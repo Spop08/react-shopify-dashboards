@@ -3,9 +3,10 @@ class Config {
         this.config = {};
         this.configReady = false;
         // Deploy Url
-        // this.BACKEND_API_URL = "http://ec2-35-182-231-236.ca-central-1.compute.amazonaws.com:8000/";
+        
+        this.BACKEND_API_URL = "http://ec2-13-59-196-27.us-east-2.compute.amazonaws.com:8001/";
         // Local Url
-        this.BACKEND_API_URL = "http://192.168.11.23:8001/";
+        // this.BACKEND_API_URL = "http://192.168.11.23:8001/";
     }
 }
 
