@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from 'axios';
 import Config from '../config';
 
-export default class Login extends Component {
+export default class ForgotPassword extends Component {
   constructor(props) {
     super(props);
     
@@ -39,16 +39,16 @@ export default class Login extends Component {
     }
     axios({
       method: 'post',
-      url: '/auth/login',
+      url: '/auth/forgot-pwd',
       data: {
-        email: this.state.email,
-        password:  this.state.password
+        email: this.state.email
       },
       headers: {
         'content-type': 'application/json'
       }
     })
     .then((res) => {
+        console.log(res.data);
       if (res.data.status == "success") {
         alert("Login success");
       }
@@ -64,21 +64,16 @@ export default class Login extends Component {
     console.log(this.state);
     return (
       <div>
-        <h3>Sign In</h3>
+        <h3>Forgot Password</h3>
 
         <div className="form-group">
           <label>Email address</label>
-          <input type="email" onChange= {(e) => this.setState({'email': e.target.value})} className="form-control" placeholder="Enter email" />
+          <input type="email" onChange= {(e) => this.setState({email: e.target.value})} className="form-control" placeholder="Enter email" />
         </div>
 
-        <div className="form-group">
-          <label>Password</label>
-          <input type="password" name="password" onChange= {(e) => this.setState({'password': e.target.value})} className="form-control" placeholder="Enter password" />
-        </div>
-
-        <button className="btn btn-primary btn-block" onClick={this.onLogin}>Sign In</button>
+        <button className="btn btn-primary btn-block" onClick={this.onLogin}>Submit</button>
         <p className="forgot-password text-right">
-          Forgot <a href="/forgot-password">password?</a>
+          <a href="/sign-in">Log In?</a>
         </p>
       </div>
     );
