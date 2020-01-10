@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from 'axios';
 import Config from '../config';
-import qs from 'qs'
 
 export default class Login extends Component {
   constructor(props) {
