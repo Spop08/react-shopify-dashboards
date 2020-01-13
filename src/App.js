@@ -1,45 +1,43 @@
-import React from 'react';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import React, { Component } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+// import { renderRoutes } from 'react-router-config';
+import './App.scss';
+import {ForgotPassword, ResetPassword} from './pages'
 
-import Login from "./pages/Login";
-import SignUp from "./pages/Signup";
-import ForgotPassword from "./pages/ForgotPassword";
-import ResetPassword from "./pages/ResetPassword";
+const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
 
-function App() {
-  return (<Router>
-    <div className="App">
-      <nav className="navbar navbar-expand-lg navbar-light fixed-top">
-        <div className="container">
-          <Link className="navbar-brand" to={"/sign-in"}>Aliexpress App</Link>
-          <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-            <ul className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <Link className="nav-link" to={"/sign-in"}>Login</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to={"/sign-up"}>Sign up</Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+// Containers
+const DefaultLayout = React.lazy(() => import('./containers/DefaultLayout'));
+const AdminLayout = React.lazy(() => import('./containers/AdminLayout'));
 
-      <div className="auth-wrapper">
-        <div className="auth-inner">
-          <Switch>
-            <Route exact path='/' component={Login} />
-            <Route path="/sign-in" component={Login} />
-            <Route path="/sign-up" component={SignUp} />
-            <Route path="/forgot-password" component={ForgotPassword} />
-            <Route path="/reset-password/:token" component={ResetPassword} />
-          </Switch>
-        </div>
-      </div>
-    </div></Router>
-  );
+// Pages
+const Login = React.lazy(() => import('./pages/Login'));
+const Register = React.lazy(() => import('./pages/Register'));
+// const ForgotPassword = React.lazy(() => import('./pages/ForgotPassword'))
+// const ResetPassword = React.lazy(() => import('./pages/ResetPassword'))
+const Page404 = React.lazy(() => import('./pages/Page404'));
+const Page500 = React.lazy(() => import('./pages/Page500'));
+
+class App extends Component {
+
+  render() {
+    return (
+      <BrowserRouter>
+          <React.Suspense fallback={loading()}>
+            <Switch>
+              <Route exact path="/login" name="Login Page" render={props => <Login {...props}/>} />
+              <Route exact path="/register" name="Register Page" render={props => <Register {...props}/>} />
+              <Route exact path="/forgot" name="ForgotPassword Page" render={props => <ForgotPassword {...props}/>} />
+              <Route exact path="/reset/:token" name="ResetPassword Page" render={props => <ResetPassword {...props}/>} />
+              <Route exact path="/404" name="Page 404" render={props => <Page404 {...props}/>} />
+              <Route exact path="/500" name="Page 500" render={props => <Page500 {...props}/>} />
+              <Route path="/admin" name="Admin" render={props => <AdminLayout {...props}/>} />
+              <Route path="/" name="Home" render={props => <DefaultLayout {...props}/>} />
+            </Switch>
+          </React.Suspense>
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;
