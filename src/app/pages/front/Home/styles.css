@@ -1,0 +1,40 @@
+.banner-button {
+  background-color: #FFFFFF;
+  width: 280px;
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  color: #32CA49;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.shadow {
+  box-shadow: 0px 4px 16px 1px rgba(0,0,0,0.1);
+  background: #FFFFFF;
+}
+
+.adv-date {
+  padding: 8%;
+  text-align: center;
+}
+
+.adv-date span {
+  font-size: 50px;
+  font-weight: bold;
+  color: #32ca49;
+}
+
+.adv-date p {
+  font-size: 14px;
+  color: #394f3c;
+}
+
+h1, .h1, h2, .h2, h3, .h3 {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.signup-btn a {
+  color: white;
+}

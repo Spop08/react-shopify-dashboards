@@ -1,0 +1,40 @@
+body {
+  font-family: arial!important;
+  font-size: 16px!important;
+}
+
+.home-back {
+  background: url('https://shopifyfile.oss-us-west-1.aliyuncs.com/attached/website/bg.jpg') no-repeat center top;
+}
+
+.text-large {
+  font-size: 50px;
+  font-weight: bold;
+  color: #fff;
+  font-family: arial;
+}
+
+.text-large-1 {
+  font-size: 34px;
+  color: #394F3C;
+  font-family: arial;
+}
+
+.text-medium-p {
+  font-size: 28px;
+  color: #fff;
+  font-family: arial;
+}
+
+.text-medium-h {
+  font-size: 26px;
+  color: #394F3C;
+  font-family: arial;
+}
+
+.text-small {
+  font-size: 21px;
+  color: #394F3C;
+  font-family: arial;
+  font-family: arial;
+}
