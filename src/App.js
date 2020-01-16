@@ -1,45 +1,39 @@
-import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-// import { renderRoutes } from 'react-router-config';
-import './App.scss';
-import {ForgotPassword, ResetPassword, ShopifyAuth} from './pages'
+/**
+ * Entry application component used to compose providers and render Routes.
+ * */
 
-const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
+import React from "react";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import { PersistGate } from "redux-persist/integration/react";
+import { LastLocationProvider } from "react-router-last-location";
+import { Routes } from "./app/router/Routes";
+import { I18nProvider, LayoutSplashScreen, ThemeProvider } from "./_metronic";
 
-// Containers
-const DefaultLayout = React.lazy(() => import('./containers/DefaultLayout'));
-const AdminLayout = React.lazy(() => import('./containers/AdminLayout'));
-
-// Pages
-const Login = React.lazy(() => import('./pages/Login'));
-const Register = React.lazy(() => import('./pages/Register'));
-// const ForgotPassword = React.lazy(() => import('./pages/ForgotPassword'))
-// const ResetPassword = React.lazy(() => import('./pages/ResetPassword'))
-const Page404 = React.lazy(() => import('./pages/Page404'));
-const Page500 = React.lazy(() => import('./pages/Page500'));
-
-require('dotenv').config();
-class App extends Component {
-  
-  render() {
-    return (
-      <BrowserRouter>
-          <React.Suspense fallback={loading()}>
-            <Switch>
-              <Route exact path="/login" name="Login Page" render={props => <Login {...props}/>} />
-              <Route exact path="/register" name="Register Page" render={props => <Register {...props}/>} />
-              <Route exact path="/forgot" name="ForgotPassword Page" render={props => <ForgotPassword {...props}/>} />
-              <Route exact path="/reset/:token" name="ResetPassword Page" render={props => <ResetPassword {...props}/>} />
-              <Route exact path="/404" name="Page 404" render={props => <Page404 {...props}/>} />
-              <Route exact path="/500" name="Page 500" render={props => <Page500 {...props}/>} />
-              <Route path="/shopify/callback" name="Shopify Callback" render={props => <ShopifyAuth {...props}/>} />
-              <Route path="/admin" name="Admin" render={props => <AdminLayout {...props}/>} />
-              <Route path="/" name="Home" render={props => <DefaultLayout {...props}/>} />
-            </Switch>
-          </React.Suspense>
-      </BrowserRouter>
-    );
-  }
+export default function App({ store, persistor, basename }) {
+  return (
+    /* Provide Redux store */
+    <Provider store={store}>
+      {/* Asynchronously persist redux stores and show `SplashScreen` while it's loading. */}
+      <PersistGate persistor={persistor} loading={<LayoutSplashScreen />}>
+        {/* Add high level `Suspense` in case if was not handled inside the React tree. */}
+        <React.Suspense fallback={<LayoutSplashScreen />}>
+          {/* Override `basename` (e.g: `homepage` in `package.json`) */}
+          <BrowserRouter basename={basename}>
+            {/*This library only returns the location that has been active before the recent location change in the current window lifetime.*/}
+            <LastLocationProvider>
+              {/* Provide Metronic theme overrides. */}
+              <ThemeProvider>
+                {/* Provide `react-intl` context synchronized with Redux state.  */}
+                <I18nProvider>
+                  {/* Render routes with provided `Layout`. */}
+                  <Routes />
+                </I18nProvider>
+              </ThemeProvider>
+            </LastLocationProvider>
+          </BrowserRouter>
+        </React.Suspense>
+      </PersistGate>
+    </Provider>
+  );
 }
-
-export default App;
