@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik } from "formik";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -6,9 +6,24 @@ import { FormattedMessage, injectIntl } from "react-intl";
 import { Checkbox, FormControlLabel, TextField } from "@material-ui/core";
 import * as auth from "../../store/ducks/auth.duck";
 import { register } from "../../crud/auth.crud";
+import clsx from "clsx";
 
 function Registration(props) {
   const { intl } = props;
+  const [loading, setLoading] = useState(false);
+  const [loadingButtonStyle, setLoadingButtonStyle] = useState({
+    paddingRight: "2.5rem"
+  });
+
+  const enableLoading = () => {
+    setLoading(true);
+    setLoadingButtonStyle({ paddingRight: "3.5rem" });
+  };
+
+  const disableLoading = () => {
+    setLoading(false);
+    setLoadingButtonStyle({ paddingRight: "2.5rem" });
+  };
 
   return (
     <div className="kt-login__body">
@@ -22,7 +37,6 @@ function Registration(props) {
         <Formik
           initialValues={{
             email: "",
-            fullname: "",
             username: "",
             password: "",
             acceptTerms: true,
@@ -40,12 +54,6 @@ function Registration(props) {
             ) {
               errors.email = intl.formatMessage({
                 id: "AUTH.VALIDATION.INVALID_FIELD"
-              });
-            }
-
-            if (!values.fullname) {
-              errors.fullname = intl.formatMessage({
-                id: "AUTH.VALIDATION.REQUIRED_FIELD"
               });
             }
 
@@ -73,27 +81,29 @@ function Registration(props) {
             if (!values.acceptTerms) {
               errors.acceptTerms = "Accept Terms";
             }
-
+            console.log(errors);
             return errors;
           }}
           onSubmit={(values, { setStatus, setSubmitting }) => {
-            register(
-              values.email,
-              values.fullname,
-              values.username,
-              values.password
-            )
-              .then(({ data: { accessToken } }) => {
-                props.register(accessToken);
-              })
-              .catch(() => {
-                setSubmitting(false);
-                setStatus(
-                  intl.formatMessage({
-                    id: "AUTH.VALIDATION.INVALID_LOGIN"
-                  })
-                );
-              });
+            enableLoading();
+            console.log("SUBMITTED");
+
+            setTimeout(() => {
+              register(values.username, values.email, values.password)
+                .then(({ data: { status } }) => {
+                  console.log(status);
+                  props.history.push("/auth/login");
+                })
+                .catch(() => {
+                  setSubmitting(false);
+                  disableLoading();
+                  setStatus(
+                    intl.formatMessage({
+                      id: "AUTH.VALIDATION.INVALID_LOGIN"
+                    })
+                  );
+                });
+            }, 1000);
           }}
         >
           {({
@@ -106,7 +116,12 @@ function Registration(props) {
             handleSubmit,
             isSubmitting
           }) => (
-            <form onSubmit={handleSubmit} noValidate autoComplete="off">
+            <form
+              onSubmit={handleSubmit}
+              noValidate={true}
+              autoComplete="off"
+              className="kt-form"
+            >
               {status && (
                 <div role="alert" className="alert alert-danger">
                   <div className="alert-text">{status}</div>
@@ -116,14 +131,14 @@ function Registration(props) {
               <div className="form-group mb-0">
                 <TextField
                   margin="normal"
-                  label="Fullname"
+                  label="Username"
                   className="kt-width-full"
-                  name="fullname"
+                  name="username"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.fullname}
-                  helperText={touched.fullname && errors.fullname}
-                  error={Boolean(touched.fullname && errors.fullname)}
+                  value={values.username}
+                  helperText={touched.username && errors.username}
+                  error={Boolean(touched.username && errors.username)}
                 />
               </div>
 
@@ -138,20 +153,6 @@ function Registration(props) {
                   value={values.email}
                   helperText={touched.email && errors.email}
                   error={Boolean(touched.email && errors.email)}
-                />
-              </div>
-
-              <div className="form-group mb-0">
-                <TextField
-                  margin="normal"
-                  label="Username"
-                  className="kt-width-full"
-                  name="username"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.username}
-                  helperText={touched.username && errors.username}
-                  error={Boolean(touched.username && errors.username)}
                 />
               </div>
 
@@ -222,16 +223,21 @@ function Registration(props) {
                 </Link>
 
                 <Link to="/auth">
-                  <button type="button" className="btn btn-secondary btn-elevate kt-login__btn-secondary">
+                  <button className="btn btn-secondary btn-elevate kt-login__btn-secondary">
                     Back
                   </button>
                 </Link>
-
                 <button
+                  type="submit"
                   disabled={isSubmitting || !values.acceptTerms}
-                  className="btn btn-primary btn-elevate kt-login__btn-primary"
+                  className={`btn btn-primary btn-elevate kt-login__btn-primary ${clsx(
+                    {
+                      "kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light": loading
+                    }
+                  )}`}
+                  style={loadingButtonStyle}
                 >
-                  Submit
+                  Sign up
                 </button>
               </div>
             </form>
@@ -242,9 +248,4 @@ function Registration(props) {
   );
 }
 
-export default injectIntl(
-  connect(
-    null,
-    auth.actions
-  )(Registration)
-);
+export default injectIntl(connect(null, auth.actions)(Registration));

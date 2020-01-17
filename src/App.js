@@ -9,6 +9,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { LastLocationProvider } from "react-router-last-location";
 import { Routes } from "./app/router/Routes";
 import { I18nProvider, LayoutSplashScreen, ThemeProvider } from "./_metronic";
+// import { createBrowserHistory } from "history";
 
 export default function App({ store, persistor, basename }) {
   return (

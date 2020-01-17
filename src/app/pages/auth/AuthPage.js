@@ -5,6 +5,7 @@ import "../../../_metronic/_assets/sass/pages/login/login-1.scss";
 import Login from "./Login";
 import Registration from "./Registration";
 import ForgotPassword from "./ForgotPassword";
+import Logout from "./Logout";
 
 export default function AuthPage() {
   console.log("authPage");

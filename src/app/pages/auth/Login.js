@@ -79,10 +79,19 @@ function Login(props) {
               enableLoading();
               setTimeout(() => {
                 login(values.email, values.password)
-                  .then(({ data: { accessToken } }) => {
-                    console.log("authorization", accessToken, props);
+                  .then(res => {
+                    const data = res.data;
+                    console.log("authorization", data, props);
                     disableLoading();
-                    props.login(accessToken);
+                    if (data.status != "no user") props.login(data.token);
+                    else {
+                      setSubmitting(false);
+                      setStatus(
+                        intl.formatMessage({
+                          id: "AUTH.VALIDATION.INVALID_LOGIN"
+                        })
+                      );
+                    }
                   })
                   .catch(err => {
                     console.log("authorization", err);

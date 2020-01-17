@@ -15,43 +15,39 @@ import LogoutPage from "../pages/auth/Logout";
 import { LayoutContextProvider } from "../../_metronic";
 import Layout from "../../_metronic/layout/Layout";
 import * as routerHelpers from "../router/RouterHelpers";
+import LandinPage from "../../app/pages/front";
 import AuthPage from "../pages/auth/AuthPage";
-
 export const Routes = withRouter(({ history }) => {
   const lastLocation = useLastLocation();
   routerHelpers.saveLastLocation(lastLocation);
+
   const { isAuthorized, menuConfig, userLastLocation } = useSelector(
     ({ auth, urls, builder: { menuConfig } }) => ({
       menuConfig,
-      isAuthorized: auth.user != null,
+      isAuthorized: auth.authToken != null,
       userLastLocation: routerHelpers.getLastLocation()
     }),
     shallowEqual
   );
-
+  console.log("IsAuthorized???", isAuthorized);
   return (
     /* Create `LayoutContext` from current `history` and `menuConfig`. */
     <LayoutContextProvider history={history} menuConfig={menuConfig}>
       <Switch>
         {!isAuthorized ? (
           /* Render auth page when user at `/auth` and not authorized. */
-          <AuthPage />
+          <Switch>
+            <Route path="/main" component={LandinPage} />
+            <Route path="/auth" component={AuthPage} />
+            <Redirect to="/main" />
+          </Switch>
         ) : (
           /* Otherwise redirect to root page (`/`) */
-          <Redirect from="/auth" to={userLastLocation} />
-        )}
-
-        <Route path="/error" component={ErrorsPage} />
-        <Route path="/logout" component={LogoutPage} />
-
-        {!isAuthorized ? (
-          /* Redirect to `/auth` when user is not authorized */
-          <Redirect to="/auth/login" />
-        ) : (
           <Layout>
-            <HomePage userLastLocation={userLastLocation} />
+            <HomePage />
           </Layout>
         )}
+        <Route path="/error" component={ErrorsPage} />
       </Switch>
     </LayoutContextProvider>
   );

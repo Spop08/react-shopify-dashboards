@@ -71,7 +71,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <div className="row">
+      {/* <div className="row">
         <div className="col-xl-6">
           <div className="row row-full-height">
             <div className="col-sm-12 col-md-12 col-lg-6">
@@ -184,13 +184,6 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* <div className="row">
-        <div className="col-xl-8"></div>
-        <div className="col-xl-4">
-          <AuthorsProfit />
-        </div>
-      </div> */}
-
       <div className="row">
         <div className="col-xl-8">
           <BestSellers />
@@ -198,7 +191,7 @@ export default function Dashboard() {
         <div className="col-xl-4">
           <RecentActivities />
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

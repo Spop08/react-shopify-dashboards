@@ -6,6 +6,7 @@ import { LayoutSplashScreen } from "../../../_metronic";
 
 class Logout extends Component {
   componentDidMount() {
+    console.log("Log OUT!");
     this.props.logout();
   }
 
