@@ -32,27 +32,79 @@ export default {
         translate: "MENU.DASHBOARD",
         bullet: "dot"
       },
-      { section: "Products" },
+      { section: "Platform" },
       {
-        title: "Search Products",
+        title: "Product list",
+        root: true,
+        bullet: "dot",
+        icon: "flaticon2-search",
+        page: "admin/product-list"
+      },
+      {
+        title: "Seller list",
+        root: true,
+        bullet: "dot",
+        icon: "flaticon2-calendar-5",
+        page: "admin/user-list"
+      },
+      {
+        title: "Order issue list",
+        root: true,
+        bullet: "dot",
+        icon: "flaticon2-calendar-5",
+        page: "admin/my-products"
+      },
+      {
+        title: "Customer Service Info",
+        root: true,
+        bullet: "dot",
+        icon: "flaticon2-calendar-5",
+        page: "admin/my-products"
+      },
+      { section: "Order" },
+      {
+        title: "Order list",
         root: true,
         bullet: "dot",
         icon: "flaticon2-search",
         page: "admin/search-products"
       },
       {
-        title: "Import List",
+        title: "Pending orders",
         root: true,
         bullet: "dot",
         icon: "flaticon2-calendar-5",
         page: "admin/import-list"
       },
+      { section: "Customer" },
       {
-        title: "My Products",
+        title: "Orders by Customer",
+        root: true,
+        bullet: "dot",
+        icon: "flaticon2-search",
+        page: "admin/search-products"
+      },
+      {
+        title: "Development customer list",
         root: true,
         bullet: "dot",
         icon: "flaticon2-calendar-5",
-        page: "admin/my-products"
+        page: "admin/import-list"
+      },
+      { section: "Purchase " },
+      {
+        title: "All purchased orders",
+        root: true,
+        bullet: "dot",
+        icon: "flaticon2-search",
+        page: "admin/search-products"
+      },
+      {
+        title: "Unpurchased orders",
+        root: true,
+        bullet: "dot",
+        icon: "flaticon2-calendar-5",
+        page: "admin/import-list"
       }
     ]
   }

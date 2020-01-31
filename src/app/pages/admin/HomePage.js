@@ -2,7 +2,10 @@ import React, { Suspense, lazy } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { LayoutSplashScreen } from "../../../_metronic";
 import LogoutPage from "../auth/Logout";
+
 import AdminDashBoard from "./DashboardPage";
+import ProductListPage from "./ProductListPage";
+import UserListPage from "./UserListPage";
 
 const GoogleMaterialPage = lazy(() =>
   import("../main/google-material/GoogleMaterialPage")
@@ -24,7 +27,9 @@ export default function AdminHomePage() {
         <Redirect exact from="/auth/login" to="/admin/dashboard" />
 
         <Route path="/admin/dashboard" component={AdminDashBoard} />
-
+        <Route path="/admin/product-list" component={ProductListPage} />
+        <Route path="/admin/user-list" component={UserListPage} />
+        
         <Route path="/auth/logout" component={LogoutPage} />
         <Redirect to="/error/error-v1" />
       </Switch>
