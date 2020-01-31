@@ -1,6 +1,5 @@
 import React, { Suspense, lazy } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import Builder from "./Builder";
 import Dashboard from "./DashboardPage";
 import DocsPage from "./docs/DocsPage";
 import { LayoutSplashScreen } from "../../../_metronic";
@@ -22,7 +21,7 @@ const ReactBootstrapPage = lazy(() =>
   import("./react-bootstrap/ReactBootstrapPage")
 );
 
-export default function HomePage() {
+export default function MainHomePage() {
   // useEffect(() => {
   //   console.log('Home page');
   // }, []) // [] - is required if you need only one call
@@ -33,7 +32,6 @@ export default function HomePage() {
       <Switch>
         <Redirect exact from="/" to="/app/dashboard" />
         <Redirect exact from="/auth/login" to="/app/dashboard" />
-        <Route path="/builder" component={Builder} />
         <Route path="/app/dashboard" component={Dashboard} />
         <Route path="/app/search-products" component={SearchProductPage} />
         <Route path="/app/import-list" component={ImportListPage} />

@@ -10,7 +10,8 @@ import ScrollTop from "../../app/partials/layout/ScrollTop";
 import StickyToolbar from "../../app/partials/layout/StickyToolbar";
 import HTMLClassService from "./HTMLClassService";
 import LayoutConfig from "./LayoutConfig";
-import MenuConfig from "./MenuConfig";
+import MainMenuConfig from "./MainMenuConfig";
+import AdminMenuConfig from "./AdminMenuConfig";
 import LayoutInitializer from "./LayoutInitializer";
 import QuickPanel from "../../app/partials/layout/QuickPanel";
 import KtContent from "./KtContent";
@@ -24,24 +25,24 @@ function Layout({
   subheaderDisplay,
   selfLayout,
   layoutConfig,
-  contentContainerClasses
+  contentContainerClasses,
+  isAdmin
 }) {
   htmlClassService.setConfig(layoutConfig);
   // scroll to top after location changes
   // window.scrollTo(0, 0);
 
   const contentCssClasses = htmlClassService.classes.content.join(" ");
-
+  console.log(" I AM LAYOUT", isAdmin);
   return selfLayout !== "blank" ? (
     <LayoutInitializer
-      menuConfig={MenuConfig}
+      menuConfig={isAdmin ? AdminMenuConfig : MainMenuConfig}
       layoutConfig={LayoutConfig}
       htmlClassService={htmlClassService}
     >
-      {/* <!-- begin:: Header Mobile --> */}
+      }{/* <!-- begin:: Header Mobile --> */}
       <HeaderMobile />
       {/* <!-- end:: Header Mobile --> */}
-
       <div className="kt-grid kt-grid--hor kt-grid--root">
         {/* <!-- begin::Body --> */}
         <div className="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">

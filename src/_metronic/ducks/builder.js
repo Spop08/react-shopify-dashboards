@@ -3,12 +3,13 @@ import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 import LayoutConfig from "../layout/LayoutConfig";
-import MenuConfig from "../layout/MenuConfig";
+import MenuConfig from "../layout/MainMenuConfig";
 
 export const actionTypes = {
   SetMenuConfig: "builder/SET_MENU_CONFIG",
   SetLayoutConfigs: "builder/SET_LAYOUT_CONFIGS",
-  SetLayoutConfigsWithPageRefresh: "builder/SET_LAYOUT_CONFIGS_WITH_PAGE_REFRESH",
+  SetLayoutConfigsWithPageRefresh:
+    "builder/SET_LAYOUT_CONFIGS_WITH_PAGE_REFRESH",
   SetHtmlClassService: "builder/SET_HTML_CLASS_SERVICE"
 };
 
@@ -26,8 +27,9 @@ export const selectors = {
       const { htmlClassServiceObjects } = store.builder;
 
       return htmlClassServiceObjects
-          ? htmlClassServiceObjects.getAttributes(params.path)
-          : [];    }
+        ? htmlClassServiceObjects.getAttributes(params.path)
+        : [];
+    }
 
     return [];
   },
@@ -95,7 +97,7 @@ export const reducer = persistReducer(
         return { ...state, layoutConfig: payload };
 
       case actionTypes.SetLayoutConfigsWithPageRefresh: {
-        return {...state, layoutConfig: payload};
+        return { ...state, layoutConfig: payload };
       }
       case actionTypes.SetHtmlClassService:
         return { ...state, htmlClassServiceObjects: payload };
