@@ -1,0 +1,15 @@
+.images-tab {
+  .image-container {
+    margin-bottom: 30px;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    box-shadow: 0 0 13px 0 rgba(82, 63, 105, 0.29);
+    background-color: #fff;
+    margin-bottom: 20px;
+    border-radius: 4px;
+  }
+  img {
+    width: 100%;
+  }
+}

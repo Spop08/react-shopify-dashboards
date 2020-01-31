@@ -17,6 +17,8 @@ import Layout from "../../_metronic/layout/Layout";
 import * as routerHelpers from "../router/RouterHelpers";
 import LandinPage from "../../app/pages/front";
 import AuthPage from "../pages/auth/AuthPage";
+import ShopifyAuthCallBack from "../auth/ShopifyAuthCallBack";
+
 export const Routes = withRouter(({ history }) => {
   const lastLocation = useLastLocation();
   routerHelpers.saveLastLocation(lastLocation);
@@ -34,15 +36,14 @@ export const Routes = withRouter(({ history }) => {
     /* Create `LayoutContext` from current `history` and `menuConfig`. */
     <LayoutContextProvider history={history} menuConfig={menuConfig}>
       <Switch>
+        <Route path="/shopify/callback" component={ShopifyAuthCallBack} />
         {!isAuthorized ? (
-          /* Render auth page when user at `/auth` and not authorized. */
           <Switch>
             <Route path="/main" component={LandinPage} />
             <Route path="/auth" component={AuthPage} />
             <Redirect to="/main" />
           </Switch>
         ) : (
-          /* Otherwise redirect to root page (`/`) */
           <Layout>
             <HomePage />
           </Layout>

@@ -1,10 +1,19 @@
 import React, { Suspense, lazy } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import Builder from "./Builder";
-import Dashboard from "./Dashboard";
+import Dashboard from "./DashboardPage";
 import DocsPage from "./docs/DocsPage";
 import { LayoutSplashScreen } from "../../../_metronic";
 import LogoutPage from "../auth/Logout";
+import SearchProductPage from "./SearchProductPage";
+import ShopifyAuthCallBack from "../../auth/ShopifyAuthCallBack";
+import ImportListPage from "./ImportListPage";
+import MyProductsPage from "./MyProductsPage";
+import InProcessingOrderPage from "./InProcessingOrderPage";
+import UnDeliveredOrderPage from "./UnDeliveredOrderPage";
+import DeliveredOrderPage from "./DeliveredOrderPage";
+import CancelledOrderPage from "./CancelledOrderPage";
+import CategoryPage from "./CategoryPage";
 
 const GoogleMaterialPage = lazy(() =>
   import("./google-material/GoogleMaterialPage")
@@ -22,15 +31,23 @@ export default function HomePage() {
   return (
     <Suspense fallback={<LayoutSplashScreen />}>
       <Switch>
-        {
-          /* Redirect from root URL to /dashboard. */
-          <Redirect exact from="/auth/login" to="/dashboard" />
-        }
+        <Redirect exact from="/" to="/app/dashboard" />
+        <Redirect exact from="/auth/login" to="/app/dashboard" />
         <Route path="/builder" component={Builder} />
-        <Route path="/dashboard" component={Dashboard} />
-        <Route path="/google-material" component={GoogleMaterialPage} />
-        <Route path="/react-bootstrap" component={ReactBootstrapPage} />
-        <Route path="/docs" component={DocsPage} />
+        <Route path="/app/dashboard" component={Dashboard} />
+        <Route path="/app/search-products" component={SearchProductPage} />
+        <Route path="/app/import-list" component={ImportListPage} />
+        <Route path="/app/my-products" component={MyProductsPage} />
+        <Route
+          path="/app/inprocessing-order"
+          component={InProcessingOrderPage}
+        />
+        <Route path="/app/undelivered-order" component={UnDeliveredOrderPage} />
+        <Route path="/app/delivered-order" component={DeliveredOrderPage} />
+        <Route path="/app/cancelled-order" component={CancelledOrderPage} />
+        <Route path="/app/category" component={CategoryPage} />
+        <Route path="/shopify/callback" component={ShopifyAuthCallBack} />
+        {/* <Route path="/account-settings" component={AccountSettingPage} /> */}
         <Route path="/auth/logout" component={LogoutPage} />
         <Redirect to="/error/error-v1" />
       </Switch>

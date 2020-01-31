@@ -12,7 +12,7 @@ export default class Topbar extends React.Component {
   render() {
     return (
       <div className="kt-header__topbar">
-        <SearchDropdown useSVG="true" />
+        {/* <SearchDropdown useSVG="true" /> */}
 
         {/* <UserNotifications
           bgImage={toAbsoluteUrl("/media/misc/bg-1.jpg")}

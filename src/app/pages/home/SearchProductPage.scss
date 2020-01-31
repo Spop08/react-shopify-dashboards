@@ -1,0 +1,47 @@
+.modal-dialog {
+  label {
+    font-weight: 600;
+  }
+}
+
+.container-import {
+  display: flex;
+  .btn-import {
+    margin-left: auto;
+    background: #eaeaea;
+    font-weight: 600;
+  }
+  margin-bottom: 20px;
+}
+.kproduct-container {
+  max-width: 1176px;
+  margin: auto !important;
+
+  .kt-searchbar {
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    .input-group-text {
+      border: none;
+      background-color: #fff !important;
+      padding: 0 0.65rem 0 1rem;
+    }
+    .input-group .form-control {
+      border: none;
+      background-color: #fff !important;
+      padding: 0;
+    }
+    button {
+      margin-left: 20px;
+    }
+  }
+}
+.page-title {
+  margin-left: 50px;
+  margin-bottom: 30px;
+}
+@media (min-width: 1025px) {
+  .kt-header--fixed.kt-subheader--fixed.kt-subheader--enabled .kt-wrapper {
+    padding-top: 80px !important;
+  }
+}

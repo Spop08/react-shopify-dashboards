@@ -7,6 +7,7 @@ import { TextField } from "@material-ui/core";
 import clsx from "clsx";
 import * as auth from "../../store/ducks/auth.duck";
 import { login } from "../../crud/auth.crud";
+import { crudAPI } from "../../crud/api.crud";
 
 function Login(props) {
   const { intl } = props;
@@ -83,8 +84,17 @@ function Login(props) {
                     const data = res.data;
                     console.log("authorization", data, props);
                     disableLoading();
-                    if (data.status != "no user") props.login(data.token);
-                    else {
+                    if (data.status != "no user") {
+                      console.log("USER is VALID", res.data);
+                      crudAPI("/api/user/info", "post", null, data.token).then(
+                        res => {
+                          props.fulfillUser(res.data);
+                          console.log("USER is LOGIN", res.data);
+                          props.login(data.token);
+                          console.log("FULFILLUSER", res.data);
+                        }
+                      );
+                    } else {
                       setSubmitting(false);
                       setStatus(
                         intl.formatMessage({
@@ -218,5 +228,7 @@ function Login(props) {
     </>
   );
 }
-
+// function mapDispatchToProps (dispatch) {
+//   return bindActionCreators({auth.actions.login, user.actions.loaduser}, dispatch);
+// }
 export default injectIntl(connect(null, auth.actions)(Login));

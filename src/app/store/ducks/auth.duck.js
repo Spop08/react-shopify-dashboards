@@ -5,7 +5,8 @@ export const actionTypes = {
   Login: "[Login] Action",
   Logout: "[Logout] Action",
   Register: "[Register] Action",
-  UserLoaded: "[Load User] Auth API"
+  UserLoaded: "[Load User] Auth API",
+  StoreConnected: "[Connect Store] Action"
 };
 
 const initialAuthState = {
@@ -20,7 +21,7 @@ export const reducer = persistReducer(
       case actionTypes.Login: {
         const { authToken } = action.payload;
         console.log("AUTHTOKEN", authToken);
-        return { authToken, user: undefined };
+        return { ...state, authToken };
       }
 
       case actionTypes.Register: {
@@ -38,6 +39,12 @@ export const reducer = persistReducer(
         return { ...state, user };
       }
 
+      case actionTypes.StoreConnected: {
+        const { store } = action.payload;
+        const { ...user } = state.user;
+        user.store = store;
+        return { ...state, user };
+      }
       default:
         return state;
     }
@@ -51,5 +58,9 @@ export const actions = {
     payload: { authToken }
   }),
   logout: () => ({ type: actionTypes.Logout }),
-  fulfillUser: user => ({ type: actionTypes.UserLoaded, payload: { user } })
+  fulfillUser: user => ({ type: actionTypes.UserLoaded, payload: { user } }),
+  connectStore: store => ({
+    type: actionTypes.StoreConnected,
+    payload: { store }
+  })
 };

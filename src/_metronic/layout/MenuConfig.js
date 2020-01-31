@@ -28,7 +28,7 @@ export default {
         title: "Dashboard",
         root: true,
         icon: "flaticon2-architecture-and-city",
-        page: "dashboard",
+        page: "app/dashboard",
         translate: "MENU.DASHBOARD",
         bullet: "dot"
       },
@@ -37,44 +37,51 @@ export default {
         title: "Search Products",
         root: true,
         bullet: "dot",
-        icon: "flaticon2-search"
-        // page: "dashboard"
+        icon: "flaticon2-search",
+        page: "app/search-products"
       },
       {
-        title: "Import Products",
+        title: "Import List",
         root: true,
         bullet: "dot",
-        icon: "flaticon2-calendar-5"
-        // page: "dashboard"
+        icon: "flaticon2-calendar-5",
+        page: "app/import-list"
+      },
+      {
+        title: "My Products",
+        root: true,
+        bullet: "dot",
+        icon: "flaticon2-calendar-5",
+        page: "app/my-products"
       },
       { section: "Orders" },
-      {
-        title: "UnPaid Order",
-        root: true,
-        bullet: "dot",
-        icon: "flaticon2-calendar-5"
-        // page: "dashboard"
-      },
       {
         title: "UnDelivered Order",
         root: true,
         bullet: "dot",
-        icon: "flaticon2-calendar-5"
-        // page: "dashboard"
+        icon: "flaticon2-calendar-5",
+        page: "app/undelivered-order"
       },
       {
-        title: "Delivery Order",
+        title: "InProcessing Order",
         root: true,
         bullet: "dot",
-        icon: "flaticon2-calendar-5"
-        // page: "dashboard"
+        icon: "flaticon2-calendar-5",
+        page: "app/inprocessing-order"
       },
       {
-        title: "Cancel Refund Order",
+        title: "Delivered Order",
         root: true,
         bullet: "dot",
-        icon: "flaticon2-calendar-5"
-        // page: "dashboard"
+        icon: "flaticon2-calendar-5",
+        page: "app/delivered-order"
+      },
+      {
+        title: "Cancelled Order",
+        root: true,
+        bullet: "dot",
+        icon: "flaticon2-calendar-5",
+        page: "app/cancelled-order"
       }
       // {
       //   root: true,

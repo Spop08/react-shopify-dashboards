@@ -1,0 +1,58 @@
+.modal-store-connect {
+  display: block;
+  .shopify-logo {
+    width: 105px;
+    margin-bottom: 16px;
+  }
+  .btn-shopify-connect {
+    margin-left: 20px;
+  }
+  .h2-connect-store {
+    font-size: 19px;
+    font-weight: 600;
+  }
+  .label-store-url {
+    font-size: 15px;
+  }
+  .label-connect-desc {
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+}
+.modal-dialog {
+  max-width: 650px !important;
+}
+
+.step-page-onboarding__badge {
+  font-size: 14px;
+  font-weight: bold;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.step-badge-success {
+  color: #fff;
+  background-color: #82c853;
+}
+.step-badge-primary {
+  color: #fff;
+  background-color: #27b7d7;
+}
+.step-section {
+  display: flex;
+}
+.step-badge {
+  display: inline-block;
+  min-width: 10px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-align: center;
+  margin-right: 20px;
+  height: 26px;
+  border-radius: 20px;
+  padding-top: 7px;
+}

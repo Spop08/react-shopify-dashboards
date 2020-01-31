@@ -1,0 +1,69 @@
+.order-container {
+  p {
+    margin-bottom: 0px;
+    font-weight: 500;
+  }
+  .card-header {
+    display: flex;
+    p {
+      margin-top: 4px;
+    }
+    img {
+      margin-left: 5px;
+      width: 18px;
+    }
+  }
+  .order-name {
+    margin-left: 10px;
+  }
+  .order-customername {
+    margin-left: 5px;
+    color: cornflowerblue;
+  }
+  .order-customer {
+    margin-left: 50px;
+  }
+  .order-date {
+    margin-left: 10px;
+  }
+  .order-number {
+    margin-left: 3px;
+    margin-bottom: 0px;
+    color: cornflowerblue;
+    font-weight: 600;
+  }
+  .order-products {
+    .order-products__supplier {
+      display: flex;
+      p {
+        margin-top: 4px;
+      }
+      .MuiChip-root {
+        margin-left: 0px;
+      }
+      button {
+        margin-left: auto;
+      }
+    }
+    .card {
+      margin-top: 10px;
+
+      margin-bottom: 10px;
+      background: #f7f8fa;
+      .order-product__name {
+        color: cornflowerblue;
+        font-weight: 600;
+      }
+      .order-product_details {
+        margin-left: 10px;
+      }
+      .order-product__img {
+        width: auto;
+        height: 50px;
+      }
+      .col-md-4 {
+        display: flex;
+      }
+    }
+  }
+}

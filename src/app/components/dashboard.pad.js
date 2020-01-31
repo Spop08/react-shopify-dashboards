@@ -1,9 +1,32 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useState } from "react";
 import { toAbsoluteUrl } from "../../_metronic/utils/utils";
 import PortletHeaderDropdown from "../partials/content/CustomDropdowns/PortletHeaderDropdown";
+import { Button, Modal } from "react-bootstrap";
+import "./dashboard.pad.scss";
+import { connect } from "react-redux";
 
-export default function BestSellers() {
+function DashboardPad(props) {
+  const [showModal, setShowModal] = useState(false);
+  const [stateConnect, setStateConnect] = useState(false);
+  const [storeName, setStoreName] = useState("uds-dropshippingstore");
+
+  const handleChange = event => {
+    // console.log(value.target.value);
+    const store = event.target.value;
+    store == "" ? setStateConnect(true) : setStateConnect(false);
+    setStoreName(store);
+  };
+  const handleConnect = () => {
+    console.log("Connect Clicked");
+    // const url = process.env.REACT_APP_BACKEND_ENDPOINT + "/shopify";
+    const backend_url = "https://7896f79f.ngrok.io/shopify";
+    const email = props.email;
+    window.location =
+      backend_url + "?shop=" + storeName + ".myshopify.com&" + "email=" + email;
+  };
+
+  const isConnected = props.store;
   return (
     <>
       <div className="kt-portlet kt-portlet--height-fluid">
@@ -11,35 +34,76 @@ export default function BestSellers() {
           <div className="kt-portlet__head-label">
             <h3 className="kt-portlet__head-title">Let's get started</h3>
           </div>
-          {/* <div id="chrome-circles" class="-flex -flex-middle in-row">
-            <div class="circle-color circle-sm color-success"></div>
-            <div class="circle-color circle-sm color-info"></div>
-            <div class="circle-color circle-sm color-info"></div>
-            <div class="circle-color circle-sm color-info"></div>{" "}
-            <h3 class="-secondary-text-color -margin-left-xs">
-              <span>1</span>/4 Completed
-            </h3>
-          </div> */}
         </div>
         <div className="kt-portlet__body">
           <div className="kt-widget5">
             <div className="kt-widget5__item ">
               <div className="kt-widget5__content">
-                <div className="kt-widget5__pic">
-                  <img
-                    alt=""
-                    className="kt-widget7__img"
-                    src={toAbsoluteUrl("/media/products/product6.jpg")}
-                  />
+                <div className="kt-widget5__section step-section">
+                  <span
+                    class={
+                      "step-page-onboarding__badge step-badge" +
+                      (isConnected
+                        ? " step-badge-success"
+                        : " step-badge-primary")
+                    }
+                  >
+                    Step 1
+                  </span>
+
+                  <div>
+                    <p className="kt-widget5__title">
+                      Create or connect your Shopify store
+                    </p>
+                    <p className="kt-widget5__desc">
+                      In order to start selling you have to have a Shopify
+                      store. Start your free trial.
+                    </p>
+                  </div>
                 </div>
-                <div className="kt-widget5__section">
-                  <p className="kt-widget5__title">
-                    Create or connect your Shopify store
-                  </p>
-                  <p className="kt-widget5__desc">
-                    In order to start selling you have to have a Shopify store.
-                    Start your free trial.
-                  </p>
+              </div>
+              <div className="kt-widget5__content">
+                {!isConnected && (
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    onClick={() => setShowModal(true)}
+                  >
+                    Connect
+                  </button>
+                )}
+              </div>
+            </div>
+
+            <div className="kt-widget5__item ">
+              <div className="kt-widget5__content">
+                <div className="kt-widget5__section step-section">
+                  <span class="step-page-onboarding__badge step-badge step-badge-primary">
+                    Step 2
+                  </span>
+                  <div>
+                    <p className="kt-widget5__title">Add your first product</p>
+                    <p className="kt-widget5__desc">
+                      Find product that you want to sell in your store.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="kt-widget5__content"></div>
+            </div>
+            <div className="kt-widget5__item ">
+              <div className="kt-widget5__content">
+                <div className="kt-widget5__section step-section">
+                  <span class="step-page-onboarding__badge step-badge step-badge-primary">
+                    Step 3
+                  </span>
+                  <div>
+                    <p className="kt-widget5__title">Go live</p>
+                    <p className="kt-widget5__desc">
+                      It's a very exciting step! Check some important things to
+                      do before you go live.
+                    </p>
+                  </div>
                 </div>
               </div>
               <div className="kt-widget5__content"></div>
@@ -47,57 +111,17 @@ export default function BestSellers() {
 
             <div className="kt-widget5__item ">
               <div className="kt-widget5__content">
-                <div className="kt-widget5__pic">
-                  <img
-                    alt=""
-                    className="kt-widget7__img"
-                    src={toAbsoluteUrl("/media/products/product11.jpg")}
-                  />
-                </div>
-                <div className="kt-widget5__section">
-                  <p className="kt-widget5__title">Add your first product</p>
-                  <p className="kt-widget5__desc">
-                    Find product that you want to sell in your store.
-                  </p>
-                </div>
-              </div>
-              <div className="kt-widget5__content"></div>
-            </div>
-            <div className="kt-widget5__item ">
-              <div className="kt-widget5__content">
-                <div className="kt-widget5__pic">
-                  <img
-                    alt=""
-                    className="kt-widget7__img"
-                    src={toAbsoluteUrl("/media/products/product18.jpg")}
-                  />
-                </div>
-                <div className="kt-widget5__section">
-                  <p className="kt-widget5__title">Go live</p>
-                  <p className="kt-widget5__desc">
-                    It's a very exciting step! Check some important things to do
-                    before you go live.
-                  </p>
-                </div>
-              </div>
-              <div className="kt-widget5__content"></div>
-            </div>
-
-            <div className="kt-widget5__item ">
-              <div className="kt-widget5__content">
-                <div className="kt-widget5__pic">
-                  <img
-                    alt=""
-                    className="kt-widget7__img"
-                    src={toAbsoluteUrl("/media/products/product14.jpg")}
-                  />
-                </div>
-                <div className="kt-widget5__section">
-                  <p className="kt-widget5__title">Make a sale</p>
-                  <p className="kt-widget5__desc">
-                    Here are some ideas that will help you make your first sale
-                    faster.
-                  </p>
+                <div className="kt-widget5__section step-section">
+                  <span class="step-page-onboarding__badge step-badge step-badge-primary">
+                    Step 4
+                  </span>
+                  <div>
+                    <p className="kt-widget5__title">Make a sale</p>
+                    <p className="kt-widget5__desc">
+                      Here are some ideas that will help you make your first
+                      sale faster.
+                    </p>
+                  </div>
                 </div>
               </div>
               <div className="kt-widget5__content"></div>
@@ -105,6 +129,55 @@ export default function BestSellers() {
           </div>
         </div>
       </div>
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Create or Connect a Shopify store</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="modal-store-connect">
+            <img
+              src="https://cdn.oberlo.com/img/shopify-logo.svg"
+              alt="Shopify logo."
+              class="shopify-logo"
+            />
+            <h2 className="h2-connect-store">Connect a store</h2>
+            <label className="label-connect-desc">
+              Enter your existing Shopify store URL below and you'll be
+              redirected to Shopify to connect your account to Oberlo.
+            </label>
+            <label className="label-store-url">Your Shopify store URL</label>
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="store-name"
+                value={storeName}
+                onChange={handleChange}
+              />
+              <div class="input-group-append">
+                <span class="input-group-text">.myshopify.com</span>
+              </div>
+              <button
+                type="button"
+                class="btn btn-primary btn-shopify-connect"
+                disabled={stateConnect}
+                onClick={handleConnect}
+              >
+                Connect
+              </button>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
     </>
   );
 }
+
+function mapStateToProps(state) {
+  return {
+    email: state.auth.user.email,
+    store: state.auth.user.store,
+    token: state.auth.authToken
+  };
+}
+export default connect(mapStateToProps)(DashboardPad);
