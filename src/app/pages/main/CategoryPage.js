@@ -27,6 +27,7 @@ export default class CategoryPage extends Component {
         <div className="row">
           <div className="col-md-3">
             <ExpansionCategory />
+            <ExpansionCategory />
           </div>
           <div className="col-md-9">
             <div className="container-import">
