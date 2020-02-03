@@ -3,7 +3,6 @@
     font-weight: 600;
   }
 }
-
 .container-import {
   display: flex;
   .btn-import {
@@ -16,7 +15,33 @@
 .kproduct-container {
   max-width: 1176px;
   margin: auto !important;
-
+  .ct-categories {
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    border-top: 1px solid #e2e5ec;
+    border-left: 1px solid #e2e5ec;
+    .col-md-3 {
+      padding: 0px;
+      span {
+        font-size: 15px;
+        flex: 3;
+        text-align: left;
+      }
+      .icon-category {
+        width: 40px;
+        height: 40px;
+        flex: 1;
+      }
+      .btn {
+        padding: 12px 24px;
+        height: 100%;
+        border-radius: 0px;
+        border-top: none;
+        border-left: none;
+        background-color: #fff;
+      }
+    }
+  }
   .kt-searchbar {
     margin-bottom: 30px;
     max-width: 600px;

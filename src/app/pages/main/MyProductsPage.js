@@ -1,5 +1,5 @@
 import React from "react";
-import ControlledExpansionPanels from "../../components/expansion.pad";
+import ExpansionPad from "../../components/expansion.pad";
 
 export default class MyProductsPage extends React.Component {
   render() {
@@ -7,10 +7,10 @@ export default class MyProductsPage extends React.Component {
       <div>
         <h3 className="page-title">My Products</h3>
         <div className="kproduct-container">
-          <ControlledExpansionPanels />
-          <ControlledExpansionPanels />
-          <ControlledExpansionPanels />
-          <ControlledExpansionPanels />
+          <ExpansionPad />
+          <ExpansionPad />
+          <ExpansionPad />
+          <ExpansionPad />
         </div>
       </div>
     );

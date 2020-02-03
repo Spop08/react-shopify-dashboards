@@ -7,7 +7,8 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { Button } from "react-bootstrap";
 import ExpansionCategory from "../../components/expansion.category";
-import "./SearchProductPage.scss";
+import ExpansionPrice from "../../components/expansion.price";
+import "./CategoryPage.scss";
 
 export default class CategoryPage extends Component {
   state = {
@@ -22,12 +23,12 @@ export default class CategoryPage extends Component {
   render() {
     const { open } = this.state;
     return (
-      <div>
+      <div className="category-page">
         <h3 className="page-title">Search Products</h3>
         <div className="row">
-          <div className="col-md-3">
+          <div className="col-md-3 container-expansion">
             <ExpansionCategory />
-            <ExpansionCategory />
+            <ExpansionPrice />
           </div>
           <div className="col-md-9">
             <div className="container-import">

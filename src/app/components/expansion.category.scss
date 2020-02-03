@@ -1,5 +1,7 @@
 .expansion-category {
-  margin-top: 58px;
+  .MuiPaper-root {
+    border-radius: 0px !important;
+  }
   .MuiExpansionPanelDetails-root {
     display: block;
     .filter-category__item {

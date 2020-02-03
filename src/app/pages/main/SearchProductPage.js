@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import SProductPad from "../../components/sproduct.pad";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
 import { Button, Modal, InputGroup, FormControl } from "react-bootstrap";
+import { search_icon } from "../../icons/icons";
 import "./SearchProductPage.scss";
+import { clothing } from "../../icons/icons";
+import { Link } from "@material-ui/core";
 
 export default class SearchProductPage extends Component {
   state = {
@@ -18,8 +16,66 @@ export default class SearchProductPage extends Component {
   handleClose = () => {
     this.setState({ open: false });
   };
+  componentCategories = () => {
+    return (
+      <div className="d-flex ct-categories">
+        <div className="col-md-3">
+          <Button variant="secondary btn-block d-flex">
+            {clothing()}
+            <span>Men's Clothing & Accessories</span>
+          </Button>
+        </div>
+        <div className="col-md-3">
+          <Button variant="secondary btn-block d-flex">
+            {clothing()}
+            <span>Women's Clothing & Accessories</span>
+          </Button>
+        </div>
+        <div className="col-md-3">
+          <Button variant="secondary btn-block d-flex">
+            {clothing()}
+            <span>Toys & Hobbies</span>
+          </Button>
+        </div>
+        <div className="col-md-3">
+          <Button variant="secondary btn-block d-flex">
+            {clothing()}
+            <span>Beauty & Health</span>
+          </Button>
+        </div>
+        <div className="col-md-3">
+          <Button variant="secondary btn-block d-flex">
+            {clothing()}
+            <span>Watches</span>
+          </Button>
+        </div>
+        <div className="col-md-3">
+          <Button variant="secondary btn-block d-flex">
+            {clothing()}
+            <span>Jewelry & Accessories</span>
+          </Button>
+        </div>
+        <div className="col-md-3">
+          <Link to="/app/category">
+            <Button variant="secondary btn-block d-flex">
+              {clothing()}
+              <span>Home & Garden</span>
+            </Button>
+          </Link>
+        </div>
+        <div className="col-md-3">
+          <Button variant="secondary btn-block d-flex">
+            {clothing()}
+            <span>Mother & Kids</span>
+          </Button>
+        </div>
+      </div>
+    );
+  };
   render() {
     const { open } = this.state;
+    const componentCategories = this.componentCategories;
+
     return (
       <div>
         <h3 className="page-title">Search Products</h3>
@@ -28,33 +84,7 @@ export default class SearchProductPage extends Component {
             <div class="input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">
-                  <svg
-                    width="24px"
-                    height="24px"
-                    viewBox="0 0 24 24"
-                    version="1.1"
-                    class="kt-svg-icon"
-                  >
-                    <g
-                      stroke="none"
-                      strokeWidth="1"
-                      fill="none"
-                      fillRule="evenodd"
-                    >
-                      <rect x="0" y="0" width="24" height="24"></rect>
-                      <path
-                        d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z"
-                        fill="#000000"
-                        fillRule="nonzero"
-                        opacity="0.3"
-                      ></path>
-                      <path
-                        d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z"
-                        fill="#000000"
-                        fillRule="nonzero"
-                      ></path>
-                    </g>
-                  </svg>
+                  {search_icon()}
                 </span>
               </div>
               <input
@@ -69,19 +99,15 @@ export default class SearchProductPage extends Component {
             </div>
           </div>
           <div className="container-import">
-            <a href="/app/category" className="btn-import">
-              <button type="button" className="btn btn-secondary btn-wide ">
-                Categories
-              </button>
-            </a>
             <button
               type="button"
-              className="btn btn-secondary btn-wide "
+              className="btn btn-secondary btn-wide btn-import"
               onClick={this.handleClickOpen}
             >
               Import product by URL or ID
             </button>
           </div>
+          {componentCategories()}
           <h2>Free Shipping From AliExpress Warehouses</h2>
           <div className="row">
             <div className="col-md-12 col-lg-6 col-xl-3">

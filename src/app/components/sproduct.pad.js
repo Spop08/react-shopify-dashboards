@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -33,18 +34,20 @@ export default class SProductPad extends Component {
       <div>
         <div class="kt-portlet kt-portlet--height-fluid kt-widget19">
           <div class="kt-portlet__body kt-portlet__body--fit kt-portlet__body--unfill">
-            <div
-              class="kt-widget19__pic kt-portlet-fit--top kt-portlet-fit--sides"
-              style={{
-                minHeight: "300px",
-                backgroundImage: "url(/media/products/product11.jpg)"
-              }}
-            >
-              <div class="discount-notice">
-                <span class="old-price">US $21.28</span>
-                <span class="badge badge-discount">44% off</span>
+            <Link to="/app/details">
+              <div
+                class="kt-widget19__pic kt-portlet-fit--top kt-portlet-fit--sides"
+                style={{
+                  minHeight: "300px",
+                  backgroundImage: "url(/media/products/product11.jpg)"
+                }}
+              >
+                <div class="discount-notice">
+                  <span class="old-price">US $21.28</span>
+                  <span class="badge badge-discount">44% off</span>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
           <div class="kt-portlet__body">
             <div>
