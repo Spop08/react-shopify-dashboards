@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import SProductPad from "../../components/sproduct.pad";
 import { Button, Modal, InputGroup, FormControl } from "react-bootstrap";
-import { search_icon } from "../../icons/icons";
+import { search_icon, clothing } from "../../icons";
+import { Link } from "react-router-dom";
 import "./SearchProductPage.scss";
-import { clothing } from "../../icons/icons";
-import { Link } from "@material-ui/core";
 
 export default class SearchProductPage extends Component {
   state = {
@@ -20,43 +19,59 @@ export default class SearchProductPage extends Component {
     return (
       <div className="d-flex ct-categories">
         <div className="col-md-3">
-          <Button variant="secondary btn-block d-flex">
-            {clothing()}
-            <span>Men's Clothing & Accessories</span>
-          </Button>
+          <Link
+            to={{ pathname: "/app/category", state: { type: "menclothing" } }}
+          >
+            <Button variant="secondary btn-block d-flex">
+              {clothing()}
+              <span>Men's Clothing & Accessories</span>
+            </Button>
+          </Link>
         </div>
         <div className="col-md-3">
-          <Button variant="secondary btn-block d-flex">
-            {clothing()}
-            <span>Women's Clothing & Accessories</span>
-          </Button>
+          <Link
+            to={{ pathname: "/app/category", state: { type: "womenclothing" } }}
+          >
+            <Button variant="secondary btn-block d-flex">
+              {clothing()}
+              <span>Women's Clothing & Accessories</span>
+            </Button>
+          </Link>
         </div>
         <div className="col-md-3">
-          <Button variant="secondary btn-block d-flex">
-            {clothing()}
-            <span>Toys & Hobbies</span>
-          </Button>
+          <Link to={{ pathname: "/app/category", state: { type: "toys" } }}>
+            <Button variant="secondary btn-block d-flex">
+              {clothing()}
+              <span>Toys & Hobbies</span>
+            </Button>
+          </Link>
         </div>
         <div className="col-md-3">
-          <Button variant="secondary btn-block d-flex">
-            {clothing()}
-            <span>Beauty & Health</span>
-          </Button>
+          <Link to={{ pathname: "/app/category", state: { type: "beauty" } }}>
+            <Button variant="secondary btn-block d-flex">
+              {clothing()}
+              <span>Beauty & Health</span>
+            </Button>
+          </Link>
         </div>
         <div className="col-md-3">
-          <Button variant="secondary btn-block d-flex">
-            {clothing()}
-            <span>Watches</span>
-          </Button>
+          <Link to={{ pathname: "/app/category", state: { type: "watches" } }}>
+            <Button variant="secondary btn-block d-flex">
+              {clothing()}
+              <span>Watches</span>
+            </Button>
+          </Link>
         </div>
         <div className="col-md-3">
-          <Button variant="secondary btn-block d-flex">
-            {clothing()}
-            <span>Jewelry & Accessories</span>
-          </Button>
+          <Link to={{ pathname: "/app/category", state: { type: "jewelry" } }}>
+            <Button variant="secondary btn-block d-flex">
+              {clothing()}
+              <span>Jewelry & Accessories</span>
+            </Button>
+          </Link>
         </div>
         <div className="col-md-3">
-          <Link to="/app/category">
+          <Link to={{ pathname: "/app/category", state: { type: "home" } }}>
             <Button variant="secondary btn-block d-flex">
               {clothing()}
               <span>Home & Garden</span>
@@ -64,10 +79,12 @@ export default class SearchProductPage extends Component {
           </Link>
         </div>
         <div className="col-md-3">
-          <Button variant="secondary btn-block d-flex">
-            {clothing()}
-            <span>Mother & Kids</span>
-          </Button>
+          <Link to={{ pathname: "/app/category", state: { type: "mother" } }}>
+            <Button variant="secondary btn-block d-flex">
+              {clothing()}
+              <span>Mother & Kids</span>
+            </Button>
+          </Link>
         </div>
       </div>
     );

@@ -82,6 +82,14 @@ export default {
         bullet: "dot",
         icon: "flaticon2-calendar-5",
         page: "app/cancelled-order"
+      },
+      { section: "Settings" },
+      {
+        title: "Account Settings",
+        root: true,
+        bullet: "dot",
+        icon: "flaticon2-settings",
+        page: "app/account-settings"
       }
     ]
   }

@@ -12,7 +12,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import "./expansion.price.scss";
-import { arrow_right } from "../icons/icons";
+import { arrow_right } from "../icons";
 
 const useStyles = makeStyles(theme => ({
   expansion: {

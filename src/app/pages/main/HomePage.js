@@ -14,6 +14,7 @@ import DeliveredOrderPage from "./DeliveredOrderPage";
 import CancelledOrderPage from "./CancelledOrderPage";
 import CategoryPage from "./CategoryPage";
 import ProductDetailsPage from "./ProductDetailsPage";
+import AccountSettingsPage from "./AccountSettingsPage";
 
 const GoogleMaterialPage = lazy(() =>
   import("./google-material/GoogleMaterialPage")
@@ -47,7 +48,7 @@ export default function MainHomePage() {
         <Route path="/app/category" component={CategoryPage} />
         <Route path="/app/details" component={ProductDetailsPage} />
         <Route path="/shopify/callback" component={ShopifyAuthCallBack} />
-        {/* <Route path="/account-settings" component={AccountSettingPage} /> */}
+        <Route path="/app/account-settings" component={AccountSettingsPage} />
         <Route path="/auth/logout" component={LogoutPage} />
         <Redirect to="/error/error-v1" />
       </Switch>

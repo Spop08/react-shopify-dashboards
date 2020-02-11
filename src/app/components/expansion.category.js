@@ -6,7 +6,7 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import "./expansion.category.scss";
-import { arrow_right } from "../icons/icons";
+import { arrow_right } from "../icons";
 
 const useStyles = makeStyles(theme => ({
   expansion: {
