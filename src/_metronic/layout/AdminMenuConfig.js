@@ -67,14 +67,14 @@ export default {
         root: true,
         bullet: "dot",
         icon: "flaticon2-search",
-        page: "admin/search-products"
+        page: "admin/order-list"
       },
       {
         title: "Pending orders",
         root: true,
         bullet: "dot",
         icon: "flaticon2-calendar-5",
-        page: "admin/import-list"
+        page: "admin/pending-order"
       },
       { section: "Customer" },
       {
@@ -82,7 +82,7 @@ export default {
         root: true,
         bullet: "dot",
         icon: "flaticon2-search",
-        page: "admin/search-products"
+        page: "admin/order-customer"
       },
       {
         title: "Development customer list",
