@@ -15,22 +15,23 @@ import CategoryPage from "./CategoryPage";
 import ProductDetailsPage from "./ProductDetailsPage";
 import AccountSettingsPage from "./AccountSettingsPage";
 
-import { connect } from "react-redux";
-import * as user_duck from "../../store/ducks/user.duck";
-import { fetchImportProducts } from "../../crud/user.crud";
+import { useSelector, useDispatch } from "react-redux";
+import { actions } from "../../store/ducks/user.duck";
+import { fetchImportProducts, fetchStoreProducts } from "../../crud/user.crud";
 
-const MainHomePage = props => {
+const MainHomePage = () => {
+  const token = useSelector(state => state.auth.authToken);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    async function fetchInfo() {
-      const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjVlMjE4ODI1MzZjNWRlMjk4YzRiZDUxMSIsImVtYWlsIjoiYUBhLmNvbSIsImlzQWRtaW4iOmZhbHNlfSwiaWF0IjoxNTgwMjYzOTkxfQ.oBur6qJqEN38FfZdsXthQZzzRWJJLIRpE--HCAzI4qc";
-
-      const my_products = await fetchImportProducts(token);
-      props.f_loadImportProducts(my_products);
-      // props.loadStoreProducts(my_products);
-    }
+    const fetchInfo = async () => {
+      const products_import = await fetchImportProducts(token);
+      const products_store = await fetchStoreProducts(token);
+      dispatch(actions.f_loadImportProducts(products_import));
+      dispatch(actions.f_loadStoreProducts(products_store));
+    };
     fetchInfo();
-  }, []); // [] - is required if you need only one call
+  }, [dispatch, token]); // [] - is required if you need only one call
   // https://reactjs.org/docs/hooks-reference.html#useeffect
 
   return (
@@ -60,4 +61,4 @@ const MainHomePage = props => {
   );
 };
 
-export default connect(null, user_duck.actions)(MainHomePage);
+export default MainHomePage;

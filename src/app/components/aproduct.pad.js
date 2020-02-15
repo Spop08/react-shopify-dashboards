@@ -5,8 +5,6 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import Paper from "@material-ui/core/Paper";
-import Draggable from "react-draggable";
 import "./sproduct.pad.scss";
 
 export default class SProductPad extends Component {
@@ -42,11 +40,11 @@ export default class SProductPad extends Component {
             <div>
               <div className="product-card-meta">
                 <div className="product-card-title">
-                  <a>
+                  <p>
                     ADBOOV High Top Sneakers Women Knit Upper Breathable Sock
                     Shoes Woman Thick Sole 5 CM Fashion sapato feminino Black /
                     White
-                  </a>
+                  </p>
                 </div>
               </div>
               <div className="product-price-wrapper">

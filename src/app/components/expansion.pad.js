@@ -6,14 +6,13 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import "./expansion.pad.scss";
-import shadows from "@material-ui/core/styles/shadows";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
   expansion: {
     boxShadow: "none!important"
   }
-}));
-export default function ExpansionPad() {
+});
+export default function ExpansionPad({ data }) {
   const [expanded, setExpanded] = React.useState(false);
   const classes = useStyles();
 
@@ -44,13 +43,9 @@ export default function ExpansionPad() {
                   />
                 </div>
                 <div className="kt-widget5__section">
-                  <h5>
-                    Elegant Ball Gown Pearls Embroidered Flowers Long Evening
-                    Dress Party Masquerade Solo Performance Host Dress Robe De
-                    Soiree 40
-                  </h5>
+                  <h5>{data.title}</h5>
 
-                  <p className="kt-widget5__desc">by Aliexpress</p>
+                  <p className="kt-widget5__desc">by UDS Dropshipping</p>
                 </div>
               </div>
               <div className="kt-widget5__content">

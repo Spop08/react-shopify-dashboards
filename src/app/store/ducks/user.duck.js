@@ -8,8 +8,8 @@ const actionTypes = {
 
 const initialState = {
   info: undefined,
-  import_products: undefined,
-  store_products: undefined
+  import_products: [],
+  store_products: []
 };
 
 export const reducer = (state = initialState, action) => {

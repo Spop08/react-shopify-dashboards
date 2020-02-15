@@ -6,7 +6,6 @@ import "react-app-polyfill/ie11";
 import "react-app-polyfill/stable";
 import React from "react";
 import ReactDOM from "react-dom";
-import axios from "axios";
 // import { mockAxios, setupAxios } from "./_metronic";
 import store, { persistor } from "./app/store/store";
 // import store from "./app/store/store";

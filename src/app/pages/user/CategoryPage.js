@@ -14,10 +14,6 @@ export default class CategoryPage extends Component {
   state = {
     open: false
   };
-  constructor(props) {
-    super(props);
-    console.log(props.location.state.type);
-  }
   handleClickOpen = () => {
     this.setState({ open: true });
   };

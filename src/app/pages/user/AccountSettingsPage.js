@@ -1,12 +1,7 @@
 import React, { Component } from "react";
 import clsx from "clsx";
 import { connect } from "react-redux";
-import {
-  icon_settings,
-  icon_account,
-  icon_profile,
-  icon_changepassword
-} from "../../icons";
+import { icon_settings, icon_profile, icon_changepassword } from "../../icons";
 import "./AccountSettingsPage.scss";
 
 class AccountSettingsPage extends Component {
@@ -14,9 +9,8 @@ class AccountSettingsPage extends Component {
     activeTab: "tab1"
   };
   componentDidMount() {
-    console.log(this.props);
     const { email, priceRule } = this.props.info;
-    this.setState({ email, priceRule: 2 });
+    this.setState({ email, priceRule });
   }
   onTabChange = value => {
     this.setState({ activeTab: value });
@@ -29,7 +23,7 @@ class AccountSettingsPage extends Component {
         role="tablist"
       >
         <li className="nav-item">
-          <a
+          <p
             className={clsx({
               "nav-link": true,
               active: activeTab === "tab1"
@@ -40,10 +34,10 @@ class AccountSettingsPage extends Component {
           >
             {icon_profile()}
             Profile
-          </a>
+          </p>
         </li>
         <li className="nav-item">
-          <a
+          <p
             className={clsx({
               "nav-link": true,
               active: activeTab === "tab2"
@@ -54,10 +48,10 @@ class AccountSettingsPage extends Component {
           >
             {icon_changepassword()}
             Change Password
-          </a>
+          </p>
         </li>
         <li className="nav-item">
-          <a
+          <p
             className={clsx({
               "nav-link": true,
               active: activeTab === "tab3"
@@ -68,7 +62,7 @@ class AccountSettingsPage extends Component {
           >
             {icon_settings()}
             Settings
-          </a>
+          </p>
         </li>
       </ul>
     </div>
@@ -378,10 +372,10 @@ class AccountSettingsPage extends Component {
               <div className="row">
                 <div className="col-xl-3"></div>
                 <div className="col-lg-9 col-xl-6">
-                  <a href="#" className="btn btn-label-brand btn-bold">
+                  <a href="/" className="btn btn-label-brand btn-bold">
                     Save changes
                   </a>
-                  <a href="#" className="kt-ml-30 btn btn-clean btn-bold">
+                  <a href="/" className="kt-ml-30 btn btn-clean btn-bold">
                     Cancel
                   </a>
                 </div>

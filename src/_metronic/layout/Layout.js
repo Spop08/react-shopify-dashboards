@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import objectPath from "object-path";
 import Header from "./header/Header";
-import SubHeader from "./sub-header/SubHeader";
 import HeaderMobile from "./header/HeaderMobile";
 import AsideLeft from "./aside/AsideLeft";
 import Footer from "./footer/Footer";
@@ -22,10 +21,10 @@ const htmlClassService = new HTMLClassService();
 function Layout({
   children,
   asideDisplay,
-  subheaderDisplay,
+  // subheaderDisplay,
   selfLayout,
   layoutConfig,
-  contentContainerClasses,
+  // contentContainerClasses,
   isAdmin
 }) {
   htmlClassService.setConfig(layoutConfig);

@@ -48,8 +48,8 @@ function Login(props) {
 
           <Formik
             initialValues={{
-              email: "admin@demo.com",
-              password: "demo"
+              email: "a@a.com",
+              password: "123"
             }}
             validate={values => {
               const errors = {};
@@ -82,10 +82,8 @@ function Login(props) {
                   .then(async res => {
                     const data = res.data;
                     disableLoading();
-                    if (data.status != "no user") {
+                    if (data.status !== "no user") {
                       console.log("LOGIN SUCCESS", res.data);
-                      // const token = data.token;
-
                       props.login(data.token);
                     } else {
                       console.log("LOGIN FAILED1", res.data);

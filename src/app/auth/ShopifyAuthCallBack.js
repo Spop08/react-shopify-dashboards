@@ -6,9 +6,8 @@ const queryString = require("query-string");
 class ShopifyAuthCallBack extends Component {
   componentDidMount() {
     const parsed = queryString.parse(this.props.location.search);
-
     const { shop } = parsed;
-    console.log(shop);
+
     this.props.connectStore(shop);
     window.location = "/app/dashboard";
   }

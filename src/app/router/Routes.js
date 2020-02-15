@@ -29,7 +29,6 @@ export const Routes = withRouter(({ history }) => {
     }),
     shallowEqual
   );
-  console.log("IsAuthorized???", isAuthorized);
   return (
     /* Create `LayoutContext` from current `history` and `menuConfig`. */
     <LayoutContextProvider history={history} menuConfig={menuConfig}>

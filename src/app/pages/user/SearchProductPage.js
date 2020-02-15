@@ -105,7 +105,6 @@ class SearchProductPage extends Component {
         <SProductPad data={data} />
       </div>
     ));
-    console.log(hot_products);
     return (
       <div>
         <h3 className="page-title">Search Products</h3>

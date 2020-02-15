@@ -1,17 +1,16 @@
 import React from "react";
 import MUIDataTable from "mui-datatables";
-import { makeStyles } from '@material-ui/core/styles';
-import Avatar from '@material-ui/core/Avatar';
+import { makeStyles } from "@material-ui/core/styles";
+import Avatar from "@material-ui/core/Avatar";
 
 import OrderToolbarSelect from "../../components/ordertoolbar";
 
 const useStyles = makeStyles(theme => ({
   large: {
     width: theme.spacing(9),
-    height: theme.spacing(9),
-  },
+    height: theme.spacing(9)
+  }
 }));
-
 
 const OrderList = () => {
   const classes = useStyles();
@@ -22,7 +21,7 @@ const OrderList = () => {
       label: "No",
       options: {
         filter: false,
-        sort: true,
+        sort: true
       }
     },
     {
@@ -33,7 +32,12 @@ const OrderList = () => {
         sort: false,
         customBodyRender: (value, tableMeta, updateValue) => {
           return (
-            <Avatar alt="product img" variant="rounded" src={value} className={classes.large} />
+            <Avatar
+              alt="product img"
+              variant="rounded"
+              src={value}
+              className={classes.large}
+            />
           );
         }
       }
@@ -43,7 +47,7 @@ const OrderList = () => {
       label: "Product Name",
       options: {
         filter: true,
-        sort: true,
+        sort: true
       }
     },
     {
@@ -51,7 +55,7 @@ const OrderList = () => {
       label: "Seller Email",
       options: {
         filter: true,
-        sort: true,
+        sort: true
       }
     },
     {
@@ -59,7 +63,7 @@ const OrderList = () => {
       label: "Seller Shop",
       options: {
         filter: true,
-        sort: true,
+        sort: true
       }
     },
     {
@@ -67,7 +71,7 @@ const OrderList = () => {
       label: "Status",
       options: {
         filter: true,
-        sort: true,
+        sort: true
       }
     },
     {
@@ -75,30 +79,99 @@ const OrderList = () => {
       label: "Shipping",
       options: {
         filter: true,
-        sort: true,
+        sort: true
       }
-    },
+    }
   ];
- 
+
   const data = [
-    { no: 1, image: "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg", name: "Phone 1", email: "a@a.com", store: "udsdropship", status: "Pending", isShipped: "Delivered"},
-    { no: 2, image: "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg", name: "Phone 1", email: "a@a.com", store: "udsdropship", status: "Pending", isShipped: "Undelivered"},
-    { no: 3, image: "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg", name: "Phone 1", email: "a@a.com", store: "udsdropship", status: "Pending", isShipped: "Delivered"},
-    { no: 4, image: "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg", name: "Phone 1", email: "a@a.com", store: "udsdropship", status: "Pending", isShipped: "Undelivered"},
-    { no: 5, image: "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg", name: "Phone 1", email: "a@a.com", store: "udsdropship", status: "Pending", isShipped: "Delivered"},
-    { no: 6, image: "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg", name: "Phone 1", email: "a@a.com", store: "udsdropship", status: "Pending", isShipped: "Undelivered"},
-    { no: 7, image: "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg", name: "Phone 1", email: "a@a.com", store: "udsdropship", status: "Pending", isShipped: "Delivered"},
-    { no: 8, image: "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg", name: "Phone 1", email: "a@a.com", store: "udsdropship", status: "Pending", isShipped: "Undelivered"},
-    
+    {
+      no: 1,
+      image:
+        "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg",
+      name: "Phone 1",
+      email: "a@a.com",
+      store: "udsdropship",
+      status: "Pending",
+      isShipped: "Delivered"
+    },
+    {
+      no: 2,
+      image:
+        "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg",
+      name: "Phone 1",
+      email: "a@a.com",
+      store: "udsdropship",
+      status: "Pending",
+      isShipped: "Undelivered"
+    },
+    {
+      no: 3,
+      image:
+        "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg",
+      name: "Phone 1",
+      email: "a@a.com",
+      store: "udsdropship",
+      status: "Pending",
+      isShipped: "Delivered"
+    },
+    {
+      no: 4,
+      image:
+        "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg",
+      name: "Phone 1",
+      email: "a@a.com",
+      store: "udsdropship",
+      status: "Pending",
+      isShipped: "Undelivered"
+    },
+    {
+      no: 5,
+      image:
+        "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg",
+      name: "Phone 1",
+      email: "a@a.com",
+      store: "udsdropship",
+      status: "Pending",
+      isShipped: "Delivered"
+    },
+    {
+      no: 6,
+      image:
+        "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg",
+      name: "Phone 1",
+      email: "a@a.com",
+      store: "udsdropship",
+      status: "Pending",
+      isShipped: "Undelivered"
+    },
+    {
+      no: 7,
+      image:
+        "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg",
+      name: "Phone 1",
+      email: "a@a.com",
+      store: "udsdropship",
+      status: "Pending",
+      isShipped: "Delivered"
+    },
+    {
+      no: 8,
+      image:
+        "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg",
+      name: "Phone 1",
+      email: "a@a.com",
+      store: "udsdropship",
+      status: "Pending",
+      isShipped: "Undelivered"
+    }
   ];
- 
+
   const options = {
-   filterType: 'checkbox',
-   customToolbarSelect: selectedRows => (
-     <OrderToolbarSelect
-       selectedRows={selectedRows}
-     />
-   )
+    filterType: "checkbox",
+    customToolbarSelect: selectedRows => (
+      <OrderToolbarSelect selectedRows={selectedRows} />
+    )
   };
 
   return (
@@ -108,7 +181,7 @@ const OrderList = () => {
       columns={columns}
       options={options}
     />
-  )
-}
+  );
+};
 
 export default OrderList;

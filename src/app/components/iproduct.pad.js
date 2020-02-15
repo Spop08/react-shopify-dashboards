@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -52,7 +52,6 @@ export default class IProductPad extends Component {
   render() {
     const { activeTab, editorState, import_open, delete_open } = this.state;
 
-    console.log(activeTab);
     return (
       <div className="kt-portlet">
         <div className="kt-portlet__head">
@@ -63,44 +62,44 @@ export default class IProductPad extends Component {
         <div className="kt-portlet__body">
           <ul className="nav nav-tabs " role="tablist">
             <li className="nav-item">
-              <a
+              <p
                 className={"nav-link " + (activeTab === "tab1" ? "active" : "")}
                 onClick={() => this.onTabChange("tab1")}
                 data-toggle="tab"
                 role="tab"
               >
                 Product
-              </a>
+              </p>
             </li>
             <li className="nav-item">
-              <a
+              <p
                 className={"nav-link " + (activeTab === "tab2" ? "active" : "")}
                 onClick={() => this.onTabChange("tab2")}
                 data-toggle="tab"
                 role="tab"
               >
                 Description
-              </a>
+              </p>
             </li>
             <li className="nav-item">
-              <a
+              <p
                 className={"nav-link " + (activeTab === "tab3" ? "active" : "")}
                 onClick={() => this.onTabChange("tab3")}
                 data-toggle="tab"
                 role="tab"
               >
                 Variants
-              </a>
+              </p>
             </li>
             <li className="nav-item">
-              <a
+              <p
                 className={"nav-link " + (activeTab === "tab4" ? "active" : "")}
                 onClick={() => this.onTabChange("tab4")}
                 data-toggle="tab"
                 role="tab"
               >
                 Images
-              </a>
+              </p>
             </li>
             <li className="nav-item btn-import">
               <button
@@ -129,6 +128,7 @@ export default class IProductPad extends Component {
                   <img
                     src="https://img.oberlo.com/?url=https://ae01.alicdn.com/kf/H9cff03171da44e5abc46e14fe36ec6b3u/MISSFOX-Diamond-Watch-For-Women-Luxury-Brand-Ladies-Gold-Square-Watch-Minimalist-Analog-Quartz-Movt-Unique.jpg"
                     className="tab-product-image"
+                    alt="name"
                   />
                 </div>
                 <div className="col-md-9">

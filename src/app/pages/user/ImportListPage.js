@@ -8,7 +8,6 @@ export default class ImportListPage extends Component {
         <h3 className="page-title">Import List</h3>
         <div className="kproduct-container">
           <IProductPad />
-          <IProductPad />
         </div>
       </div>
     );

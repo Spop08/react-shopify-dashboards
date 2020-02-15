@@ -1,6 +1,5 @@
 import React from "react";
 import BootstrapTable from "react-bootstrap-table-next";
-import cellEditFactory, { Type } from "react-bootstrap-table2-editor";
 import { toAbsoluteUrl } from "../../_metronic/utils/utils";
 import "./variants.table.scss";
 
@@ -69,13 +68,6 @@ const columns = [
     style: { whiteSpace: "nowrap" }
   }
 ];
-
-function afterSaveCell(oldValue, newValue) {
-  console.log("--after save cell--");
-  console.log("New Value was apply as");
-  console.log(newValue);
-  console.log(`and the type is ${typeof newValue}`);
-}
 
 export default class CustomColumnTable extends React.Component {
   state = {

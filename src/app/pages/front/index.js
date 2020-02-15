@@ -4,8 +4,7 @@ import Features from "./Features";
 import Home from "./Home";
 import Pricing from "./Pricing";
 import Shipping from "./Shipping";
-import { Redirect, Route, Switch, withRouter } from "react-router-dom";
-import AuthPage from "../../pages/auth/AuthPage";
+import { Redirect, Route, Switch } from "react-router-dom";
 import Footer from "./Footer";
 
 export default class LandingPage extends React.Component {

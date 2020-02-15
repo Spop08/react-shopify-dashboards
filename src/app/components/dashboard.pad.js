@@ -4,24 +4,21 @@ import { Modal } from "react-bootstrap";
 import "./dashboard.pad.scss";
 import { connect } from "react-redux";
 
-function DashboardPad(props) {
+const DashboardPad = props => {
   const [showModal, setShowModal] = useState(false);
   const [stateConnect, setStateConnect] = useState(false);
   const [storeName, setStoreName] = useState("uds-dropshippingstore");
 
   const handleChange = event => {
-    // console.log(value.target.value);
     const store = event.target.value;
     store === "" ? setStateConnect(true) : setStateConnect(false);
     setStoreName(store);
   };
   const handleConnect = () => {
-    console.log("Connect Clicked");
     // const url = process.env.REACT_APP_BACKEND_ENDPOINT + "/shopify";
     const backend_url = "https://7896f79f.ngrok.io/shopify";
     const email = props.email;
-    window.location =
-      backend_url + "?shop=" + storeName + ".myshopify.com&" + "email=" + email;
+    window.location = `${backend_url}?shop=${storeName}.myshopify.com&email=${email}`;
   };
 
   const isConnected = props.store;
@@ -169,7 +166,7 @@ function DashboardPad(props) {
       </Modal>
     </>
   );
-}
+};
 
 function mapStateToProps(state) {
   return {

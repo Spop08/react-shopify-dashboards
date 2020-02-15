@@ -47,7 +47,9 @@ export default class ProductDetailsPage extends React.Component {
               </p>
               <div className="d-flex">
                 <p>132 in stock</p>
-                <a className="text-link ml-auto">View product on AliExpress</a>
+                <a className="text-link ml-auto" href="/">
+                  View product on AliExpress
+                </a>
               </div>
               <Button variant="success" className="btn-import">
                 + Add to Import List
@@ -126,7 +128,9 @@ export default class ProductDetailsPage extends React.Component {
               <p className="product-statistics__icon">
                 2 reviews on Aliexpress
               </p>
-              <a className="text-link">Read Reviews</a>
+              <a className="text-link" href="/">
+                Read Reviews
+              </a>
             </div>
 
             <div className="col-md-2">
