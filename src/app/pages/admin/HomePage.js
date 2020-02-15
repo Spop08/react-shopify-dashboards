@@ -6,6 +6,9 @@ import LogoutPage from "../auth/Logout";
 import AdminDashBoard from "./DashboardPage";
 import ProductListPage from "./ProductListPage";
 import UserListPage from "./UserListPage";
+import OrderListPage from "./OrderListPage";
+import PendingOrderPage from "./PendingOrder";
+import OrderbyCustomerPage from "./OrderbyCustomer";
 
 export default function AdminHomePage() {
   // useEffect(() => {
@@ -22,7 +25,9 @@ export default function AdminHomePage() {
         <Route path="/admin/dashboard" component={AdminDashBoard} />
         <Route path="/admin/product-list" component={ProductListPage} />
         <Route path="/admin/user-list" component={UserListPage} />
-
+        <Route path="/admin/order-list" component={OrderListPage} />
+        <Route path="/admin/pending-order" component={PendingOrderPage} />
+        <Route path="/admin/order-customer" component={OrderbyCustomerPage} />
         <Route path="/auth/logout" component={LogoutPage} />
         <Redirect to="/error/error-v1" />
       </Switch>
