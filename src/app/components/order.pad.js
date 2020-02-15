@@ -71,12 +71,12 @@ export default function OrderPad(props) {
           <p className="order-customer">Supplier:</p>
           <p className="order-customername">Tang Tang Store</p>
           {type === "undelivered" && (
-            <button type="button" class="btn btn-warning btn-wide">
+            <button type="button" className="btn btn-warning btn-wide">
               Order Product
             </button>
           )}
           {type === "inprocessing" && (
-            <button type="button" class="btn btn-primary btn-wide">
+            <button type="button" className="btn btn-primary btn-wide">
               Get Tracking Code
             </button>
           )}

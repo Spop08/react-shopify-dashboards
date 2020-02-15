@@ -1,8 +1,6 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
-import { toAbsoluteUrl } from "../../_metronic/utils/utils";
-import PortletHeaderDropdown from "../partials/content/CustomDropdowns/PortletHeaderDropdown";
-import { Button, Modal } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import "./dashboard.pad.scss";
 import { connect } from "react-redux";
 
@@ -14,7 +12,7 @@ function DashboardPad(props) {
   const handleChange = event => {
     // console.log(value.target.value);
     const store = event.target.value;
-    store == "" ? setStateConnect(true) : setStateConnect(false);
+    store === "" ? setStateConnect(true) : setStateConnect(false);
     setStoreName(store);
   };
   const handleConnect = () => {
@@ -41,7 +39,7 @@ function DashboardPad(props) {
               <div className="kt-widget5__content">
                 <div className="kt-widget5__section step-section">
                   <span
-                    class={
+                    className={
                       "step-page-onboarding__badge step-badge" +
                       (isConnected
                         ? " step-badge-success"
@@ -66,7 +64,7 @@ function DashboardPad(props) {
                 {!isConnected && (
                   <button
                     type="button"
-                    class="btn btn-primary"
+                    className="btn btn-primary"
                     onClick={() => setShowModal(true)}
                   >
                     Connect
@@ -78,7 +76,7 @@ function DashboardPad(props) {
             <div className="kt-widget5__item ">
               <div className="kt-widget5__content">
                 <div className="kt-widget5__section step-section">
-                  <span class="step-page-onboarding__badge step-badge step-badge-primary">
+                  <span className="step-page-onboarding__badge step-badge step-badge-primary">
                     Step 2
                   </span>
                   <div>
@@ -94,7 +92,7 @@ function DashboardPad(props) {
             <div className="kt-widget5__item ">
               <div className="kt-widget5__content">
                 <div className="kt-widget5__section step-section">
-                  <span class="step-page-onboarding__badge step-badge step-badge-primary">
+                  <span className="step-page-onboarding__badge step-badge step-badge-primary">
                     Step 3
                   </span>
                   <div>
@@ -112,7 +110,7 @@ function DashboardPad(props) {
             <div className="kt-widget5__item ">
               <div className="kt-widget5__content">
                 <div className="kt-widget5__section step-section">
-                  <span class="step-page-onboarding__badge step-badge step-badge-primary">
+                  <span className="step-page-onboarding__badge step-badge step-badge-primary">
                     Step 4
                   </span>
                   <div>
@@ -138,7 +136,7 @@ function DashboardPad(props) {
             <img
               src="https://cdn.oberlo.com/img/shopify-logo.svg"
               alt="Shopify logo."
-              class="shopify-logo"
+              className="shopify-logo"
             />
             <h2 className="h2-connect-store">Connect a store</h2>
             <label className="label-connect-desc">
@@ -146,20 +144,20 @@ function DashboardPad(props) {
               redirected to Shopify to connect your account to Oberlo.
             </label>
             <label className="label-store-url">Your Shopify store URL</label>
-            <div class="input-group">
+            <div className="input-group">
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 placeholder="store-name"
                 value={storeName}
                 onChange={handleChange}
               />
-              <div class="input-group-append">
-                <span class="input-group-text">.myshopify.com</span>
+              <div className="input-group-append">
+                <span className="input-group-text">.myshopify.com</span>
               </div>
               <button
                 type="button"
-                class="btn btn-primary btn-shopify-connect"
+                className="btn btn-primary btn-shopify-connect"
                 disabled={stateConnect}
                 onClick={handleConnect}
               >
@@ -175,8 +173,8 @@ function DashboardPad(props) {
 
 function mapStateToProps(state) {
   return {
-    email: state.auth.user.email,
-    store: state.auth.user.store,
+    email: state.user.info.email,
+    store: state.user.info.store,
     token: state.auth.authToken
   };
 }

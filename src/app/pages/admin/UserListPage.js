@@ -20,35 +20,28 @@ const columns = [
   }
 ];
 
-function afterSaveCell(oldValue, newValue) {
-  console.log("--after save cell--");
-  console.log("New Value was apply as");
-  console.log(newValue);
-  console.log(`and the type is ${typeof newValue}`);
-}
-
 export default class UserListPage extends React.Component {
   state = {
     users: [
       {
         no: "1",
         email: "test1@test.com",
-        storeName: "uds-dropshippingstore.myshopify.com",
+        storeName: "uds-dropshippingstore.myshopify.com"
       },
       {
         no: "2",
         email: "test2@test.com",
-        storeName: "uds-dropshippingstore.myshopify.com",
+        storeName: "uds-dropshippingstore.myshopify.com"
       },
       {
         no: "3",
         email: "test3@test.com",
-        storeName: "uds-dropshippingstore.myshopify.com",
+        storeName: "uds-dropshippingstore.myshopify.com"
       },
       {
         no: "4",
         email: "test4@test.com",
-        storeName: "uds-dropshippingstore.myshopify.com",
+        storeName: "uds-dropshippingstore.myshopify.com"
       }
     ]
   };

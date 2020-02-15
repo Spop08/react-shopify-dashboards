@@ -180,7 +180,7 @@ export default class SearchDropdown extends React.Component {
                   "kt-spinner kt-spinner--input kt-spinner--sm kt-spinner--brand kt-spinner--right": loading
                 })}
               >
-                {/* <div className="input-group-prepend">
+                <div className="input-group-prepend">
                   <span className="input-group-text">
                     <i className="flaticon2-search-1" />
                   </span>
@@ -193,7 +193,7 @@ export default class SearchDropdown extends React.Component {
                   value={searchValue}
                   onChange={this.handleSearchChange}
                   className="form-control kt-quick-search__input"
-                /> */}
+                />
 
                 <div className="input-group-append">
                   <span className="input-group-text">

@@ -33,7 +33,6 @@ function Layout({
   // window.scrollTo(0, 0);
 
   const contentCssClasses = htmlClassService.classes.content.join(" ");
-  console.log(" I AM LAYOUT", isAdmin);
   return selfLayout !== "blank" ? (
     <LayoutInitializer
       menuConfig={isAdmin ? AdminMenuConfig : MainMenuConfig}

@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { LayoutSplashScreen } from "../../../_metronic";
 import LogoutPage from "../auth/Logout";
@@ -6,13 +6,6 @@ import LogoutPage from "../auth/Logout";
 import AdminDashBoard from "./DashboardPage";
 import ProductListPage from "./ProductListPage";
 import UserListPage from "./UserListPage";
-
-const GoogleMaterialPage = lazy(() =>
-  import("../main/google-material/GoogleMaterialPage")
-);
-const ReactBootstrapPage = lazy(() =>
-  import("../main/react-bootstrap/ReactBootstrapPage")
-);
 
 export default function AdminHomePage() {
   // useEffect(() => {
@@ -29,7 +22,7 @@ export default function AdminHomePage() {
         <Route path="/admin/dashboard" component={AdminDashBoard} />
         <Route path="/admin/product-list" component={ProductListPage} />
         <Route path="/admin/user-list" component={UserListPage} />
-        
+
         <Route path="/auth/logout" component={LogoutPage} />
         <Redirect to="/error/error-v1" />
       </Switch>

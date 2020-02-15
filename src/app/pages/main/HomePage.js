@@ -1,7 +1,6 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, useEffect } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import Dashboard from "./DashboardPage";
-import DocsPage from "./docs/DocsPage";
 import { LayoutSplashScreen } from "../../../_metronic";
 import LogoutPage from "../auth/Logout";
 import SearchProductPage from "./SearchProductPage";
@@ -16,17 +15,22 @@ import CategoryPage from "./CategoryPage";
 import ProductDetailsPage from "./ProductDetailsPage";
 import AccountSettingsPage from "./AccountSettingsPage";
 
-const GoogleMaterialPage = lazy(() =>
-  import("./google-material/GoogleMaterialPage")
-);
-const ReactBootstrapPage = lazy(() =>
-  import("./react-bootstrap/ReactBootstrapPage")
-);
+import { connect } from "react-redux";
+import * as user_duck from "../../store/ducks/user.duck";
+import { fetchImportProducts } from "../../crud/user.crud";
 
-export default function MainHomePage() {
-  // useEffect(() => {
-  //   console.log('Home page');
-  // }, []) // [] - is required if you need only one call
+const MainHomePage = props => {
+  useEffect(() => {
+    async function fetchInfo() {
+      const token =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjVlMjE4ODI1MzZjNWRlMjk4YzRiZDUxMSIsImVtYWlsIjoiYUBhLmNvbSIsImlzQWRtaW4iOmZhbHNlfSwiaWF0IjoxNTgwMjYzOTkxfQ.oBur6qJqEN38FfZdsXthQZzzRWJJLIRpE--HCAzI4qc";
+
+      const my_products = await fetchImportProducts(token);
+      props.f_loadImportProducts(my_products);
+      // props.loadStoreProducts(my_products);
+    }
+    fetchInfo();
+  }, []); // [] - is required if you need only one call
   // https://reactjs.org/docs/hooks-reference.html#useeffect
 
   return (
@@ -54,4 +58,6 @@ export default function MainHomePage() {
       </Switch>
     </Suspense>
   );
-}
+};
+
+export default connect(null, user_duck.actions)(MainHomePage);

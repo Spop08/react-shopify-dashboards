@@ -4,11 +4,19 @@ import { Button, Modal, InputGroup, FormControl } from "react-bootstrap";
 import { search_icon, clothing } from "../../icons";
 import { Link } from "react-router-dom";
 import "./SearchProductPage.scss";
+import { fetchHotProducts } from "../../crud/product.crud";
+import { connect } from "react-redux";
 
-export default class SearchProductPage extends Component {
+class SearchProductPage extends Component {
   state = {
-    open: false
+    open: false,
+    hot_products: []
   };
+  async componentDidMount() {
+    const { token } = this.props;
+    const hot_products = await fetchHotProducts(token);
+    this.setState({ hot_products });
+  }
   handleClickOpen = () => {
     this.setState({ open: true });
   };
@@ -90,27 +98,32 @@ export default class SearchProductPage extends Component {
     );
   };
   render() {
-    const { open } = this.state;
+    const { open, hot_products } = this.state;
     const componentCategories = this.componentCategories;
-
+    const componentHotProducts = hot_products.map((data, index) => (
+      <div className="col-md-12 col-lg-6 col-xl-3" key={index}>
+        <SProductPad data={data} />
+      </div>
+    ));
+    console.log(hot_products);
     return (
       <div>
         <h3 className="page-title">Search Products</h3>
         <div className="kproduct-container">
           <div className="kt-searchbar">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">
+            <div className="input-group">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="basic-addon1">
                   {search_icon()}
                 </span>
               </div>
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 placeholder="Search"
                 aria-describedby="basic-addon1"
               />
-              <button type="button" class="btn btn-primary btn-wide">
+              <button type="button" className="btn btn-primary btn-wide">
                 Search
               </button>
             </div>
@@ -125,37 +138,9 @@ export default class SearchProductPage extends Component {
             </button>
           </div>
           {componentCategories()}
-          <h2>Free Shipping From AliExpress Warehouses</h2>
-          <div className="row">
-            <div className="col-md-12 col-lg-6 col-xl-3">
-              <SProductPad />
-            </div>
-            <div className="col-md-12 col-lg-6 col-xl-3">
-              <SProductPad />
-            </div>
-            <div className="col-md-12 col-lg-6 col-xl-3">
-              <SProductPad />
-            </div>
-            <div className="col-md-12 col-lg-6 col-xl-3">
-              <SProductPad />
-            </div>
-          </div>
 
-          <h2>Women Shoes</h2>
-          <div className="row">
-            <div className="col-md-12 col-lg-6 col-xl-3">
-              <SProductPad />
-            </div>
-            <div className="col-md-12 col-lg-6 col-xl-3">
-              <SProductPad />
-            </div>
-            <div className="col-md-12 col-lg-6 col-xl-3">
-              <SProductPad />
-            </div>
-            <div className="col-md-12 col-lg-6 col-xl-3">
-              <SProductPad />
-            </div>
-          </div>
+          <h2>HighLited Products</h2>
+          <div className="row">{componentHotProducts}</div>
         </div>
         <Modal show={open} onHide={this.handleClose}>
           <Modal.Header closeButton>
@@ -185,3 +170,7 @@ export default class SearchProductPage extends Component {
     );
   }
 }
+function mapStateToProps(state) {
+  return { token: state.auth.authToken };
+}
+export default connect(mapStateToProps)(SearchProductPage);

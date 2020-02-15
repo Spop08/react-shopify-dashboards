@@ -9,26 +9,22 @@ import React from "react";
 import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 import { shallowEqual, useSelector } from "react-redux";
 import { useLastLocation } from "react-router-last-location";
-import MainHomePage from "../pages/main/HomePage";
-import AdminHomePage from "../pages/admin/HomePage";
 import ErrorsPage from "../pages/errors/ErrorsPage";
-import LogoutPage from "../pages/auth/Logout";
 import { LayoutContextProvider } from "../../_metronic";
-import Layout from "../../_metronic/layout/Layout";
 import * as routerHelpers from "../router/RouterHelpers";
 import LandinPage from "../../app/pages/front";
 import AuthPage from "../pages/auth/AuthPage";
 import ShopifyAuthCallBack from "../auth/ShopifyAuthCallBack";
+import AppRoute from "./app.route";
 
 export const Routes = withRouter(({ history }) => {
   const lastLocation = useLastLocation();
   routerHelpers.saveLastLocation(lastLocation);
 
-  const { isAuthorized, menuConfig, userLastLocation, isAdmin } = useSelector(
-    ({ auth, urls, builder: { menuConfig } }) => ({
+  const { isAuthorized, menuConfig } = useSelector(
+    ({ auth, builder: { menuConfig } }) => ({
       menuConfig,
       isAuthorized: auth.authToken != null,
-      isAdmin: auth.authToken != null && auth.user.isAdmin,
       userLastLocation: routerHelpers.getLastLocation()
     }),
     shallowEqual
@@ -46,9 +42,7 @@ export const Routes = withRouter(({ history }) => {
             <Redirect to="/main" />
           </Switch>
         ) : (
-          <Layout isAdmin={isAdmin}>
-            {isAdmin ? <AdminHomePage /> : <MainHomePage />}
-          </Layout>
+          <AppRoute />
         )}
         <Route path="/error" component={ErrorsPage} />
       </Switch>

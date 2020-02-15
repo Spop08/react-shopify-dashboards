@@ -34,29 +34,31 @@ export default function ExpansionPad() {
           id="panel1bh-header"
         >
           <div className="kt-widget5">
-            <div class="kt-widget5__item ">
-              <div class="kt-widget5__content">
-                <div class="kt-widget5__pic">
+            <div className="kt-widget5__item ">
+              <div className="kt-widget5__content">
+                <div className="kt-widget5__pic">
                   <img
                     alt=""
-                    class="kt-widget7__img"
+                    className="kt-widget7__img"
                     src="https://ae01.alicdn.com/kf/H170b706c280948f18fad2a4a8dd6cfc3P/2019-Winter-Shoes-Men-Warm-Boots-Men-Fur-High-Quality-Split-Leather-Wterproof-Ankle-Snow-Boots.jpg"
                   />
                 </div>
-                <div class="kt-widget5__section">
+                <div className="kt-widget5__section">
                   <h5>
                     Elegant Ball Gown Pearls Embroidered Flowers Long Evening
                     Dress Party Masquerade Solo Performance Host Dress Robe De
                     Soiree 40
                   </h5>
 
-                  <p class="kt-widget5__desc">by Aliexpress</p>
+                  <p className="kt-widget5__desc">by Aliexpress</p>
                 </div>
               </div>
-              <div class="kt-widget5__content">
-                <div class="kt-widget5__stats">
-                  <span class="kt-widget5__sales">Shopify Price:US$143.72</span>
-                  <span class="kt-widget5__sales">Cost:US$70.70</span>
+              <div className="kt-widget5__content">
+                <div className="kt-widget5__stats">
+                  <span className="kt-widget5__sales">
+                    Shopify Price:US$143.72
+                  </span>
+                  <span className="kt-widget5__sales">Cost:US$70.70</span>
                 </div>
               </div>
             </div>
@@ -65,38 +67,38 @@ export default function ExpansionPad() {
         <ExpansionPanelDetails>
           <div>
             <div className="row ">
-              <div class="expansion__pic">
+              <div className="expansion__pic">
                 <img
                   alt=""
-                  class="expansion__img"
+                  className="expansion__img"
                   src="https://ae01.alicdn.com/kf/H8cb212f003164fb5b9137e0d7efc0a38Q/2019-Winter-Shoes-Men-Warm-Boots-Men-Fur-High-Quality-Split-Leather-Wterproof-Ankle-Snow-Boots.jpg_640x640.jpg"
                 />
               </div>
-              <div class="expansion__pic">
+              <div className="expansion__pic">
                 <img
                   alt=""
-                  class="expansion__img"
+                  className="expansion__img"
                   src="https://ae01.alicdn.com/kf/H5b0fce4ca87443499482d4f62637b96eS/2019-Winter-Shoes-Men-Warm-Boots-Men-Fur-High-Quality-Split-Leather-Wterproof-Ankle-Snow-Boots.jpg_640x640.jpg"
                 />
               </div>
-              <div class="expansion__pic">
+              <div className="expansion__pic">
                 <img
                   alt=""
-                  class="expansion__img"
+                  className="expansion__img"
                   src="https://ae01.alicdn.com/kf/H170b706c280948f18fad2a4a8dd6cfc3P/2019-Winter-Shoes-Men-Warm-Boots-Men-Fur-High-Quality-Split-Leather-Wterproof-Ankle-Snow-Boots.jpg"
                 />
               </div>
             </div>
             <div className="expansion__desc">
-              <div class="product-card__reviews">
+              <div className="product-card__reviews">
                 <div>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
+                  <i className="fa fa-star"></i>
+                  <i className="fa fa-star"></i>
+                  <i className="fa fa-star"></i>
+                  <i className="fa fa-star"></i>
+                  <i className="fa fa-star"></i>
                 </div>
-                <label class="product-card__reviews-count">(2)</label>
+                <label className="product-card__reviews-count">(2)</label>
               </div>
               <Typography>
                 Elegant Ball Gown Pearls Embroidered Flowers Long Evening Dress

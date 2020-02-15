@@ -36,23 +36,23 @@ export default function ExpansionCategory() {
           <Typography>Category</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <button class="filter-category__item active">
+          <button className="filter-category__item active">
             Accessories
             {arrow_right()}
           </button>
-          <button class="filter-category__item">
+          <button className="filter-category__item">
             Belts
             {arrow_right()}
           </button>
-          <button class="filter-category__item">
+          <button className="filter-category__item">
             Eyewear
             {arrow_right()}
           </button>
-          <button class="filter-category__item">
+          <button className="filter-category__item">
             Gloves & Mittens
             {arrow_right()}
           </button>
-          <button class="filter-category__item">
+          <button className="filter-category__item">
             Hats & Caps
             {arrow_right()}
           </button>

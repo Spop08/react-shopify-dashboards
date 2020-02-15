@@ -115,13 +115,13 @@ export default class ProductDetailsPage extends React.Component {
             <div className="col-md-2 ">
               <div className="product-card__reviews">
                 <div>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
+                  <i className="fa fa-star"></i>
+                  <i className="fa fa-star"></i>
+                  <i className="fa fa-star"></i>
+                  <i className="fa fa-star"></i>
+                  <i className="fa fa-star"></i>
                 </div>
-                <label class="product-card__reviews-count">(2)</label>
+                <label className="product-card__reviews-count">(2)</label>
               </div>
               <p className="product-statistics__icon">
                 2 reviews on Aliexpress

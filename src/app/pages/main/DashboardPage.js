@@ -1,10 +1,7 @@
-import React, { useMemo } from "react";
-import { useSelector } from "react-redux";
-import { connect } from "react-redux";
+import React from "react";
 import DashboardPad from "../../components/dashboard.pad";
 
 export default function Dashboard(props) {
-
   return (
     <>
       <div className="row">

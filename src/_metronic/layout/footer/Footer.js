@@ -15,7 +15,7 @@ class Footer extends React.Component {
           <div className="kt-footer__copyright">
             {today.toString()}&nbsp;&copy;&nbsp;
             <a
-              // href="/main"
+              href="/"
               target="_blank"
               rel="noopener noreferrer"
               className="kt-link"
@@ -25,7 +25,7 @@ class Footer extends React.Component {
           </div>
           <div className="kt-footer__menu">
             <a
-              // href="/main"
+              href="/"
               target="_blank"
               rel="noopener noreferrer"
               className="kt-footer__menu-link kt-link"
@@ -33,7 +33,7 @@ class Footer extends React.Component {
               About
             </a>
             <a
-              // href="/main"
+              href="/"
               target="_blank"
               rel="noopener noreferrer"
               className="kt-footer__menu-link kt-link"
@@ -41,7 +41,7 @@ class Footer extends React.Component {
               Team
             </a>
             <a
-              // href="/main"
+              href="/"
               target="_blank"
               rel="noopener noreferrer"
               className="kt-footer__menu-link kt-link"

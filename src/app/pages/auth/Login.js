@@ -7,7 +7,6 @@ import { TextField } from "@material-ui/core";
 import clsx from "clsx";
 import * as auth from "../../store/ducks/auth.duck";
 import { login } from "../../crud/auth.crud";
-import { crudAPI } from "../../crud/api.crud";
 
 function Login(props) {
   const { intl } = props;
@@ -80,21 +79,16 @@ function Login(props) {
               enableLoading();
               setTimeout(() => {
                 login(values.email, values.password)
-                  .then(res => {
+                  .then(async res => {
                     const data = res.data;
-                    console.log("authorization", data, props);
                     disableLoading();
                     if (data.status != "no user") {
-                      console.log("USER is VALID", res.data);
-                      crudAPI("/api/user/info", "post", null, data.token).then(
-                        res => {
-                          props.fulfillUser(res.data);
-                          console.log("USER is LOGIN", res.data);
-                          props.login(data.token);
-                          console.log("FULFILLUSER", res.data);
-                        }
-                      );
+                      console.log("LOGIN SUCCESS", res.data);
+                      // const token = data.token;
+
+                      props.login(data.token);
                     } else {
+                      console.log("LOGIN FAILED1", res.data);
                       setSubmitting(false);
                       setStatus(
                         intl.formatMessage({
@@ -104,7 +98,7 @@ function Login(props) {
                     }
                   })
                   .catch(err => {
-                    console.log("authorization", err);
+                    console.log("LOGIN FAILED2", err);
                     disableLoading();
                     setSubmitting(false);
                     setStatus(

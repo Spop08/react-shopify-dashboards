@@ -1,32 +1,38 @@
-import AccountSettingComponent from "../../widgets/account.setting";
 import React, { Component } from "react";
 import clsx from "clsx";
+import { connect } from "react-redux";
 import {
   icon_settings,
   icon_account,
   icon_profile,
   icon_changepassword
 } from "../../icons";
+import "./AccountSettingsPage.scss";
 
-export default class AccountSettingsPage extends Component {
+class AccountSettingsPage extends Component {
   state = {
     activeTab: "tab1"
   };
+  componentDidMount() {
+    console.log(this.props);
+    const { email, priceRule } = this.props.info;
+    this.setState({ email, priceRule: 2 });
+  }
   onTabChange = value => {
     this.setState({ activeTab: value });
   };
 
   ComponentTabHeader = ({ activeTab }) => (
-    <div class="kt-portlet__head-toolbar">
+    <div className="kt-portlet__head-toolbar">
       <ul
-        class="nav nav-tabs nav-tabs-space-xl nav-tabs-line nav-tabs-bold nav-tabs-line-3x nav-tabs-line-brand"
+        className="nav nav-tabs nav-tabs-space-xl nav-tabs-line nav-tabs-bold nav-tabs-line-3x nav-tabs-line-brand"
         role="tablist"
       >
-        <li class="nav-item">
+        <li className="nav-item">
           <a
             className={clsx({
               "nav-link": true,
-              active: activeTab == "tab1"
+              active: activeTab === "tab1"
             })}
             onClick={() => this.onTabChange("tab1")}
             data-toggle="tab"
@@ -36,11 +42,11 @@ export default class AccountSettingsPage extends Component {
             Profile
           </a>
         </li>
-        <li class="nav-item">
+        <li className="nav-item">
           <a
             className={clsx({
               "nav-link": true,
-              active: activeTab == "tab2"
+              active: activeTab === "tab2"
             })}
             onClick={() => this.onTabChange("tab2")}
             data-toggle="tab"
@@ -50,11 +56,11 @@ export default class AccountSettingsPage extends Component {
             Change Password
           </a>
         </li>
-        <li class="nav-item">
+        <li className="nav-item">
           <a
             className={clsx({
               "nav-link": true,
-              active: activeTab == "tab3"
+              active: activeTab === "tab3"
             })}
             onClick={() => this.onTabChange("tab3")}
             data-toggle="tab"
@@ -67,147 +73,157 @@ export default class AccountSettingsPage extends Component {
       </ul>
     </div>
   );
-  ComponentProfile = ({ activeTab }) => (
-    <div className="tab-content">
-      <div
-        className={clsx({
-          "tab-pane": true,
-          active: activeTab == "tab1"
-        })}
-      >
-        <div class="kt-form kt-form--label-right">
-          <div class="kt-form__body">
-            <div class="kt-section kt-section--first">
-              <div class="kt-section__body">
-                <div class="row">
-                  <label class="col-xl-3"></label>
-                  <div class="col-lg-9 col-xl-6">
-                    <h3 class="kt-section__title kt-section__title-sm">
-                      Customer Info:
-                    </h3>
+  ComponentProfile = ({ activeTab }) => {
+    const { email } = this.state;
+    return (
+      <div className="tab-content">
+        <div
+          className={clsx({
+            "tab-pane": true,
+            active: activeTab === "tab1"
+          })}
+        >
+          <div className="kt-form kt-form--label-right">
+            <div className="kt-form__body">
+              <div className="kt-section kt-section--first">
+                <div className="kt-section__body">
+                  <div className="row">
+                    <label className="col-xl-3"></label>
+                    <div className="col-lg-9 col-xl-6">
+                      <h3 className="kt-section__title kt-section__title-sm">
+                        Customer Info:
+                      </h3>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-xl-3 col-lg-3 col-form-label">Avatar</label>
-                  <div class="col-lg-9 col-xl-6">
-                    <div
-                      class="kt-avatar kt-avatar--outline kt-avatar--circle-"
-                      id="kt_user_edit_avatar"
-                    >
+                  <div className="form-group row">
+                    <label className="col-xl-3 col-lg-3 col-form-label">
+                      Avatar
+                    </label>
+                    <div className="col-lg-9 col-xl-6">
                       <div
-                        class="kt-avatar__holder"
-                        style={{
-                          backgroundImage: "url(/media/users/300_25.jpg)"
-                        }}
-                      ></div>
-                      <label
-                        class="kt-avatar__upload"
-                        data-toggle="kt-tooltip"
-                        title=""
-                        data-original-title="Change avatar"
+                        className="kt-avatar kt-avatar--outline kt-avatar--circle-"
+                        id="kt_user_edit_avatar"
                       >
-                        <i class="fa fa-pen"></i>
-                        <input
-                          type="file"
-                          name="profile_avatar"
-                          accept=".png, .jpg, .jpeg"
-                        />
-                      </label>
-                      <span
-                        class="kt-avatar__cancel"
-                        data-toggle="kt-tooltip"
-                        title=""
-                        data-original-title="Cancel avatar"
-                      >
-                        <i class="fa fa-times"></i>
-                      </span>
+                        <div
+                          className="kt-avatar__holder"
+                          style={{
+                            backgroundImage: "url(/media/users/300_25.jpg)"
+                          }}
+                        ></div>
+                        <label
+                          className="kt-avatar__upload"
+                          data-toggle="kt-tooltip"
+                          title=""
+                          data-original-title="Change avatar"
+                        >
+                          <i className="fa fa-pen"></i>
+                          <input
+                            type="file"
+                            name="profile_avatar"
+                            accept=".png, .jpg, .jpeg"
+                          />
+                        </label>
+                        <span
+                          className="kt-avatar__cancel"
+                          data-toggle="kt-tooltip"
+                          title=""
+                          data-original-title="Cancel avatar"
+                        >
+                          <i className="fa fa-times"></i>
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div class="form-group row">
-                  <label class="col-xl-3 col-lg-3 col-form-label">
-                    First Name
-                  </label>
-                  <div class="col-lg-9 col-xl-6">
-                    <input class="form-control" type="text" value="Liu" />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-xl-3 col-lg-3 col-form-label">
-                    Last Name
-                  </label>
-                  <div class="col-lg-9 col-xl-6">
-                    <input class="form-control" type="text" value="Zhang" />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-xl-3 col-lg-3 col-form-label">
-                    Company Name
-                  </label>
-                  <div class="col-lg-9 col-xl-6">
-                    <input class="form-control" type="text" value="Loop Inc." />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-xl-3 col-lg-3 col-form-label">
-                    Contact Phone
-                  </label>
-                  <div class="col-lg-9 col-xl-6">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">
-                          <i class="la la-phone"></i>
-                        </span>
-                      </div>
-                      <input
-                        type="text"
-                        class="form-control"
-                        value="+8613020000000"
-                        placeholder="Phone"
-                        aria-describedby="basic-addon1"
-                      />
+                  <div className="form-group row">
+                    <label className="col-xl-3 col-lg-3 col-form-label">
+                      First Name
+                    </label>
+                    <div className="col-lg-9 col-xl-6">
+                      <input className="form-control" type="text" value="Liu" />
                     </div>
-                    <span class="form-text text-muted">
-                      We'll use this phone number for contacting you.
-                    </span>
                   </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-xl-3 col-lg-3 col-form-label">
-                    Email Address
-                  </label>
-                  <div class="col-lg-9 col-xl-6">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">
-                          <i class="la la-at"></i>
-                        </span>
-                      </div>
+                  <div className="form-group row">
+                    <label className="col-xl-3 col-lg-3 col-form-label">
+                      Last Name
+                    </label>
+                    <div className="col-lg-9 col-xl-6">
                       <input
+                        className="form-control"
                         type="text"
-                        class="form-control"
-                        value="liuzhang@qq.com"
-                        placeholder="Email"
-                        aria-describedby="basic-addon1"
+                        value="Zhang"
                       />
                     </div>
                   </div>
-                </div>
-                <div class="form-group form-group-last row">
-                  <label class="col-xl-3 col-lg-3 col-form-label">
-                    Company Site
-                  </label>
-                  <div class="col-lg-9 col-xl-6">
-                    <div class="input-group">
+                  <div className="form-group row">
+                    <label className="col-xl-3 col-lg-3 col-form-label">
+                      Email Address
+                    </label>
+                    <div className="col-lg-9 col-xl-6">
+                      <div className="input-group">
+                        <div className="input-group-prepend">
+                          <span className="input-group-text">
+                            <i className="la la-at"></i>
+                          </span>
+                        </div>
+                        <input
+                          type="text"
+                          className="form-control"
+                          value={email}
+                          placeholder="Email"
+                          aria-describedby="basic-addon1"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="form-group row">
+                    <label className="col-xl-3 col-lg-3 col-form-label">
+                      Company Name
+                    </label>
+                    <div className="col-lg-9 col-xl-6">
                       <input
+                        className="form-control"
                         type="text"
-                        class="form-control"
-                        placeholder="Username"
-                        value="loop"
+                        value="Loop Inc."
                       />
-                      <div class="input-group-append">
-                        <span class="input-group-text">.com</span>
+                    </div>
+                  </div>
+                  <div className="form-group row">
+                    <label className="col-xl-3 col-lg-3 col-form-label">
+                      Company Site
+                    </label>
+                    <div className="col-lg-9 col-xl-6">
+                      <div className="input-group">
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Username"
+                          value="loop"
+                        />
+                        <div className="input-group-append">
+                          <span className="input-group-text">.com</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="form-group form-group-last row">
+                    <label className="col-xl-3 col-lg-3 col-form-label">
+                      Contact Phone
+                    </label>
+                    <div className="col-lg-9 col-xl-6">
+                      <div className="input-group">
+                        <div className="input-group-prepend">
+                          <span className="input-group-text">
+                            <i className="la la-phone"></i>
+                          </span>
+                        </div>
+                        <input
+                          type="text"
+                          className="form-control"
+                          value="+8613020000000"
+                          placeholder="Phone"
+                          aria-describedby="basic-addon1"
+                        />
                       </div>
                     </div>
                   </div>
@@ -217,87 +233,59 @@ export default class AccountSettingsPage extends Component {
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  };
   ComponentChangePassword = ({ activeTab }) => (
     <div className="tab-content">
       <div
         className={clsx({
           "tab-pane": true,
-          active: activeTab == "tab2"
+          active: activeTab === "tab2"
         })}
       >
-        <div class="kt-form kt-form--label-right">
-          <div class="kt-form__body">
-            <div class="kt-section kt-section--first">
-              <div class="kt-section__body">
-                <div class="row">
-                  <label class="col-xl-3"></label>
-                  <div class="col-lg-9 col-xl-6">
-                    <h3 class="kt-section__title kt-section__title-sm">
-                      Change Or Recover Your Password:
-                    </h3>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-xl-3 col-lg-3 col-form-label">
+        <div className="kt-form kt-form--label-right">
+          <div className="kt-form__body">
+            <div className="kt-section kt-section--first">
+              <div className="kt-section__body">
+                <div className="form-group row">
+                  <label className="col-xl-3 col-lg-3 col-form-label">
                     Current Password
                   </label>
-                  <div class="col-lg-9 col-xl-6">
+                  <div className="col-lg-9 col-xl-6">
                     <input
                       type="password"
-                      class="form-control"
+                      className="form-control"
                       value=""
                       placeholder="Current password"
                     />
-                    <a
-                      href="#"
-                      class="kt-link kt-font-sm kt-font-bold kt-margin-t-5"
-                    >
-                      Forgot password ?
-                    </a>
                   </div>
                 </div>
-                <div class="form-group row">
-                  <label class="col-xl-3 col-lg-3 col-form-label">
+                <div className="form-group row">
+                  <label className="col-xl-3 col-lg-3 col-form-label">
                     New Password
                   </label>
-                  <div class="col-lg-9 col-xl-6">
+                  <div className="col-lg-9 col-xl-6">
                     <input
                       type="password"
-                      class="form-control"
+                      className="form-control"
                       value=""
                       placeholder="New password"
                     />
                   </div>
                 </div>
-                <div class="form-group form-group-last row">
-                  <label class="col-xl-3 col-lg-3 col-form-label">
-                    Verify Password
+                <div className="form-group form-group-last row">
+                  <label className="col-xl-3 col-lg-3 col-form-label">
+                    Confirm Password
                   </label>
-                  <div class="col-lg-9 col-xl-6">
+                  <div className="col-lg-9 col-xl-6">
                     <input
                       type="password"
-                      class="form-control"
+                      className="form-control"
                       value=""
-                      placeholder="Verify password"
+                      placeholder="Confirm password"
                     />
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="kt-separator kt-separator--space-lg kt-separator--fit kt-separator--border-solid"></div>
-          <div class="kt-form__actions">
-            <div class="row">
-              <div class="col-xl-3"></div>
-              <div class="col-lg-9 col-xl-6">
-                <a href="#" class="btn btn-label-brand btn-bold">
-                  Save changes
-                </a>
-                <a href="#" class="btn btn-clean btn-bold">
-                  Cancel
-                </a>
               </div>
             </div>
           </div>
@@ -306,32 +294,48 @@ export default class AccountSettingsPage extends Component {
     </div>
   );
 
-  ComponentSettings = ({ activeTab }) => (
-    <div className="tab-content">
-      <div
-        className={clsx({
-          "tab-pane": true,
-          active: activeTab == "tab3"
-        })}
-      >
-        <div class="kt-form kt-form--label-right">
-          <div class="kt-form__body">
-            <div class="kt-section kt-section--first">
-              <div class="kt-section__body">
-                <div class="row">
-                  <label class="col-xl-3"></label>
-                  <div class="col-lg-9 col-xl-6">
-                    <h3 class="kt-section__title kt-section__title-sm">
-                      Global Pricing Rules :
-                    </h3>
+  ComponentSettings = ({ activeTab }) => {
+    const { priceRule } = this.state;
+    return (
+      <div className="tab-content">
+        <div
+          className={clsx({
+            "tab-pane": true,
+            active: activeTab === "tab3"
+          })}
+        >
+          <div className="kt-form kt-form--label-right">
+            <div className="kt-form__body">
+              <div className="kt-section kt-section--first">
+                <div className="kt-section__body">
+                  <div className="kt-rules">
+                    <h3 className="pricing-rules">Global Pricing Rules :</h3>
+                    <div className="d-flex">
+                      <h4 className="cost-title">Product Cost </h4>
+                      <span>
+                        <svg className="icon-plus" viewBox="0 0 512 512">
+                          <path d="m512 205l-205 0 0-205-102 0 0 205-205 0 0 102 205 0 0 205 102 0 0-205 205 0z"></path>
+                        </svg>
+                      </span>
+                      <input
+                        className="form-control form-price"
+                        value={priceRule}
+                      />
+                      <span>
+                        <svg className="icon-arrow" viewBox="0 0 20 20">
+                          <path d="M15.92 10.38a1 1 0 0 0-.21-1.09l-4-4a1 1 0 1 0-1.42 1.42L12.6 9H5a1 1 0 1 0 0 2h7.59l-2.3 2.3a1 1 0 1 0 1.42 1.4l4-4a1 1 0 0 0 .21-.32z"></path>
+                        </svg>
+                      </span>
+                      <h4 className="cost-title">Your Product Price </h4>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group form-group-sm row">
-                  <label class="col-xl-3 col-lg-3 col-form-label">
+
+                  {/* <div className="form-group form-group-sm row">
+                  <label className="col-xl-3 col-lg-3 col-form-label">
                     Email Notification
                   </label>
-                  <div class="col-lg-9 col-xl-6">
-                    <span class="kt-switch">
+                  <div className="col-lg-9 col-xl-6">
+                    <span className="kt-switch">
                       <label>
                         <input
                           type="checkbox"
@@ -342,14 +346,15 @@ export default class AccountSettingsPage extends Component {
                       </label>
                     </span>
                   </div>
+                </div> */}
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   render() {
     const { activeTab } = this.state;
@@ -368,9 +373,30 @@ export default class AccountSettingsPage extends Component {
             <ComponentProfile activeTab={activeTab} />
             <ComponentChangePassword activeTab={activeTab} />
             <ComponentSettings activeTab={activeTab} />
+            <div className="kt-separator kt-separator--space-lg kt-separator--fit kt-separator--border-solid"></div>
+            <div className="kt-form__actions">
+              <div className="row">
+                <div className="col-xl-3"></div>
+                <div className="col-lg-9 col-xl-6">
+                  <a href="#" className="btn btn-label-brand btn-bold">
+                    Save changes
+                  </a>
+                  <a href="#" className="kt-ml-30 btn btn-clean btn-bold">
+                    Cancel
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    info: state.user.info
+  };
+}
+export default connect(mapStateToProps)(AccountSettingsPage);

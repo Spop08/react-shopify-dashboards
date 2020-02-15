@@ -9,14 +9,6 @@ import Paper from "@material-ui/core/Paper";
 import Draggable from "react-draggable";
 import "./sproduct.pad.scss";
 
-function PaperComponent(props) {
-  return (
-    <Draggable cancel={'[class*="MuiDialogContent-root"]'}>
-      <Paper {...props} />
-    </Draggable>
-  );
-}
-
 export default class SProductPad extends Component {
   state = {
     open: false
@@ -31,25 +23,25 @@ export default class SProductPad extends Component {
     const { open } = this.state;
     return (
       <div>
-        <div class="kt-portlet kt-portlet--height-fluid kt-widget19">
-          <div class="kt-portlet__body kt-portlet__body--fit kt-portlet__body--unfill">
+        <div className="kt-portlet kt-portlet--height-fluid kt-widget19">
+          <div className="kt-portlet__body kt-portlet__body--fit kt-portlet__body--unfill">
             <div
-              class="kt-widget19__pic kt-portlet-fit--top kt-portlet-fit--sides"
+              className="kt-widget19__pic kt-portlet-fit--top kt-portlet-fit--sides"
               style={{
                 minHeight: "300px",
                 backgroundImage: "url(/media/products/product11.jpg)"
               }}
             >
-              <div class="discount-notice">
-                <span class="old-price">US $21.28</span>
-                <span class="badge badge-discount">44% off</span>
+              <div className="discount-notice">
+                <span className="old-price">US $21.28</span>
+                <span className="badge badge-discount">44% off</span>
               </div>
             </div>
           </div>
-          <div class="kt-portlet__body">
+          <div className="kt-portlet__body">
             <div>
-              <div class="product-card-meta">
-                <div class="product-card-title">
+              <div className="product-card-meta">
+                <div className="product-card-title">
                   <a>
                     ADBOOV High Top Sneakers Women Knit Upper Breathable Sock
                     Shoes Woman Thick Sole 5 CM Fashion sapato feminino Black /
@@ -57,42 +49,42 @@ export default class SProductPad extends Component {
                   </a>
                 </div>
               </div>
-              <div class="product-price-wrapper">
+              <div className="product-price-wrapper">
                 <h4>
-                  <span class="product-card-price">US $29.99</span>
+                  <span className="product-card-price">US $29.99</span>
                 </h4>
               </div>
               <div>
-                <div class="product-card__reviews">
+                <div className="product-card__reviews">
                   <div>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
+                    <i className="fa fa-star"></i>
+                    <i className="fa fa-star"></i>
+                    <i className="fa fa-star"></i>
+                    <i className="fa fa-star"></i>
+                    <i className="fa fa-star"></i>
                   </div>
-                  <label class="product-card__reviews-count">(2)</label>
+                  <label className="product-card__reviews-count">(2)</label>
                 </div>
-                <div class="product-card__stat">
-                  <div class="product-card__stat-name">
+                <div className="product-card__stat">
+                  <div className="product-card__stat-name">
                     <i className="flaticon2-plus" />
                     Imports
                   </div>
-                  <div class="product-card__stat-value">9016</div>
+                  <div className="product-card__stat-value">9016</div>
                 </div>
-                <div class="product-card__stat">
-                  <div class="product-card__stat-name">
+                <div className="product-card__stat">
+                  <div className="product-card__stat-name">
                     <i className="flaticon-eye" />
                     Pageviews
                   </div>
-                  <div class="product-card__stat-value">3834</div>
+                  <div className="product-card__stat-value">3834</div>
                 </div>
-                <div class="product-card__stat">
-                  <div class="product-card__stat-name">
+                <div className="product-card__stat">
+                  <div className="product-card__stat-name">
                     <i className="flaticon2-delivery-truck" />
                     Orders
                   </div>
-                  <div class="product-card__stat-value">1</div>
+                  <div className="product-card__stat-value">1</div>
                 </div>
               </div>
             </div>
@@ -102,10 +94,9 @@ export default class SProductPad extends Component {
         <Dialog
           open={open}
           onClose={this.handleClose}
-          PaperComponent={PaperComponent}
           aria-labelledby="draggable-dialog-title"
         >
-          <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
+          <DialogTitle id="draggable-dialog-title">
             Add to Import List
           </DialogTitle>
           <DialogContent>
