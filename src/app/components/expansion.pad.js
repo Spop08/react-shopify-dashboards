@@ -15,7 +15,8 @@ const useStyles = makeStyles({
 export default function ExpansionPad({ data }) {
   const [expanded, setExpanded] = React.useState(false);
   const classes = useStyles();
-
+  const descriptionHtml =
+    "<p><span><strong>Brand Name:</strong> QUEEN BRIDAL</span><br><span><strong>Neckline:</strong> V-Neck</span><br><span><strong>Actual Images:</strong> Yes</span><br><span><strong>Train:</strong> NONE</span><br><span><strong>Fashion Element:</strong> Appliques</span><br><span><strong>Sleeve Style:</strong> Cap Sleeve</span><br><span><strong>Sleeve Length(cm):</strong> Sleeveless</span><br><span><strong>Fabric Type:</strong> Tulle</span><br><span><strong>Dresses Length:</strong> Floor-Length</span><br><span><strong>Waistline:</strong> Natural</span><br><span><strong>Occasion:</strong> Formal Evening</span><br><span><strong>Built-in Bra:</strong> Yes</span><br><span><strong>is_customized:</strong> Yes</span><br><span><strong>Material:</strong> Spandex</span><br><span><strong>Silhouette:</strong> A-Line</span><br><span><strong>Item Type:</strong> Evening Dresses</span><br><span><strong>Decoration:</strong> Sequined</span><br><span><strong>Model Number:</strong> LS27</span></p>";
   const handleChange = panel => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
@@ -61,6 +62,23 @@ export default function ExpansionPad({ data }) {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <div>
+            <div className="expansion__title">
+              {/* <div className="product-card__reviews">
+                <div>
+                  <i className="fa fa-star"></i>
+                  <i className="fa fa-star"></i>
+                  <i className="fa fa-star"></i>
+                  <i className="fa fa-star"></i>
+                  <i className="fa fa-star"></i>
+                </div>
+                <label className="product-card__reviews-count">(2)</label>
+              </div> */}
+              <Typography>
+                Elegant Ball Gown Pearls Embroidered Flowers Long Evening Dress
+                Party Masquerade Solo Performance Host Dress Robe De Soiree 40
+                (VLNUO NISA . Store (AliExpress))
+              </Typography>
+            </div>
             <div className="row ">
               <div className="expansion__pic">
                 <img
@@ -84,23 +102,10 @@ export default function ExpansionPad({ data }) {
                 />
               </div>
             </div>
-            <div className="expansion__desc">
-              <div className="product-card__reviews">
-                <div>
-                  <i className="fa fa-star"></i>
-                  <i className="fa fa-star"></i>
-                  <i className="fa fa-star"></i>
-                  <i className="fa fa-star"></i>
-                  <i className="fa fa-star"></i>
-                </div>
-                <label className="product-card__reviews-count">(2)</label>
-              </div>
-              <Typography>
-                Elegant Ball Gown Pearls Embroidered Flowers Long Evening Dress
-                Party Masquerade Solo Performance Host Dress Robe De Soiree 40
-                (VLNUO NISA . Store (AliExpress))
-              </Typography>
-            </div>
+            <div
+              className="expansion__desc"
+              dangerouslySetInnerHTML={{ __html: data.descriptionHtml }}
+            ></div>
           </div>
         </ExpansionPanelDetails>
       </ExpansionPanel>
