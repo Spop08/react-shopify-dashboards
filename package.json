@@ -1,8 +1,8 @@
 {
-  "name": "demo1",
-  "version": "6.1.5",
+  "name": "UDS-Dropshipping",
+  "homepage": "http://udsdropshipping.com",
+  "version": "v1.0.0",
   "private": true,
-  "homepage": "http://ec2-13-59-196-27.us-east-2.compute.amazonaws.com",
   "scripts": {
     "serve": "cp-cli build _site/src/app && serve",
     "start": "react-scripts start",
