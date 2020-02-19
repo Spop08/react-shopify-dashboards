@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/static/css/main.7b9512d1.chunk.css",
-    "main.js": "/static/js/main.2f7893df.chunk.js",
-    "main.js.map": "/static/js/main.2f7893df.chunk.js.map",
+    "main.css": "/static/css/main.6dd53eaf.chunk.css",
+    "main.js": "/static/js/main.4c2f0c65.chunk.js",
+    "main.js.map": "/static/js/main.4c2f0c65.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.71db3154.js",
     "runtime-main.js.map": "/static/js/runtime-main.71db3154.js.map",
     "static/css/2.f2475736.chunk.css": "/static/css/2.f2475736.chunk.css",
-    "static/js/2.26e8a65d.chunk.js": "/static/js/2.26e8a65d.chunk.js",
-    "static/js/2.26e8a65d.chunk.js.map": "/static/js/2.26e8a65d.chunk.js.map",
+    "static/js/2.16dee04e.chunk.js": "/static/js/2.16dee04e.chunk.js",
+    "static/js/2.16dee04e.chunk.js.map": "/static/js/2.16dee04e.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.e22b74012f1838d56f45c6afe2a832fb.js": "/precache-manifest.e22b74012f1838d56f45c6afe2a832fb.js",
+    "precache-manifest.498f5be3478a05054c51bd8f7e6dff1d.js": "/precache-manifest.498f5be3478a05054c51bd8f7e6dff1d.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.f2475736.chunk.css.map": "/static/css/2.f2475736.chunk.css.map",
-    "static/css/main.7b9512d1.chunk.css.map": "/static/css/main.7b9512d1.chunk.css.map",
-    "static/js/2.26e8a65d.chunk.js.LICENSE": "/static/js/2.26e8a65d.chunk.js.LICENSE",
-    "static/js/main.2f7893df.chunk.js.LICENSE": "/static/js/main.2f7893df.chunk.js.LICENSE",
+    "static/css/main.6dd53eaf.chunk.css.map": "/static/css/main.6dd53eaf.chunk.css.map",
+    "static/js/2.16dee04e.chunk.js.LICENSE": "/static/js/2.16dee04e.chunk.js.LICENSE",
+    "static/js/main.4c2f0c65.chunk.js.LICENSE": "/static/js/main.4c2f0c65.chunk.js.LICENSE",
     "static/media/Angle-double-left.5056745c.svg": "/static/media/Angle-double-left.5056745c.svg",
     "static/media/Angle-double-right.5590cf20.svg": "/static/media/Angle-double-right.5590cf20.svg",
     "static/media/flaticon.css": "/static/media/Flaticon2.eafcbac0.ttf",
@@ -25,8 +25,8 @@
   "entrypoints": [
     "static/js/runtime-main.71db3154.js",
     "static/css/2.f2475736.chunk.css",
-    "static/js/2.26e8a65d.chunk.js",
-    "static/css/main.7b9512d1.chunk.css",
-    "static/js/main.2f7893df.chunk.js"
+    "static/js/2.16dee04e.chunk.js",
+    "static/css/main.6dd53eaf.chunk.css",
+    "static/js/main.4c2f0c65.chunk.js"
   ]
 }
