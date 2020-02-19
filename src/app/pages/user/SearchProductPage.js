@@ -138,7 +138,7 @@ class SearchProductPage extends Component {
           </div>
           {componentCategories()}
 
-          <h2>HighLited Products</h2>
+          <h2>HighLighted Products</h2>
           <div className="row">{componentHotProducts}</div>
         </div>
         <Modal show={open} onHide={this.handleClose}>

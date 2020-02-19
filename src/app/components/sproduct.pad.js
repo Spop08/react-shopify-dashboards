@@ -20,6 +20,7 @@ export default class SProductPad extends Component {
   };
   render() {
     const { open } = this.state;
+    const { data } = this.props;
     return (
       <div>
         <div className="kt-portlet kt-portlet--height-fluid kt-widget19">
@@ -29,11 +30,11 @@ export default class SProductPad extends Component {
                 className="kt-widget19__pic kt-portlet-fit--top kt-portlet-fit--sides"
                 style={{
                   minHeight: "300px",
-                  backgroundImage: "url(/media/products/product11.jpg)"
+                  backgroundImage: `url(${data.images[0].src})`
                 }}
               >
                 <div className="discount-notice">
-                  <span className="old-price">US $21.28</span>
+                  <span className="old-price">US $29.99</span>
                   <span className="badge badge-discount">44% off</span>
                 </div>
               </div>
@@ -43,16 +44,14 @@ export default class SProductPad extends Component {
             <div>
               <div className="product-card-meta">
                 <div className="product-card-title">
-                  <p>
-                    ADBOOV High Top Sneakers Women Knit Upper Breathable Sock
-                    Shoes Woman Thick Sole 5 CM Fashion sapato feminino Black /
-                    White
-                  </p>
+                  <p>{data.title}</p>
                 </div>
               </div>
               <div className="product-price-wrapper">
                 <h4>
-                  <span className="product-card-price">US $29.99</span>
+                  <span className="product-card-price">
+                    US ${data.variants[0].price}
+                  </span>
                 </h4>
               </div>
               <div>
