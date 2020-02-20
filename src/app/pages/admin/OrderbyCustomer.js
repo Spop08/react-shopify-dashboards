@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MUIDataTable from "mui-datatables";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import Avatar from "@material-ui/core/Avatar";
+import {useSelector} from 'react-redux';
+
+import { fetchOrdersbyUsers } from "../../crud/order.crud";
+
 import SellerToolbarSelect from "../../components/sellertoolbar";
 
 const UserList = () => {
@@ -15,14 +19,7 @@ const UserList = () => {
         sort: true
       }
     },
-    {
-      name: "name",
-      label: "Name",
-      options: {
-        filter: true,
-        sort: true
-      }
-    },
+    
     {
       name: "email",
       label: "Email",
@@ -40,96 +37,12 @@ const UserList = () => {
       }
     },
     {
-      name: "order_cnt",
+      name: "orders_cnt",
       label: "Order Count",
       options: {
         filter: true,
         sort: false
       }
-    }
-  ];
-
-  const data = [
-    {
-      no: 1,
-      name: "Joe James",
-      email: "a@a.com",
-      store: "udsdropship",
-      order_cnt: 3,
-      orders: [
-        {
-          image:
-            "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg",
-          name: "Phone 1",
-          status: "delivered"
-        },
-        {
-          image:
-            "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg",
-          name: "Phone 1",
-          status: "delivered"
-        },
-        {
-          image:
-            "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg",
-          name: "Phone 1",
-          status: "delivered"
-        }
-      ]
-    },
-    {
-      no: 2,
-      name: "Joe James",
-      email: "a@a.com",
-      store: "udsdropship",
-      order_cnt: 3,
-      orders: [
-        {
-          image:
-            "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg",
-          name: "Phone 1",
-          status: "delivered"
-        },
-        {
-          image:
-            "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg",
-          name: "Phone 1",
-          status: "delivered"
-        },
-        {
-          image:
-            "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg",
-          name: "Phone 1",
-          status: "delivered"
-        }
-      ]
-    },
-    {
-      no: 3,
-      name: "Joe James",
-      email: "a@a.com",
-      store: "udsdropship",
-      order_cnt: 3,
-      orders: [
-        {
-          image:
-            "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg",
-          name: "Phone 1",
-          status: "delivered"
-        },
-        {
-          image:
-            "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg",
-          name: "Phone 1",
-          status: "delivered"
-        },
-        {
-          image:
-            "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg",
-          name: "Phone 1",
-          status: "delivered"
-        }
-      ]
     }
   ];
 
@@ -139,17 +52,18 @@ const UserList = () => {
       <SellerToolbarSelect selectedRows={selectedRows} />
     ),
     renderExpandableRow: (rowData, rowMeta) => {
-      console.log(data[[rowData[0] - 1]].orders);
+      console.log(users[[rowData[0] - 1]].orders);
       return (
         <>
-          {data[[rowData[0] - 1]].orders.map((order, i) => (
+          {users[[rowData[0] - 1]].orders.map((order, i) => (
             <TableRow key={i}>
               <TableCell colSpan={2}></TableCell>
               <TableCell>
                 <Avatar alt="product img" variant="rounded" src={order.image} />
               </TableCell>
-              <TableCell>{order.name}</TableCell>
-              <TableCell>{order.status}</TableCell>
+              <TableCell>{order.product_name}</TableCell>
+              <TableCell>{order.isShipped}</TableCell>
+              <TableCell>{order.product_type}</TableCell>
             </TableRow>
           ))}
         </>
@@ -169,10 +83,23 @@ const UserList = () => {
     selectableRows: "none"
   };
 
+  const token = useSelector(state => state.auth.authToken);
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const response = await fetchOrdersbyUsers(token);
+      console.log(response);
+      setUsers(response);
+    }
+    fetchUsers();
+
+  }, []);
+
   return (
     <MUIDataTable
-      title={"Employee List"}
-      data={data}
+      title={"Orders by Users"}
+      data={users}
       columns={columns}
       options={options}
     />

@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MUIDataTable from "mui-datatables";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
+import {useSelector} from 'react-redux';
+
+import { fetchAllOrders } from "../../crud/order.crud";
 
 import OrderToolbarSelect from "../../components/ordertoolbar";
 
@@ -12,9 +15,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const OrderList = () => {
+const OrderList = (props) => {
   const classes = useStyles();
-
+  
   const columns = [
     {
       name: "no",
@@ -43,7 +46,7 @@ const OrderList = () => {
       }
     },
     {
-      name: "name",
+      name: "product_name",
       label: "Product Name",
       options: {
         filter: true,
@@ -67,103 +70,12 @@ const OrderList = () => {
       }
     },
     {
-      name: "status",
-      label: "Status",
-      options: {
-        filter: true,
-        sort: true
-      }
-    },
-    {
       name: "isShipped",
       label: "Shipping",
       options: {
         filter: true,
         sort: true
       }
-    }
-  ];
-
-  const data = [
-    {
-      no: 1,
-      image:
-        "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg",
-      name: "Phone 1",
-      email: "a@a.com",
-      store: "udsdropship",
-      status: "Pending",
-      isShipped: "Delivered"
-    },
-    {
-      no: 2,
-      image:
-        "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg",
-      name: "Phone 1",
-      email: "a@a.com",
-      store: "udsdropship",
-      status: "Pending",
-      isShipped: "Undelivered"
-    },
-    {
-      no: 3,
-      image:
-        "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg",
-      name: "Phone 1",
-      email: "a@a.com",
-      store: "udsdropship",
-      status: "Pending",
-      isShipped: "Delivered"
-    },
-    {
-      no: 4,
-      image:
-        "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg",
-      name: "Phone 1",
-      email: "a@a.com",
-      store: "udsdropship",
-      status: "Pending",
-      isShipped: "Undelivered"
-    },
-    {
-      no: 5,
-      image:
-        "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg",
-      name: "Phone 1",
-      email: "a@a.com",
-      store: "udsdropship",
-      status: "Pending",
-      isShipped: "Delivered"
-    },
-    {
-      no: 6,
-      image:
-        "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg",
-      name: "Phone 1",
-      email: "a@a.com",
-      store: "udsdropship",
-      status: "Pending",
-      isShipped: "Undelivered"
-    },
-    {
-      no: 7,
-      image:
-        "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg",
-      name: "Phone 1",
-      email: "a@a.com",
-      store: "udsdropship",
-      status: "Pending",
-      isShipped: "Delivered"
-    },
-    {
-      no: 8,
-      image:
-        "https://images-na.ssl-images-amazon.com/images/I/719PHq579pL._SL1500_.jpg",
-      name: "Phone 1",
-      email: "a@a.com",
-      store: "udsdropship",
-      status: "Pending",
-      isShipped: "Undelivered"
     }
   ];
 
@@ -174,10 +86,23 @@ const OrderList = () => {
     )
   };
 
+  const [orders, setOrders] = useState([]);
+  const token = useSelector(state => state.auth.authToken);
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      const response = await fetchAllOrders(token);
+      console.log(response);
+      setOrders(response);
+    }
+    fetchOrders();
+
+  }, []);
+
   return (
     <MUIDataTable
-      title={"Employee List"}
-      data={data}
+      title={"Orders List"}
+      data={orders}
       columns={columns}
       options={options}
     />
