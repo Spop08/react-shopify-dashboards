@@ -18,6 +18,7 @@ const DashboardPad = props => {
     // const url = process.env.REACT_APP_BACKEND_ENDPOINT + "/shopify";
     const backend_url = "https://7896f79f.ngrok.io/shopify";
     const email = props.email;
+
     window.location = `${backend_url}?shop=${storeName}.myshopify.com&email=${email}`;
   };
 
