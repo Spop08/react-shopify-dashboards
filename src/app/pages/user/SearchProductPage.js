@@ -4,18 +4,21 @@ import { Button, Modal, InputGroup, FormControl } from "react-bootstrap";
 import { search_icon, clothing } from "../../icons";
 import { Link } from "react-router-dom";
 import "./SearchProductPage.scss";
-import { fetchHotProducts } from "../../crud/product.crud";
+import { fetchHotProducts, fetchSaleProducts } from "../../crud/product.crud";
 import { connect } from "react-redux";
 
 class SearchProductPage extends Component {
   state = {
     open: false,
-    hot_products: []
+    hot_products: [],
+    sale_products: []
   };
   async componentDidMount() {
     const { token } = this.props;
-    const hot_products = await fetchHotProducts(token);
-    this.setState({ hot_products });
+    const hot_products = await fetchHotProducts(token, 5);
+    const sale_products = await fetchSaleProducts(token);
+    console.log(hot_products);
+    this.setState({ hot_products, sale_products });
   }
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -98,9 +101,14 @@ class SearchProductPage extends Component {
     );
   };
   render() {
-    const { open, hot_products } = this.state;
+    const { open, hot_products, sale_products } = this.state;
     const componentCategories = this.componentCategories;
     const componentHotProducts = hot_products.map((data, index) => (
+      <div className="col-md-12 col-lg-6 col-xl-3" key={index}>
+        <SProductPad data={data} />
+      </div>
+    ));
+    const componentSaleProducts = sale_products.map((data, index) => (
       <div className="col-md-12 col-lg-6 col-xl-3" key={index}>
         <SProductPad data={data} />
       </div>
@@ -140,6 +148,8 @@ class SearchProductPage extends Component {
 
           <h2>HighLighted Products</h2>
           <div className="row">{componentHotProducts}</div>
+          <h2>Sale Products</h2>
+          <div className="row">{componentSaleProducts}</div>
         </div>
         <Modal show={open} onHide={this.handleClose}>
           <Modal.Header closeButton>

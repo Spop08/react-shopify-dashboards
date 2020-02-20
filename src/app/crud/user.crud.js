@@ -17,7 +17,7 @@ export function fetchStoreProducts(token) {
 }
 
 export function fetchUserInfo(token) {
-  return crudAPI(GET_USER_INFO, "post", null, token).then(res => res.data);
+  return crudAPI(GET_USER_INFO, "post", null, token).then(res => res.data.data);
 }
 
 export function setPriceRule(token, rule) {

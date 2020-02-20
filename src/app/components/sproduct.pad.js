@@ -7,8 +7,10 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import "./sproduct.pad.scss";
+import { addToImport } from "../crud/product.crud";
+import { connect } from "react-redux";
 
-export default class SProductPad extends Component {
+class SProductPad extends Component {
   state = {
     open: false
   };
@@ -18,14 +20,28 @@ export default class SProductPad extends Component {
   handleClose = () => {
     this.setState({ open: false });
   };
+  handleSubmit = async () => {
+    const { data, token } = this.props;
+    const res = await addToImport(token, data._id);
+    console.log("Add to Import", res.status);
+    this.handleClose();
+  };
   render() {
     const { open } = this.state;
     const { data } = this.props;
+    const sale_price = data.variants[0].salePrice;
+    const origin_price = data.variants[0].price;
+    const price = sale_price ? sale_price : origin_price;
+    const off_rate = Math.floor(
+      ((parseFloat(origin_price) - parseFloat(sale_price)) /
+        parseFloat(origin_price)) *
+        100
+    );
     return (
       <div>
         <div className="kt-portlet kt-portlet--height-fluid kt-widget19">
           <div className="kt-portlet__body kt-portlet__body--fit kt-portlet__body--unfill">
-            <Link to="/app/details">
+            <Link to={"/app/details/" + data._id}>
               <div
                 className="kt-widget19__pic kt-portlet-fit--top kt-portlet-fit--sides"
                 style={{
@@ -33,10 +49,14 @@ export default class SProductPad extends Component {
                   backgroundImage: `url(${data.images[0].src})`
                 }}
               >
-                <div className="discount-notice">
-                  <span className="old-price">US $29.99</span>
-                  <span className="badge badge-discount">44% off</span>
-                </div>
+                {sale_price && (
+                  <div className="discount-notice">
+                    <span className="old-price">US ${origin_price}</span>
+                    <span className="badge badge-discount">
+                      {off_rate}% off
+                    </span>
+                  </div>
+                )}
               </div>
             </Link>
           </div>
@@ -49,13 +69,11 @@ export default class SProductPad extends Component {
               </div>
               <div className="product-price-wrapper">
                 <h4>
-                  <span className="product-card-price">
-                    US ${data.variants[0].price}
-                  </span>
+                  <span className="product-card-price">US ${price}</span>
                 </h4>
               </div>
               <div>
-                <div className="product-card__reviews">
+                {/* <div className="product-card__reviews">
                   <div>
                     <i className="fa fa-star"></i>
                     <i className="fa fa-star"></i>
@@ -64,27 +82,33 @@ export default class SProductPad extends Component {
                     <i className="fa fa-star"></i>
                   </div>
                   <label className="product-card__reviews-count">(2)</label>
-                </div>
+                </div> */}
                 <div className="product-card__stat">
                   <div className="product-card__stat-name">
                     <i className="flaticon2-plus" />
                     Imports
                   </div>
-                  <div className="product-card__stat-value">9016</div>
+                  <div className="product-card__stat-value">
+                    {data.addedCount}
+                  </div>
                 </div>
                 <div className="product-card__stat">
                   <div className="product-card__stat-name">
                     <i className="flaticon-eye" />
                     Pageviews
                   </div>
-                  <div className="product-card__stat-value">3834</div>
+                  <div className="product-card__stat-value">
+                    {data.importedCount}
+                  </div>
                 </div>
                 <div className="product-card__stat">
                   <div className="product-card__stat-name">
                     <i className="flaticon2-delivery-truck" />
                     Orders
                   </div>
-                  <div className="product-card__stat-value">1</div>
+                  <div className="product-card__stat-value">
+                    {data.soldCount}
+                  </div>
                 </div>
               </div>
               <button
@@ -115,7 +139,7 @@ export default class SProductPad extends Component {
             <Button onClick={this.handleClose} color="primary">
               No
             </Button>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.handleSubmit} color="primary">
               Yes
             </Button>
           </DialogActions>
@@ -124,3 +148,8 @@ export default class SProductPad extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return { token: state.auth.authToken };
+}
+export default connect(mapStateToProps)(SProductPad);

@@ -17,7 +17,10 @@ import AccountSettingsPage from "./AccountSettingsPage";
 
 import { useSelector, useDispatch } from "react-redux";
 import { actions } from "../../store/ducks/user.duck";
-import { fetchImportProducts, fetchStoreProducts } from "../../crud/user.crud";
+import {
+  fetchImportProducts,
+  fetchStoreProducts
+} from "../../crud/product.crud";
 
 const MainHomePage = () => {
   const token = useSelector(state => state.auth.authToken);
@@ -27,13 +30,13 @@ const MainHomePage = () => {
     const fetchInfo = async () => {
       const products_import = await fetchImportProducts(token);
       const products_store = await fetchStoreProducts(token);
+      console.log(products_import, products_store);
       dispatch(actions.f_loadImportProducts(products_import));
       dispatch(actions.f_loadStoreProducts(products_store));
     };
     fetchInfo();
   }, [dispatch, token]); // [] - is required if you need only one call
   // https://reactjs.org/docs/hooks-reference.html#useeffect
-
   return (
     <Suspense fallback={<LayoutSplashScreen />}>
       <Switch>
@@ -51,7 +54,7 @@ const MainHomePage = () => {
         <Route path="/app/delivered-order" component={DeliveredOrderPage} />
         <Route path="/app/cancelled-order" component={CancelledOrderPage} />
         <Route path="/app/category" component={CategoryPage} />
-        <Route path="/app/details" component={ProductDetailsPage} />
+        <Route path="/app/details/:id" component={ProductDetailsPage} />
         <Route path="/shopify/callback" component={ShopifyAuthCallBack} />
         <Route path="/app/account-settings" component={AccountSettingsPage} />
         <Route path="/auth/logout" component={LogoutPage} />

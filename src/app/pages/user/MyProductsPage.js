@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ExpansionPad from "../../components/expansion.pad";
 import { useSelector } from "react-redux";
 

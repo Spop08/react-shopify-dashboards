@@ -19,15 +19,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default class IProductPad extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      activeTab: "tab1",
-      editorState: EditorState.createEmpty(),
-      import_open: false,
-      delete_open: false
-    };
-  }
+  state = {
+    activeTab: "tab1",
+    editorState: EditorState.createEmpty(),
+    import_open: false,
+    delete_open: false
+  };
+
   onEditorStateChange = editorState => {
     this.setState({
       editorState
@@ -51,12 +49,14 @@ export default class IProductPad extends Component {
   };
   render() {
     const { activeTab, editorState, import_open, delete_open } = this.state;
+    const { data, index } = this.props;
+    console.log(data, index);
 
     return (
       <div className="kt-portlet">
         <div className="kt-portlet__head">
           <div className="kt-portlet__head-label">
-            <h3 className="kt-portlet__head-title">Product 1</h3>
+            <h3 className="kt-portlet__head-title">Product {index}</h3>
           </div>
         </div>
         <div className="kt-portlet__body">
