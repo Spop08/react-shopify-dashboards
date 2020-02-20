@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MUIDataTable from "mui-datatables";
+import {useSelector} from 'react-redux';
+
+import { fetchAllUsers } from "../../crud/user.crud";
 
 import SellerToolbarSelect from "../../components/sellertoolbar";
 
@@ -8,14 +11,6 @@ const UserList = () => {
     {
       name: "no",
       label: "No",
-      options: {
-        filter: true,
-        sort: true
-      }
-    },
-    {
-      name: "name",
-      label: "Name",
       options: {
         filter: true,
         sort: true
@@ -39,63 +34,19 @@ const UserList = () => {
     },
     {
       name: "products_cnt",
-      label: "Products Count",
+      label: "Total products",
       options: {
         filter: true,
         sort: false
       }
-    }
-  ];
-
-  const data = [
-    {
-      no: 1,
-      name: "Joe James",
-      email: "a@a.com",
-      store: "udsdropship",
-      products_cnt: 3
     },
     {
-      no: 2,
-      name: "Joe James",
-      email: "a@a.com",
-      store: "udsdropship",
-      products_cnt: 3
-    },
-    {
-      no: 3,
-      name: "Joe James",
-      email: "a@a.com",
-      store: "udsdropship",
-      products_cnt: 3
-    },
-    {
-      no: 4,
-      name: "Joe James",
-      email: "a@a.com",
-      store: "udsdropship",
-      products_cnt: 3
-    },
-    {
-      no: 5,
-      name: "Joe James",
-      email: "a@a.com",
-      store: "udsdropship",
-      products_cnt: 3
-    },
-    {
-      no: 6,
-      name: "Joe James",
-      email: "a@a.com",
-      store: "udsdropship",
-      products_cnt: 3
-    },
-    {
-      no: 7,
-      name: "Joe James",
-      email: "a@a.com",
-      store: "udsdropship",
-      products_cnt: 3
+      name: "orders_cnt",
+      label: "Total orders",
+      options: {
+        filter: true,
+        sort: false
+      }
     }
   ];
 
@@ -106,10 +57,24 @@ const UserList = () => {
     )
   };
 
+  const token = useSelector(state => state.auth.authToken);
+
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const response = await fetchAllUsers(token);
+      console.log(response);
+      setUsers(response);
+    }
+    fetchUsers();
+
+  }, []);
+
   return (
     <MUIDataTable
-      title={"Employee List"}
-      data={data}
+      title={"Seller List"}
+      data={users}
       columns={columns}
       options={options}
     />
