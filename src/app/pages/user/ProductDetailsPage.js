@@ -1,20 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Button } from "react-bootstrap";
+import { fetchProductById } from "../../crud/product.crud";
+import { useSelector } from "react-redux";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import { addToImport } from "../../crud/product.crud";
+import { toast } from "react-toastify";
 import "./ProductDetailsPage.scss";
 
-export default class ProductDetailsPage extends React.Component {
-  state = {
-    selectedImg: 0
+const ProductDetailsPage = props => {
+  const [selectedImg, setSelectedImg] = useState(0);
+  const [data, setData] = useState(null);
+  const token = useSelector(state => state.auth.authToken);
+  const [openDialog, setOpenDialog] = useState(false);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const id = props.match.params.id;
+      const data = await fetchProductById(token, id);
+      setData(data);
+    };
+    fetchProduct();
+  }, [token, props.match.params.id]);
+
+  const handleSubmit = async () => {
+    setOpenDialog(false);
+    toast.success("Adding to the Import List");
+    const res = await addToImport(token, data._id);
+    console.log(res);
   };
-  componentDidMount() {
-    const param_id = this.props.match.params.id;
-    console.log("PARAM", param_id);
-  }
-  componentDetails = () => {
-    const { selectedImg } = this.state;
-    console.log(this.props);
-    const { data } = this.props.location;
-    console.log(data);
+
+  const componentDetails = () => {
     const sale_price = data.variants[0].salePrice;
     const origin_price = data.variants[0].price;
     const price = sale_price ? sale_price : origin_price;
@@ -27,7 +46,7 @@ export default class ProductDetailsPage extends React.Component {
       <div
         className={"expansion__pic" + (index === selectedImg ? " show" : "")}
         key={index}
-        onClick={() => this.setState({ selectedImg: index })}
+        onClick={() => setSelectedImg(index)}
       >
         <img alt="" className="expansion__img" src={item.src} />
       </div>
@@ -49,7 +68,11 @@ export default class ProductDetailsPage extends React.Component {
             <div className="col-md-6">
               <p className="product-title">{data.title}</p>
 
-              <Button variant="success" className="btn-import">
+              <Button
+                variant="success"
+                className="btn-import"
+                onClick={() => setOpenDialog(true)}
+              >
                 + Add to Import List
               </Button>
               <hr></hr>
@@ -88,9 +111,7 @@ export default class ProductDetailsPage extends React.Component {
       </Card>
     );
   };
-  componentStatistics = () => {
-    const { data } = this.props.location;
-    console.log(this.props);
+  const componentStatistics = () => {
     return (
       <Card className="ct-statistics">
         <Card.Header>Product Statistics</Card.Header>
@@ -155,18 +176,38 @@ export default class ProductDetailsPage extends React.Component {
       </Card>
     );
   };
-  render() {
-    const { data } = this.state;
-    return (
-      <div className="kproduct-container container-details">
-        {data && (
-          <div>
-            <h3 className="page-title">Product Details</h3>
-            <this.componentDetails></this.componentDetails>
-            <this.componentStatistics></this.componentStatistics>
-          </div>
-        )}
-      </div>
-    );
-  }
-}
+  return (
+    <div className="kproduct-container container-details">
+      {data && (
+        <div>
+          <h3 className="page-title">Product Details</h3>
+          {componentDetails()}
+          {componentStatistics()}
+        </div>
+      )}
+      <Dialog
+        open={openDialog}
+        onClose={() => setOpenDialog(false)}
+        aria-labelledby="draggable-dialog-title"
+      >
+        <DialogTitle id="draggable-dialog-title">
+          Add to Import List
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Do you want to add this product to your import list?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpenDialog(false)} color="primary">
+            No
+          </Button>
+          <Button onClick={handleSubmit} color="primary">
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
+};
+export default ProductDetailsPage;

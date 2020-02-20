@@ -30,7 +30,6 @@ const MainHomePage = () => {
     const fetchInfo = async () => {
       const products_import = await fetchImportProducts(token);
       const products_store = await fetchStoreProducts(token);
-      console.log(products_import, products_store);
       dispatch(actions.f_loadImportProducts(products_import));
       dispatch(actions.f_loadStoreProducts(products_store));
     };
@@ -53,7 +52,7 @@ const MainHomePage = () => {
         <Route path="/app/undelivered-order" component={UnDeliveredOrderPage} />
         <Route path="/app/delivered-order" component={DeliveredOrderPage} />
         <Route path="/app/cancelled-order" component={CancelledOrderPage} />
-        <Route path="/app/category" component={CategoryPage} />
+        <Route path="/app/category/:type" component={CategoryPage} />
         <Route path="/app/details/:id" component={ProductDetailsPage} />
         <Route path="/shopify/callback" component={ShopifyAuthCallBack} />
         <Route path="/app/account-settings" component={AccountSettingsPage} />

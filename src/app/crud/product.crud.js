@@ -5,7 +5,8 @@ const FETCH_STORE_PRODUCTS = "api/user/my-products";
 const FETCH_HOT_PRODUCTS = "api/product/listTop";
 const FETCH_SALE_PRODUCTS = "api/product/listSale";
 const ADD_TO_IMPORT = "api/product/import";
-const FETCH_PRODUCT_BY_ID = "api/product/";
+const FETCH_PRODUCT_BY_ID = "api/product/detail";
+const FETCH_PRODUCTS_BY_CATEGORY = "api/product/category";
 
 export function fetchImportProducts(token) {
   return crudAPI(FETCH_IMPORT_PRODUCTS, "post", null, token).then(
@@ -20,20 +21,14 @@ export function fetchStoreProducts(token) {
 
 export function fetchHotProducts(token, count) {
   return crudAPI(FETCH_HOT_PRODUCTS, "post", { count }, token).then(
-    response => {
-      const res = response.data;
-      if (res.status === "success") return res.data.products;
-      else return "error";
-    }
+    res => res.data.data.products
   );
 }
 
 export function fetchSaleProducts(token) {
-  return crudAPI(FETCH_SALE_PRODUCTS, "post", null, token).then(response => {
-    const res = response.data;
-    if (res.status === "success") return res.data.products;
-    else return "error";
-  });
+  return crudAPI(FETCH_SALE_PRODUCTS, "post", null, token).then(
+    res => res.data.data.products
+  );
 }
 
 export function addToImport(token, id) {
@@ -41,9 +36,16 @@ export function addToImport(token, id) {
 }
 
 export function fetchProductById(token, id) {
-  return crudAPI(FETCH_PRODUCT_BY_ID, "post", { id }, token).then(response => {
-    const res = response.data;
-    if (res.status === "success") return res.data.data;
-    else return "error";
-  });
+  return crudAPI(FETCH_PRODUCT_BY_ID, "post", { id }, token).then(
+    res => res.data.data
+  );
+}
+
+export function fetchProductsByCategory(token, type) {
+  return crudAPI(
+    FETCH_PRODUCTS_BY_CATEGORY,
+    "post",
+    { category: type },
+    token
+  ).then(res => res.data.data.products);
 }

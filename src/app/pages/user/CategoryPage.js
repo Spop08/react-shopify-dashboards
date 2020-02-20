@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import SProductPad from "../../components/sproduct.pad";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -9,90 +9,75 @@ import { Button } from "react-bootstrap";
 import ExpansionCategory from "../../components/expansion.category";
 import ExpansionPrice from "../../components/expansion.price";
 import "./CategoryPage.scss";
+import { fetchProductsByCategory } from "../../crud/product.crud";
+import { useSelector } from "react-redux";
 
-export default class CategoryPage extends Component {
-  state = {
-    open: false
-  };
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
-  handleClose = () => {
-    this.setState({ open: false });
-  };
-  render() {
-    const { open } = this.state;
-    return (
-      <div className="category-page">
-        <h3 className="page-title">Search Products</h3>
-        <div className="row">
-          <div className="col-md-3 container-expansion">
-            <ExpansionCategory />
-            <ExpansionPrice />
-          </div>
-          <div className="col-md-9">
-            <div className="container-import">
-              <button
-                type="button"
-                className="btn btn-secondary btn-wide btn-import"
-                onClick={this.handleClickOpen}
-              >
-                Import product by URL or ID
-              </button>
-            </div>
-            <div className="row">
-              <div className="col-md-12 col-lg-6 col-xl-3">
-                <SProductPad />
-              </div>
-              <div className="col-md-12 col-lg-6 col-xl-3">
-                <SProductPad />
-              </div>
-              <div className="col-md-12 col-lg-6 col-xl-3">
-                <SProductPad />
-              </div>
-              <div className="col-md-12 col-lg-6 col-xl-3">
-                <SProductPad />
-              </div>
+const CategoryPage = props => {
+  const [openDialog, setOpenDialog] = useState(false);
+  const token = useSelector(state => state.auth.authToken);
+  const [products, loadProducts] = useState([]);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const { type } = props.match.params;
+      const products = await fetchProductsByCategory(token, type);
+      loadProducts(products);
+    };
+    fetchProducts();
+  }, [token, props.match.params]);
 
-              <div className="col-md-12 col-lg-6 col-xl-3">
-                <SProductPad />
-              </div>
-              <div className="col-md-12 col-lg-6 col-xl-3">
-                <SProductPad />
-              </div>
-              <div className="col-md-12 col-lg-6 col-xl-3">
-                <SProductPad />
-              </div>
-              <div className="col-md-12 col-lg-6 col-xl-3">
-                <SProductPad />
-              </div>
-            </div>
-          </div>
+  console.log(products);
+  const componentProducts = products.map((data, index) => (
+    <div className="col-md-12 col-lg-6 col-xl-3">
+      <SProductPad data={data} key={index} />
+    </div>
+  ));
+
+  return (
+    <div className="category-page">
+      <h3 className="page-title">Search Products</h3>
+      <div className="row">
+        <div className="col-md-3 container-expansion">
+          <ExpansionCategory />
+          <ExpansionPrice />
         </div>
-
-        <Dialog
-          open={open}
-          onClose={this.handleClose}
-          aria-labelledby="draggable-dialog-title"
-        >
-          <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
-            Add to Import List
-          </DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Do you want to add this product to your import list?
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              No
-            </Button>
-            <Button onClick={this.handleClose} color="primary">
-              Yes
-            </Button>
-          </DialogActions>
-        </Dialog>
+        <div className="col-md-9">
+          <div className="container-import">
+            <button
+              type="button"
+              className="btn btn-secondary btn-wide btn-import"
+              onClick={() => setOpenDialog(true)}
+            >
+              Import product by URL or ID
+            </button>
+          </div>
+          <div className="row">{componentProducts}</div>
+        </div>
       </div>
-    );
-  }
-}
+
+      <Dialog
+        open={openDialog}
+        onClose={() => setOpenDialog(false)}
+        aria-labelledby="draggable-dialog-title"
+      >
+        <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
+          Add to Import List
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Do you want to add this product to your import list?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpenDialog(false)} color="primary">
+            No
+          </Button>
+          <Button onClick={() => setOpenDialog(false)} color="primary">
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
+};
+
+export default CategoryPage;

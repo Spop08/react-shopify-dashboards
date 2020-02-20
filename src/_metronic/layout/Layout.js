@@ -15,6 +15,8 @@ import LayoutInitializer from "./LayoutInitializer";
 import QuickPanel from "../../app/partials/layout/QuickPanel";
 import KtContent from "./KtContent";
 import "./assets/Base.scss";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 const htmlClassService = new HTMLClassService();
 
@@ -84,6 +86,7 @@ function Layout({
       </div>
       <QuickPanel />
       <ScrollTop />
+      <ToastContainer />
       <StickyToolbar />
     </LayoutInitializer>
   ) : (

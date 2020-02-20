@@ -30,9 +30,7 @@ class SearchProductPage extends Component {
     return (
       <div className="d-flex ct-categories">
         <div className="col-md-3">
-          <Link
-            to={{ pathname: "/app/category", state: { type: "menclothing" } }}
-          >
+          <Link to="/app/category/Clothes">
             <Button variant="secondary btn-block d-flex">
               {clothing()}
               <span>Men's Clothing & Accessories</span>
@@ -40,9 +38,7 @@ class SearchProductPage extends Component {
           </Link>
         </div>
         <div className="col-md-3">
-          <Link
-            to={{ pathname: "/app/category", state: { type: "womenclothing" } }}
-          >
+          <Link to="/app/category/Clothes">
             <Button variant="secondary btn-block d-flex">
               {clothing()}
               <span>Women's Clothing & Accessories</span>
@@ -50,7 +46,7 @@ class SearchProductPage extends Component {
           </Link>
         </div>
         <div className="col-md-3">
-          <Link to={{ pathname: "/app/category", state: { type: "toys" } }}>
+          <Link to="/app/category/Clothes">
             <Button variant="secondary btn-block d-flex">
               {clothing()}
               <span>Toys & Hobbies</span>
@@ -58,7 +54,7 @@ class SearchProductPage extends Component {
           </Link>
         </div>
         <div className="col-md-3">
-          <Link to={{ pathname: "/app/category", state: { type: "beauty" } }}>
+          <Link to="/app/category/Clothes">
             <Button variant="secondary btn-block d-flex">
               {clothing()}
               <span>Beauty & Health</span>
@@ -66,7 +62,7 @@ class SearchProductPage extends Component {
           </Link>
         </div>
         <div className="col-md-3">
-          <Link to={{ pathname: "/app/category", state: { type: "watches" } }}>
+          <Link to="/app/category/Clothes">
             <Button variant="secondary btn-block d-flex">
               {clothing()}
               <span>Watches</span>
@@ -74,7 +70,7 @@ class SearchProductPage extends Component {
           </Link>
         </div>
         <div className="col-md-3">
-          <Link to={{ pathname: "/app/category", state: { type: "jewelry" } }}>
+          <Link to="/app/category/Clothes">
             <Button variant="secondary btn-block d-flex">
               {clothing()}
               <span>Jewelry & Accessories</span>
@@ -82,7 +78,7 @@ class SearchProductPage extends Component {
           </Link>
         </div>
         <div className="col-md-3">
-          <Link to={{ pathname: "/app/category", state: { type: "home" } }}>
+          <Link to="/app/category/Clothes">
             <Button variant="secondary btn-block d-flex">
               {clothing()}
               <span>Home & Garden</span>
@@ -90,7 +86,7 @@ class SearchProductPage extends Component {
           </Link>
         </div>
         <div className="col-md-3">
-          <Link to={{ pathname: "/app/category", state: { type: "mother" } }}>
+          <Link to="/app/category/Clothes">
             <Button variant="secondary btn-block d-flex">
               {clothing()}
               <span>Mother & Kids</span>
