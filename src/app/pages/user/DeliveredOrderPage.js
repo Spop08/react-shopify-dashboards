@@ -12,3 +12,5 @@ const DeliveredOrderPage = () => {
     </div>
   );
 };
+
+export default DeliveredOrderPage;
