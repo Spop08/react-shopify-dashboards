@@ -69,10 +69,10 @@ const CategoryPage = props => {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpenDialog(false)} color="primary">
-            No
+            Yes
           </Button>
           <Button onClick={() => setOpenDialog(false)} color="primary">
-            Yes
+            No
           </Button>
         </DialogActions>
       </Dialog>

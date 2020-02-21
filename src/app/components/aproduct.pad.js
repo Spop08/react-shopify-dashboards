@@ -104,10 +104,10 @@ export default class SProductPad extends Component {
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
-              No
+              Yes
             </Button>
             <Button onClick={this.handleClose} color="primary">
-              Yes
+              No
             </Button>
           </DialogActions>
         </Dialog>

@@ -199,11 +199,11 @@ const ProductDetailsPage = props => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpenDialog(false)} color="primary">
-            No
-          </Button>
           <Button onClick={handleSubmit} color="primary">
             Yes
+          </Button>
+          <Button onClick={() => setOpenDialog(false)} color="primary">
+            No
           </Button>
         </DialogActions>
       </Dialog>

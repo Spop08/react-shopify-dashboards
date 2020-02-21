@@ -16,18 +16,19 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function OrderPad(props) {
+const OrderPad = props => {
   const classes = useStyles();
-  const { type } = props;
+  const { type, data } = props;
   function handleDelete() {
     alert("You want mark as Shipped?");
   }
+  console.log(data);
   return (
-    <Card>
+    <Card className="kt-order-card">
       <Card.Header>
         <i className="flaticon2-contract"></i>
         <p className="order-name">Order </p>
-        <p className="order-number"> AE5046</p>
+        <p className="order-number"> {data._id}</p>
         <p className="order-date">2020/01/28</p>
         <p className="order-customer">Customer: </p>
         <p className="order-customername">Li Wei</p>
@@ -144,4 +145,6 @@ export default function OrderPad(props) {
       </Card.Body>
     </Card>
   );
-}
+};
+
+export default OrderPad;

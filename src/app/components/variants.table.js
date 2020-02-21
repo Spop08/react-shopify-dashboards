@@ -82,7 +82,7 @@ const CustomColumnTable = ({ data }) => {
       _variants.push(variant);
     });
     setVariants(_variants);
-  }, [data.variants]);
+  }, [data.variants, data.id]);
   console.log(data);
 
   return (

@@ -38,10 +38,9 @@ const IProductPad = ({ data, index }) => {
   const handleSubmit = () => {
     addToStore(token, data.id);
     setState({ ...state, import_open: false });
-    toast.success("Add Product to Store...");
+    toast.success("Product is adding to Store...", 3000);
   };
   toast.configure({
-    autoClose: false,
     draggable: false,
     position: toast.POSITION.TOP_RIGHT
   });
