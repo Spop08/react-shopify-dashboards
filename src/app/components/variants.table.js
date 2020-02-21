@@ -66,15 +66,18 @@ const CustomColumnTable = ({ data }) => {
   useEffect(() => {
     var _variants = [];
     data.variants.forEach((item, index) => {
+      const sku1 =
+        "-" + (item.options[0] ? item.options[0].replace(/\s+/g, "") : "");
+      const sku2 = item.options[1] ? "-" + item.options[1] : "";
       const variant = {
         img: item.imageSrc,
-        sku: item.sku ? item.sku : index,
+        sku: data.id + sku1 + sku2,
         color: item.options[0],
         size: item.options[1],
         cost: item.price,
         price: item.price * 2,
         profit: item.price,
-        inventory: item.inventory ? item.inventory : 1000
+        inventory: item.inventoryQuantity
       };
       _variants.push(variant);
     });

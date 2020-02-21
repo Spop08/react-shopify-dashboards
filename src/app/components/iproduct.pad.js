@@ -15,6 +15,7 @@ import "./iproduct.pad.scss";
 import Slide from "@material-ui/core/Slide";
 import { addToStore } from "../crud/product.crud";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
@@ -37,7 +38,13 @@ const IProductPad = ({ data, index }) => {
   const handleSubmit = () => {
     addToStore(token, data.id);
     setState({ ...state, import_open: false });
+    toast.success("Add Product to Store...");
   };
+  toast.configure({
+    autoClose: false,
+    draggable: false,
+    position: toast.POSITION.TOP_RIGHT
+  });
   return (
     <div className="kt-portlet">
       <div className="kt-portlet__head">
