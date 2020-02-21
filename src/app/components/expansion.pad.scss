@@ -22,6 +22,12 @@
         align-items: flex-start;
       }
     }
+    .kt-ewidget-pic {
+      width: 100px;
+    }
+    .kt-ewidget-pic img {
+      max-height: 100px;
+    }
     .kt-widget5__stats {
       font-size: 14px;
       white-space: nowrap;
@@ -30,14 +36,16 @@
       }
     }
     .expansion__pic {
-      box-shadow: 0 0 13px 0 rgba(82, 63, 105, 0.29);
+      box-shadow: 0 0 2px 0 rgba(82, 63, 105, 0.29);
       background-color: #fff;
       border-radius: 4px;
-      margin-left: 10px;
+      margin-right: 20px;
+      width: 100px;
+      display: flex;
     }
     .expansion__img {
-      width: 150px;
-      height: auto;
+      max-height: 100px;
+      margin: 0 auto;
     }
     .expansion__title {
       width: 600px;

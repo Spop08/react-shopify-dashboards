@@ -36,6 +36,7 @@ const IProductPad = ({ data, index }) => {
   const handleDelete = () => {};
   const handleSubmit = () => {
     addToStore(token, data.id);
+    setState({ ...state, import_open: false });
   };
   return (
     <div className="kt-portlet">
@@ -174,14 +175,14 @@ const IProductPad = ({ data, index }) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
+          <Button onClick={handleDelete} color="primary">
+            Yes
+          </Button>
           <Button
             onClick={() => setState({ ...state, delete_open: false })}
             color="primary"
           >
             No
-          </Button>
-          <Button onClick={handleDelete} color="primary">
-            Yes
           </Button>
         </DialogActions>
       </Dialog>
@@ -201,14 +202,14 @@ const IProductPad = ({ data, index }) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
+          <Button onClick={handleSubmit} color="primary">
+            Yes
+          </Button>
           <Button
             onClick={() => setState({ ...state, import_open: false })}
             color="primary"
           >
             No
-          </Button>
-          <Button onClick={handleSubmit} color="primary">
-            Yes
           </Button>
         </DialogActions>
       </Dialog>

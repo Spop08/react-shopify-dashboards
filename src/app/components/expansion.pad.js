@@ -34,12 +34,8 @@ export default function ExpansionPad({ data }) {
           <div className="kt-widget5">
             <div className="kt-widget5__item ">
               <div className="kt-widget5__content">
-                <div className="kt-widget5__pic">
-                  <img
-                    alt=""
-                    className="kt-widget7__img"
-                    src="https://ae01.alicdn.com/kf/H170b706c280948f18fad2a4a8dd6cfc3P/2019-Winter-Shoes-Men-Warm-Boots-Men-Fur-High-Quality-Split-Leather-Wterproof-Ankle-Snow-Boots.jpg"
-                  />
+                <div className="kt-ewidget-pic d-flex">
+                  <img alt="" src={data.images[0].src} />
                 </div>
                 <div className="kt-widget5__section">
                   <h5>{data.title}</h5>
@@ -50,9 +46,11 @@ export default function ExpansionPad({ data }) {
               <div className="kt-widget5__content">
                 <div className="kt-widget5__stats">
                   <span className="kt-widget5__sales">
-                    Shopify Price:US$143.72
+                    Shopify Price:US${data.variants[0].price * 2}
                   </span>
-                  <span className="kt-widget5__sales">Cost:US$70.70</span>
+                  <span className="kt-widget5__sales">
+                    Cost:US${data.variants[0].price}
+                  </span>
                 </div>
               </div>
             </div>
@@ -71,34 +69,34 @@ export default function ExpansionPad({ data }) {
                 </div>
                 <label className="product-card__reviews-count">(2)</label>
               </div> */}
-              <Typography>
-                Elegant Ball Gown Pearls Embroidered Flowers Long Evening Dress
-                Party Masquerade Solo Performance Host Dress Robe De Soiree 40
-                (VLNUO NISA . Store (AliExpress))
-              </Typography>
+              {/* <Typography>{data.descriptionHtml}</Typography> */}
             </div>
             <div className="row ">
               <div className="expansion__pic">
                 <img
                   alt=""
                   className="expansion__img"
-                  src="https://ae01.alicdn.com/kf/H8cb212f003164fb5b9137e0d7efc0a38Q/2019-Winter-Shoes-Men-Warm-Boots-Men-Fur-High-Quality-Split-Leather-Wterproof-Ankle-Snow-Boots.jpg_640x640.jpg"
+                  src={data.images[0].src}
                 />
               </div>
-              <div className="expansion__pic">
-                <img
-                  alt=""
-                  className="expansion__img"
-                  src="https://ae01.alicdn.com/kf/H5b0fce4ca87443499482d4f62637b96eS/2019-Winter-Shoes-Men-Warm-Boots-Men-Fur-High-Quality-Split-Leather-Wterproof-Ankle-Snow-Boots.jpg_640x640.jpg"
-                />
-              </div>
-              <div className="expansion__pic">
-                <img
-                  alt=""
-                  className="expansion__img"
-                  src="https://ae01.alicdn.com/kf/H170b706c280948f18fad2a4a8dd6cfc3P/2019-Winter-Shoes-Men-Warm-Boots-Men-Fur-High-Quality-Split-Leather-Wterproof-Ankle-Snow-Boots.jpg"
-                />
-              </div>
+              {data.images[1] && (
+                <div className="expansion__pic">
+                  <img
+                    alt=""
+                    className="expansion__img"
+                    src={data.images[1].src ? data.images[1].src : ""}
+                  />
+                </div>
+              )}
+              {data.images[2] && (
+                <div className="expansion__pic">
+                  <img
+                    alt=""
+                    className="expansion__img"
+                    src={data.images[2].src}
+                  />
+                </div>
+              )}
             </div>
             <div
               className="expansion__desc"
