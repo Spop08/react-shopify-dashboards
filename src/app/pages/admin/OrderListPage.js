@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import MUIDataTable from "mui-datatables";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
-import {useSelector} from 'react-redux';
+import { useSelector } from "react-redux";
 
 import { fetchAllOrders } from "../../crud/order.crud";
 
@@ -15,9 +15,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const OrderList = (props) => {
+const OrderList = props => {
   const classes = useStyles();
-  
+
   const columns = [
     {
       name: "no",
@@ -94,10 +94,9 @@ const OrderList = (props) => {
       const response = await fetchAllOrders(token);
       console.log(response);
       setOrders(response);
-    }
+    };
     fetchOrders();
-
-  }, []);
+  }, [token]);
 
   return (
     <MUIDataTable

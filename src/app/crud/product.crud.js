@@ -4,9 +4,10 @@ const FETCH_IMPORT_PRODUCTS = "api/user/imported";
 const FETCH_STORE_PRODUCTS = "api/user/my-products";
 const FETCH_HOT_PRODUCTS = "api/product/listTop";
 const FETCH_SALE_PRODUCTS = "api/product/listSale";
-const ADD_TO_IMPORT = "api/product/import";
 const FETCH_PRODUCT_BY_ID = "api/product/detail";
 const FETCH_PRODUCTS_BY_CATEGORY = "api/product/category";
+const ADD_TO_STORE = "api/product/add2store";
+const ADD_TO_IMPORT = "api/product/import";
 
 export function fetchImportProducts(token) {
   return crudAPI(FETCH_IMPORT_PRODUCTS, "post", null, token).then(
@@ -48,4 +49,8 @@ export function fetchProductsByCategory(token, type) {
     { category: type },
     token
   ).then(res => res.data.data.products);
+}
+
+export function addToStore(token, id) {
+  return crudAPI(ADD_TO_STORE, "post", { id }, token).then(res => res.data);
 }

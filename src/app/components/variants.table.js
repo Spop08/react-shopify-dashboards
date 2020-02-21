@@ -1,129 +1,99 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
-import { toAbsoluteUrl } from "../../_metronic/utils/utils";
+import cellEditFactory from "react-bootstrap-table2-editor";
 import "./variants.table.scss";
 
-function priceFormatter(cell, row) {
+function priceFormatter(cell) {
   return (
-    <img
-      alt=""
-      className="variants-img"
-      src={toAbsoluteUrl("/media/products/product6.jpg")}
-    />
+    <div className="d-flex">
+      <img alt="" className="variants-img" src={cell} />
+    </div>
   );
 }
-
-const columns = [
-  {
-    dataField: "img",
-    text: "Image",
-    formatter: priceFormatter,
-    style: { whiteSpace: "nowrap" }
-  },
-  {
-    dataField: "sku",
-    text: "SKU",
-    style: { whiteSpace: "nowrap" }
-  },
-  {
-    dataField: "color",
-    text: "Color",
-    style: { whiteSpace: "nowrap" }
-  },
-  {
-    dataField: "shipfrom",
-    text: "Ships from",
-    style: { whiteSpace: "nowrap" }
-  },
-  {
-    dataField: "cost",
-    text: "Cost",
-    style: { whiteSpace: "nowrap" }
-  },
-  {
-    dataField: "shipping",
-    text: "Shipping",
-    style: { whiteSpace: "nowrap" }
-  },
-  {
-    dataField: "price",
-    text: "Price",
-    style: { whiteSpace: "nowrap" }
-  },
-  {
-    dataField: "profit",
-    text: "Profit",
-    style: { whiteSpace: "nowrap" }
-  },
-  {
-    dataField: "cprice",
-    text: "Compared At Price",
-    style: { whiteSpace: "nowrap" }
-  },
-
-  {
-    dataField: "inventory",
-    text: "Inventory",
-    type: "number",
-    style: { whiteSpace: "nowrap" }
-  }
-];
-
-export default class CustomColumnTable extends React.Component {
-  state = {
-    variants: [
-      {
-        img: "",
-        sku: "28974885-2689-2-united-states",
-        color: "2689-2",
-        shipfrom: "United States",
-        cost: "US$18.99",
-        shipping: "US$0.00",
-        price: "US$36.18",
-        profit: "US$17.19",
-        cprice: "US$34.18",
-        inventory: 1000
-      },
-      {
-        img: "",
-        sku: "28974885-2689-2-united-states",
-        color: "2689-2",
-        shipfrom: "United States",
-        cost: "US$18.99",
-        shipping: "US$0.00",
-        price: "US$36.18",
-        profit: "US$17.19",
-        cprice: "US$34.18",
-        inventory: 1000
-      },
-      {
-        img: "",
-        sku: "28974885-2689-2-united-states",
-        color: "2689-2",
-        shipfrom: "United States",
-        cost: "US$18.99",
-        shipping: "US$0.00",
-        price: "US$36.18",
-        profit: "US$17.19",
-        cprice: "US$34.18",
-        inventory: 1000
-      }
-    ]
-  };
-  render() {
-    const { variants } = this.state;
-    return (
-      <BootstrapTable
-        keyField="id"
-        data={variants}
-        columns={columns}
-        selectRow={{ mode: "checkbox" }}
-        // cellEdit={cellEditFactory({
-        //   mode: "click",
-        //   blurToSave: true,
-        //   afterSaveCell
-        // })}
-      />
-    );
-  }
+function disableEditFormatter(cell) {
+  return false;
 }
+
+const CustomColumnTable = ({ data }) => {
+  const columns = [
+    {
+      dataField: "img",
+      text: "Image",
+      formatter: priceFormatter,
+      editable: disableEditFormatter,
+      style: { whiteSpace: "nowrap" }
+    },
+    {
+      dataField: "sku",
+      text: "SKU",
+      style: { whiteSpace: "nowrap" }
+    },
+    {
+      dataField: "color",
+      text: "Color",
+      style: { whiteSpace: "nowrap" }
+    },
+    {
+      dataField: "size",
+      text: "Size",
+      style: { whiteSpace: "nowrap" }
+    },
+    {
+      dataField: "cost",
+      text: "Cost",
+      editable: disableEditFormatter,
+      style: { whiteSpace: "nowrap" }
+    },
+    {
+      dataField: "price",
+      text: "Price",
+      style: { whiteSpace: "nowrap" }
+    },
+    {
+      dataField: "profit",
+      text: "Profit",
+      style: { whiteSpace: "nowrap" }
+    },
+
+    {
+      dataField: "inventory",
+      text: "Inventory",
+      editable: disableEditFormatter,
+      style: { whiteSpace: "nowrap" }
+    }
+  ];
+  const [variants, setVariants] = useState([]);
+  useEffect(() => {
+    var _variants = [];
+    data.variants.forEach((item, index) => {
+      const variant = {
+        img: item.imageSrc,
+        sku: item.sku ? item.sku : index,
+        color: item.options[0],
+        size: item.options[1],
+        cost: item.price,
+        price: item.price * 2,
+        profit: item.price,
+        inventory: item.inventory ? item.inventory : 1000
+      };
+      _variants.push(variant);
+    });
+    setVariants(_variants);
+  }, [data.variants]);
+  console.log(data);
+
+  return (
+    <BootstrapTable
+      keyField="sku"
+      data={variants}
+      columns={columns}
+      // selectRow={{ mode: "checkbox" }}
+      cellEdit={cellEditFactory({
+        mode: "click",
+        blurToSave: true,
+        afterSaveCell: (oldValue, newValue, row, column) => {}
+      })}
+    />
+  );
+};
+export default CustomColumnTable;

@@ -1,47 +1,20 @@
-import React, { Component } from "react";
-import { toAbsoluteUrl } from "../../_metronic/utils/utils";
+import React from "react";
+import PropTypes from "prop-types";
 import "./images.tab.scss";
 
-export default class ImagesTab extends Component {
-  render() {
-    return (
-      <div className="row images-tab">
-        <div className="col-md-3">
-          <div className="image-container">
-            <img alt="" src={toAbsoluteUrl("/media/products/product6.jpg")} />
-          </div>
-        </div>
-        <div className="col-md-3">
-          <div className="image-container">
-            <img alt="" src={toAbsoluteUrl("/media/products/product6.jpg")} />
-          </div>
-        </div>
-        <div className="col-md-3">
-          <div className="image-container">
-            <img alt="" src={toAbsoluteUrl("/media/products/product6.jpg")} />
-          </div>
-        </div>
-        <div className="col-md-3">
-          <div className="image-container">
-            <img alt="" src={toAbsoluteUrl("/media/products/product6.jpg")} />
-          </div>
-        </div>
-        <div className="col-md-3">
-          <div className="image-container">
-            <img alt="" src={toAbsoluteUrl("/media/products/product6.jpg")} />
-          </div>
-        </div>
-        <div className="col-md-3">
-          <div className="image-container">
-            <img alt="" src={toAbsoluteUrl("/media/products/product6.jpg")} />
-          </div>
-        </div>
-        <div className="col-md-3">
-          <div className="image-container">
-            <img alt="" src={toAbsoluteUrl("/media/products/product6.jpg")} />
-          </div>
-        </div>
+const ImagesTab = ({ images }) => {
+  const componentsImage = images.map((item, index) => (
+    <div className="col-md-3" key={index}>
+      <div className="image-container d-flex">
+        <img alt="" src={item.src} />
       </div>
-    );
-  }
-}
+    </div>
+  ));
+  console.log(images);
+  return <div className="row images-tab">{componentsImage}</div>;
+};
+
+ImagesTab.propTypes = {
+  images: PropTypes.array
+};
+export default ImagesTab;

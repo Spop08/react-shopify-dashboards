@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MUIDataTable from "mui-datatables";
-import {useSelector} from 'react-redux';
+import { useSelector } from "react-redux";
 
 import { fetchAllUsers } from "../../crud/user.crud";
 
@@ -66,10 +66,9 @@ const UserList = () => {
       const response = await fetchAllUsers(token);
       console.log(response);
       setUsers(response);
-    }
+    };
     fetchUsers();
-
-  }, []);
+  }, [token]);
 
   return (
     <MUIDataTable

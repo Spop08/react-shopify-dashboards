@@ -37,7 +37,7 @@ export default function ExpansionCategory() {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <button className="filter-category__item active">
-            Accessories
+            Clothes
             {arrow_right()}
           </button>
           <button className="filter-category__item">
