@@ -8,6 +8,7 @@ const FETCH_PRODUCT_BY_ID = "api/product/detail";
 const FETCH_PRODUCTS_BY_CATEGORY = "api/product/category";
 const ADD_TO_STORE = "api/product/add2store";
 const ADD_TO_IMPORT = "api/product/import";
+const FETCH_ALL_PRODUCTS = "/api/product/listAll";
 
 export function fetchImportProducts(token) {
   return crudAPI(FETCH_IMPORT_PRODUCTS, "post", null, token).then(
@@ -53,4 +54,10 @@ export function fetchProductsByCategory(token, type) {
 
 export function addToStore(token, id) {
   return crudAPI(ADD_TO_STORE, "post", { id }, token).then(res => res.data);
+}
+
+export function fetchAllProducts(token) {
+  return crudAPI(FETCH_ALL_PRODUCTS, "post", null, token).then(
+    res => res.data.data.products
+  );
 }

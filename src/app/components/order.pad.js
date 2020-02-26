@@ -4,6 +4,7 @@ import Chip from "@material-ui/core/Chip";
 import DoneIcon from "@material-ui/icons/Done";
 import Card from "react-bootstrap/Card";
 import "./order.pad.scss";
+import PayPalButton from "./paypal.btn";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -22,6 +23,9 @@ const OrderPad = props => {
   function handleDelete() {
     alert("You want mark as Shipped?");
   }
+  const submitOrder = () => {
+    console.log("submitOrder");
+  };
   console.log(data);
   return (
     <Card className="kt-order-card">
@@ -31,18 +35,31 @@ const OrderPad = props => {
         <p className="order-number"> {data._id}</p>
         <p className="order-date">2020/01/28</p>
         <p className="order-customer">Customer: </p>
-        <p className="order-customername">Li Wei</p>
-        <img src="/media/flags/034-china.svg" alt="Mandarin" />
+        <p className="order-customername">Li Wei (China)</p>
+        {/* <img src="/media/flags/034-china.svg" alt="Mandarin" /> */}
         {/* <i className="flaticon-email"></i> */}
-        <Chip
-          icon={<DoneIcon />}
-          label="Mark as Shipped"
-          clickable
-          className={classes.chip}
-          color="primary"
-          onClick={handleDelete}
-          variant="outlined"
-        />
+        {type === "undelivered" && (
+          <Chip
+            icon={<DoneIcon />}
+            label="Mark as Processed"
+            clickable
+            className={classes.chip}
+            color="primary"
+            onClick={handleDelete}
+            variant="outlined"
+          />
+        )}
+        {type === "inprocessing" && (
+          <Chip
+            icon={<DoneIcon />}
+            label="Mark as Delivered"
+            clickable
+            className={classes.chip}
+            color="primary"
+            onClick={handleDelete}
+            variant="outlined"
+          />
+        )}
       </Card.Header>
       <Card.Body className="order-products">
         <div className="order-products__supplier">
@@ -67,18 +84,23 @@ const OrderPad = props => {
             <Chip label="Cancelled" className={classes.chip} />
           )}
 
-          <p className="order-customer">Supplier:</p>
-          <p className="order-customername">Tang Tang Store</p>
           {type === "undelivered" && (
-            <button type="button" className="btn btn-warning btn-wide">
-              Order Product
-            </button>
+            <div className="d-flex btn-group-order">
+              <PayPalButton amount={0.99} />
+              <button
+                type="button"
+                className="btn btn-info btn-wide"
+                onClick={submitOrder}
+              >
+                Order Product
+              </button>
+            </div>
           )}
-          {type === "inprocessing" && (
+          {/* {type === "inprocessing" && (
             <button type="button" className="btn btn-primary btn-wide">
               Get Tracking Code
             </button>
-          )}
+          )} */}
           {/* {type === "delivered" && (
             <Chip
               label="Delivered"

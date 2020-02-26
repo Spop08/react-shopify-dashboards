@@ -1,22 +1,17 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import clsx from "clsx";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { icon_settings, icon_profile, icon_changepassword } from "../../icons";
 import "./AccountSettingsPage.scss";
 
-class AccountSettingsPage extends Component {
-  state = {
-    activeTab: "tab1"
-  };
-  componentDidMount() {
-    const { email, priceRule } = this.props.info;
-    this.setState({ email, priceRule });
-  }
-  onTabChange = value => {
-    this.setState({ activeTab: value });
-  };
-
-  ComponentTabHeader = ({ activeTab }) => (
+const AccountSettingsPage = () => {
+  const [activeTab, setActiveTab] = useState("tab1");
+  const info = useSelector(state => state.user.info);
+  const [email, setEmail] = useState("");
+  useEffect(() => {
+    setEmail(info.email);
+  }, [info.email]);
+  const ComponentTabHeader = () => (
     <div className="kt-portlet__head-toolbar">
       <ul
         className="nav nav-tabs nav-tabs-space-xl nav-tabs-line nav-tabs-bold nav-tabs-line-3x nav-tabs-line-brand"
@@ -28,7 +23,7 @@ class AccountSettingsPage extends Component {
               "nav-link": true,
               active: activeTab === "tab1"
             })}
-            onClick={() => this.onTabChange("tab1")}
+            onClick={() => setActiveTab("tab1")}
             data-toggle="tab"
             role="tab"
           >
@@ -42,7 +37,7 @@ class AccountSettingsPage extends Component {
               "nav-link": true,
               active: activeTab === "tab2"
             })}
-            onClick={() => this.onTabChange("tab2")}
+            onClick={() => setActiveTab("tab2")}
             data-toggle="tab"
             role="tab"
           >
@@ -56,7 +51,7 @@ class AccountSettingsPage extends Component {
               "nav-link": true,
               active: activeTab === "tab3"
             })}
-            onClick={() => this.onTabChange("tab3")}
+            onClick={() => setActiveTab("tab3")}
             data-toggle="tab"
             role="tab"
           >
@@ -67,8 +62,7 @@ class AccountSettingsPage extends Component {
       </ul>
     </div>
   );
-  ComponentProfile = ({ activeTab }) => {
-    const { email } = this.state;
+  const ComponentProfile = () => {
     return (
       <div className="tab-content">
         <div
@@ -134,7 +128,7 @@ class AccountSettingsPage extends Component {
                       First Name
                     </label>
                     <div className="col-lg-9 col-xl-6">
-                      <input className="form-control" type="text" value="Liu" />
+                      <input className="form-control" defaultValue="Liu" />
                     </div>
                   </div>
                   <div className="form-group row">
@@ -145,7 +139,7 @@ class AccountSettingsPage extends Component {
                       <input
                         className="form-control"
                         type="text"
-                        value="Zhang"
+                        defaultValue="Zhang"
                       />
                     </div>
                   </div>
@@ -164,7 +158,6 @@ class AccountSettingsPage extends Component {
                           type="text"
                           className="form-control"
                           value={email}
-                          placeholder="Email"
                           aria-describedby="basic-addon1"
                         />
                       </div>
@@ -172,31 +165,16 @@ class AccountSettingsPage extends Component {
                   </div>
                   <div className="form-group row">
                     <label className="col-xl-3 col-lg-3 col-form-label">
-                      Company Name
-                    </label>
-                    <div className="col-lg-9 col-xl-6">
-                      <input
-                        className="form-control"
-                        type="text"
-                        value="Loop Inc."
-                      />
-                    </div>
-                  </div>
-                  <div className="form-group row">
-                    <label className="col-xl-3 col-lg-3 col-form-label">
-                      Company Site
+                      Store Name
                     </label>
                     <div className="col-lg-9 col-xl-6">
                       <div className="input-group">
                         <input
                           type="text"
                           className="form-control"
-                          placeholder="Username"
-                          value="loop"
+                          value={info.store}
+                          readOnly
                         />
-                        <div className="input-group-append">
-                          <span className="input-group-text">.com</span>
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -229,7 +207,7 @@ class AccountSettingsPage extends Component {
       </div>
     );
   };
-  ComponentChangePassword = ({ activeTab }) => (
+  const ComponentChangePassword = () => (
     <div className="tab-content">
       <div
         className={clsx({
@@ -288,8 +266,7 @@ class AccountSettingsPage extends Component {
     </div>
   );
 
-  ComponentSettings = ({ activeTab }) => {
-    const { priceRule } = this.state;
+  const ComponentSettings = () => {
     return (
       <div className="tab-content">
         <div
@@ -313,7 +290,7 @@ class AccountSettingsPage extends Component {
                       </span>
                       <input
                         className="form-control form-price"
-                        value={priceRule}
+                        value={info.priceRule}
                       />
                       <span>
                         <svg className="icon-arrow" viewBox="0 0 20 20">
@@ -350,47 +327,34 @@ class AccountSettingsPage extends Component {
     );
   };
 
-  render() {
-    const { activeTab } = this.state;
-    const ComponentTabHeader = this.ComponentTabHeader;
-    const ComponentProfile = this.ComponentProfile;
-    const ComponentSettings = this.ComponentSettings;
-    const ComponentChangePassword = this.ComponentChangePassword;
-
-    return (
-      <div className="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
-        <div className="kt-portlet kt-portlet--tabs">
-          <div className="kt-portlet__head">
-            <ComponentTabHeader activeTab={activeTab} />
-          </div>
-          <div className="kt-portlet__body">
-            <ComponentProfile activeTab={activeTab} />
-            <ComponentChangePassword activeTab={activeTab} />
-            <ComponentSettings activeTab={activeTab} />
-            <div className="kt-separator kt-separator--space-lg kt-separator--fit kt-separator--border-solid"></div>
-            <div className="kt-form__actions">
-              <div className="row">
-                <div className="col-xl-3"></div>
-                <div className="col-lg-9 col-xl-6">
-                  <a href="/" className="btn btn-label-brand btn-bold">
-                    Save changes
-                  </a>
-                  <a href="/" className="kt-ml-30 btn btn-clean btn-bold">
-                    Cancel
-                  </a>
-                </div>
+  return (
+    <div className="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+      <div className="kt-portlet kt-portlet--tabs">
+        <div className="kt-portlet__head">
+          <ComponentTabHeader />
+        </div>
+        <div className="kt-portlet__body">
+          <ComponentProfile />
+          <ComponentChangePassword />
+          <ComponentSettings />
+          <div className="kt-separator kt-separator--space-lg kt-separator--fit kt-separator--border-solid"></div>
+          <div className="kt-form__actions">
+            <div className="row">
+              <div className="col-xl-3"></div>
+              <div className="col-lg-9 col-xl-6">
+                <a href="/" className="btn btn-label-brand btn-bold">
+                  Save changes
+                </a>
+                <a href="/" className="kt-ml-30 btn btn-clean btn-bold">
+                  Cancel
+                </a>
               </div>
             </div>
           </div>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
-function mapStateToProps(state) {
-  return {
-    info: state.user.info
-  };
-}
-export default connect(mapStateToProps)(AccountSettingsPage);
+export default AccountSettingsPage;

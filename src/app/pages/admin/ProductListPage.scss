@@ -1,0 +1,20 @@
+.kt_admin_products {
+  .btn-import {
+    display: flex;
+    margin-left: auto;
+    margin-bottom: 20px;
+    min-width: 180px;
+    justify-content: center;
+  }
+}
+.diag-add-product {
+  .btn-add-variants {
+    margin-left: auto;
+    display: flex;
+    font-size: 11px;
+  }
+  .MuiDialog-paper {
+    width: 700px;
+    max-width: auto;
+  }
+}

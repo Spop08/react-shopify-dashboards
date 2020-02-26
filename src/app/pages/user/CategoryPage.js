@@ -27,8 +27,8 @@ const CategoryPage = props => {
 
   console.log(products);
   const componentProducts = products.map((data, index) => (
-    <div className="col-md-12 col-lg-6 col-xl-3">
-      <SProductPad data={data} key={index} />
+    <div className="col-md-12 col-lg-6 col-xl-3" key={index}>
+      <SProductPad data={data} />
     </div>
   ));
 
