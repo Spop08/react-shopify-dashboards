@@ -157,40 +157,6 @@ export default class MyCart extends React.Component {
                       </Link>
                     </div>
                   </div>
-
-                  <div className="kt-mycart__item">
-                    <div className="kt-mycart__container">
-                      <div className="kt-mycart__info">
-                        <Link to="cart-item" className="kt-mycart__title">
-                          Candy Machine
-                        </Link>
-
-                        <span className="kt-mycart__desc">
-                          For PHoto &amp; Others
-                        </span>
-
-                        <div className="kt-mycart__action">
-                          <span className="kt-mycart__price">$ 784</span>
-                          <span className="kt-mycart__text">for</span>
-                          <span className="kt-mycart__quantity">4</span>
-                          <span className="btn btn-label-success btn-icon">
-                            −
-                          </span>
-                          <span className="btn btn-label-success btn-icon">
-                            +
-                          </span>
-                        </div>
-                      </div>
-
-                      <Link to="cart-item" className="kt-mycart__pic">
-                        <img
-                          src={toAbsoluteUrl("/media/products/product15.jpg")}
-                          title=""
-                          alt=""
-                        />
-                      </Link>
-                    </div>
-                  </div>
                 </div>
               </PerfectScrollbar>
 

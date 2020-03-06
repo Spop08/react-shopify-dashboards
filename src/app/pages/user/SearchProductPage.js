@@ -26,6 +26,10 @@ class SearchProductPage extends Component {
   handleClose = () => {
     this.setState({ open: false });
   };
+  handleSubmit = () => {
+    
+    this.setState({ open: false });
+  };
   componentCategories = () => {
     return (
       <div className="d-flex ct-categories">
@@ -166,7 +170,7 @@ class SearchProductPage extends Component {
             <Button variant="secondary" onClick={this.handleClose}>
               Close
             </Button>
-            <Button variant="success" onClick={this.handleClose}>
+            <Button variant="success" onClick={this.handleSubmit}>
               Import
             </Button>
           </Modal.Footer>
