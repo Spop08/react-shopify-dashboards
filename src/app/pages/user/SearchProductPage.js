@@ -11,15 +11,46 @@ class SearchProductPage extends Component {
   state = {
     open: false,
     hot_products: [],
-    sale_products: []
+    sale_products: [],
+    search_str: "",
+    origin_hot_products: [],
+    origin_sale_products: []
   };
   async componentDidMount() {
     const { token } = this.props;
     const hot_products = await fetchHotProducts(token, 5);
     const sale_products = await fetchSaleProducts(token);
     console.log(hot_products);
-    this.setState({ hot_products, sale_products });
+    this.setState({
+      hot_products,
+      sale_products,
+      origin_hot_products: hot_products,
+      origin_sale_products: sale_products
+    });
   }
+  submitSearch = () => {
+    const {
+      origin_hot_products,
+      origin_sale_products,
+      search_str
+    } = this.state;
+    const hot_products = [];
+    const sale_products = [];
+    const low_search_str = search_str.toLowerCase();
+
+    origin_hot_products.map(product => {
+      const str = product.title.toLowerCase();
+      if (str.includes(low_search_str)) hot_products.push(product);
+    });
+    origin_sale_products.map(product => {
+      const str = product.title.toLowerCase();
+      if (str.includes(low_search_str)) sale_products.push(product);
+    });
+    this.setState({ hot_products, sale_products });
+  };
+  searchStringChange = event => {
+    this.setState({ search_str: event.target.value });
+  };
   handleClickOpen = () => {
     this.setState({ open: true });
   };
@@ -27,7 +58,6 @@ class SearchProductPage extends Component {
     this.setState({ open: false });
   };
   handleSubmit = () => {
-    
     this.setState({ open: false });
   };
   componentCategories = () => {
@@ -101,7 +131,7 @@ class SearchProductPage extends Component {
     );
   };
   render() {
-    const { open, hot_products, sale_products } = this.state;
+    const { open, hot_products, sale_products, search_str } = this.state;
     const componentCategories = this.componentCategories;
     const componentHotProducts = hot_products.map((data, index) => (
       <div className="col-md-12 col-lg-6 col-xl-3" key={index}>
@@ -129,8 +159,14 @@ class SearchProductPage extends Component {
                 className="form-control"
                 placeholder="Search"
                 aria-describedby="basic-addon1"
+                value={search_str}
+                onChange={this.searchStringChange}
               />
-              <button type="button" className="btn btn-primary btn-wide">
+              <button
+                type="button"
+                className="btn btn-primary btn-wide"
+                onClick={this.submitSearch}
+              >
                 Search
               </button>
             </div>

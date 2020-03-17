@@ -48,8 +48,8 @@ function Login(props) {
 
           <Formik
             initialValues={{
-              email: "admin@demo.com",
-              password: "demo"
+              email: "",
+              password: ""
             }}
             validate={values => {
               const errors = {};
