@@ -12,9 +12,19 @@
     margin-left: auto;
     display: flex;
     font-size: 11px;
+    margin-top: 30px;
   }
   .MuiDialog-paper {
-    width: 700px;
-    max-width: auto;
+    width: 900px;
+    max-width: none;
   }
+  .MuiDialogContent-root {
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+}
+.ct-variants {
+  overflow-y: auto;
+  height: 600px;
+  overflow-x: hidden;
 }

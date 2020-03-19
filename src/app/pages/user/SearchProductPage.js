@@ -4,7 +4,11 @@ import { Button, Modal, InputGroup, FormControl } from "react-bootstrap";
 import { search_icon, clothing } from "../../icons";
 import { Link } from "react-router-dom";
 import "./SearchProductPage.scss";
-import { fetchHotProducts, fetchSaleProducts } from "../../crud/product.crud";
+import {
+  fetchHotProducts,
+  fetchSaleProducts,
+  addAliProductToStore
+} from "../../crud/product.crud";
 import { connect } from "react-redux";
 
 class SearchProductPage extends Component {
@@ -14,6 +18,8 @@ class SearchProductPage extends Component {
     sale_products: [],
     search_str: "",
     origin_hot_products: [],
+    aliURL: "",
+    aliID: "",
     origin_sale_products: []
   };
   async componentDidMount() {
@@ -38,11 +44,11 @@ class SearchProductPage extends Component {
     const sale_products = [];
     const low_search_str = search_str.toLowerCase();
 
-    origin_hot_products.map(product => {
+    origin_hot_products.forEach(product => {
       const str = product.title.toLowerCase();
       if (str.includes(low_search_str)) hot_products.push(product);
     });
-    origin_sale_products.map(product => {
+    origin_sale_products.forEach(product => {
       const str = product.title.toLowerCase();
       if (str.includes(low_search_str)) sale_products.push(product);
     });
@@ -58,7 +64,16 @@ class SearchProductPage extends Component {
     this.setState({ open: false });
   };
   handleSubmit = () => {
+    const { aliURL, aliID } = this.state;
+    const { token } = this.props;
+    addAliProductToStore(token, aliURL ? aliURL : aliID);
     this.setState({ open: false });
+  };
+  changeAliID = event => {
+    this.setState({ aliID: event.target.value });
+  };
+  changeAliURL = event => {
+    this.setState({ aliURL: event.target.value });
   };
   componentCategories = () => {
     return (
@@ -194,12 +209,20 @@ class SearchProductPage extends Component {
           <Modal.Body>
             <label htmlFor="basic-url">Product URL</label>
             <InputGroup className="mb-3">
-              <FormControl id="basic-url" aria-describedby="basic-addon3" />
+              <FormControl
+                id="basic-url"
+                aria-describedby="basic-addon3"
+                onChange={this.changeAliURL}
+              />
             </InputGroup>
             <p>Or</p>
             <label htmlFor="basic-url">Product ID</label>
             <InputGroup className="mb-3">
-              <FormControl id="basic-id" aria-describedby="basic-addon3" />
+              <FormControl
+                id="basic-id"
+                aria-describedby="basic-addon3"
+                onChange={this.changeAliID}
+              />
             </InputGroup>
           </Modal.Body>
           <Modal.Footer>

@@ -8,7 +8,9 @@ const FETCH_PRODUCT_BY_ID = "api/product/detail";
 const FETCH_PRODUCTS_BY_CATEGORY = "api/product/category";
 const ADD_TO_STORE = "api/product/add2store";
 const ADD_TO_IMPORT = "api/product/import";
-const FETCH_ALL_PRODUCTS = "/api/product/listAll";
+const ADD_ALIPRODUCT_TO_IMPORT = "api/ali_product/info";
+const FETCH_ALL_PRODUCTS = "api/product/listAll";
+const ADD_PRODUCT_TO_ADMIN = "admin/api/product/add";
 
 export function fetchImportProducts(token) {
   return crudAPI(FETCH_IMPORT_PRODUCTS, "post", null, token).then(
@@ -60,4 +62,17 @@ export function fetchAllProducts(token) {
   return crudAPI(FETCH_ALL_PRODUCTS, "post", null, token).then(
     res => res.data.data.products
   );
+}
+
+export function addAliProductToStore(token, id) {
+  return crudAPI(
+    ADD_ALIPRODUCT_TO_IMPORT,
+    "post",
+    { product_id: id },
+    token
+  ).then(res => res.data);
+}
+
+export function addProductToAdmin(token, data) {
+  return crudAPI(ADD_PRODUCT_TO_ADMIN, "post", data, token);
 }

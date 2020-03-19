@@ -3,12 +3,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
 import { connect } from "react-redux";
-import { toAbsoluteUrl } from "../../../_metronic";
 import HeaderDropdownToggle from "../content/CustomDropdowns/HeaderDropdownToggle";
 
 class UserProfile extends React.Component {
   render() {
-    const { showHi, showAvatar, showBadge } = this.props;
+    const { showAvatar, showBadge } = this.props;
 
     return (
       <Dropdown
