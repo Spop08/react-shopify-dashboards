@@ -42,7 +42,11 @@ const SProductPad = ({ data }) => {
               className="kt-widget19__pic kt-portlet-fit--top kt-portlet-fit--sides"
               style={{
                 minHeight: "300px",
-                backgroundImage: `url(${data.images[0].src})`
+                backgroundImage: data.images[0]
+                  ? `url(${data.images[0].src})`
+                  : `url(
+                      "https://us.123rf.com/450wm/pavelstasevich/pavelstasevich1902/pavelstasevich190200120/124934975-stock-vector-no-image-available-icon-vector-flat.jpg?ver=6"
+                    )`
               }}
             >
               {sale_price && (

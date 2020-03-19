@@ -118,7 +118,11 @@ const IProductPad = ({ data, index }) => {
             <div className="row">
               <div className="col-md-3 d-flex">
                 <img
-                  src={data.images[0].src}
+                  src={
+                    data.images[0]
+                      ? data.images[0].src
+                      : "https://us.123rf.com/450wm/pavelstasevich/pavelstasevich1902/pavelstasevich190200120/124934975-stock-vector-no-image-available-icon-vector-flat.jpg?ver=6"
+                  }
                   className="tab-product-image"
                   alt="name"
                 />

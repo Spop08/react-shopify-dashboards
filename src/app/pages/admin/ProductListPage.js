@@ -145,7 +145,9 @@ const ProductsListPage = () => {
       var _products = [];
       products.map(item => {
         return _products.push({
-          image: item.images[0].src,
+          image: item.images[0]
+            ? item.images[0].src
+            : "https://us.123rf.com/450wm/pavelstasevich/pavelstasevich1902/pavelstasevich190200120/124934975-stock-vector-no-image-available-icon-vector-flat.jpg?ver=6",
           title: item.title,
           price: item.variants[0].price,
           category: item.category,

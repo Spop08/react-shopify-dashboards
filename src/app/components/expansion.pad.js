@@ -35,7 +35,14 @@ export default function ExpansionPad({ data }) {
             <div className="kt-widget5__item ">
               <div className="kt-widget5__content">
                 <div className="kt-ewidget-pic d-flex">
-                  <img alt="" src={data.images[0].src} />
+                  <img
+                    alt=""
+                    src={
+                      data.images[0]
+                        ? data.images[0].src
+                        : "https://us.123rf.com/450wm/pavelstasevich/pavelstasevich1902/pavelstasevich190200120/124934975-stock-vector-no-image-available-icon-vector-flat.jpg?ver=6"
+                    }
+                  />
                 </div>
                 <div className="kt-widget5__section">
                   <h5>{data.title}</h5>
@@ -76,7 +83,11 @@ export default function ExpansionPad({ data }) {
                 <img
                   alt=""
                   className="expansion__img"
-                  src={data.images[0].src}
+                  src={
+                    data.images[0]
+                      ? data.images[0].src
+                      : "https://us.123rf.com/450wm/pavelstasevich/pavelstasevich1902/pavelstasevich190200120/124934975-stock-vector-no-image-available-icon-vector-flat.jpg?ver=6"
+                  }
                 />
               </div>
               {data.images[1] && (
