@@ -63,10 +63,13 @@ class SearchProductPage extends Component {
   handleClose = () => {
     this.setState({ open: false });
   };
-  handleSubmit = () => {
+  handleSubmit = async () => {
     const { aliURL, aliID } = this.state;
     const { token } = this.props;
-    addAliProductToStore(token, aliURL ? aliURL : aliID);
+    const res = await addAliProductToStore(token, aliURL ? aliURL : aliID);
+    if (res.data.status === "success") {
+      alert("Aliexpress Product Imported Successfully!");
+    } else alert("failed");
     this.setState({ open: false });
   };
   changeAliID = event => {

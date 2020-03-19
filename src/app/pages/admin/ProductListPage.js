@@ -234,12 +234,12 @@ const ProductsListPage = () => {
     if (activeStep === 1) {
       const res = await addProductToAdmin(token, state);
       if (res.data.status === "success") {
-        setOpenDialog(false);
         alert("Successfully Imported");
         window.location.reload(false);
       } else {
         alert("Error Importing...");
       }
+      setOpenDialog(false);
     }
   }
 
