@@ -67,7 +67,7 @@ class SearchProductPage extends Component {
     const { aliURL, aliID } = this.state;
     const { token } = this.props;
     const res = await addAliProductToStore(token, aliURL ? aliURL : aliID);
-    if (res.data.status === "success") {
+    if (res.status === "success") {
       alert("Aliexpress Product Imported Successfully!");
     } else alert("failed");
     this.setState({ open: false });
