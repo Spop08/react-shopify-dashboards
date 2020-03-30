@@ -29,8 +29,7 @@ const ProductDetailsPage = props => {
   const handleSubmit = async () => {
     setOpenDialog(false);
     toast.success("Adding to the Import List");
-    const res = await addToImport(token, data._id);
-    console.log(res);
+    addToImport(token, data._id);
   };
 
   const componentDetails = () => {

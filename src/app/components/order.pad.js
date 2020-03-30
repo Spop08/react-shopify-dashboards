@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Chip from "@material-ui/core/Chip";
 import DoneIcon from "@material-ui/icons/Done";
 import Card from "react-bootstrap/Card";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Button from "@material-ui/core/Button";
 import "./order.pad.scss";
 import PayPalButton from "./paypal.btn";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { markAsProcessed, markAsDelivered } from "../crud/order.crud";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,152 +29,193 @@ const useStyles = makeStyles(theme => ({
 const OrderPad = props => {
   const classes = useStyles();
   const { type, data } = props;
-  function handleDelete() {
-    alert("You want mark as Shipped?");
+  const token = useSelector(state => state.auth.authToken);
+  const [open, setOpen] = useState(false);
+  const [markStatus, setMarkStatus] = useState(null);
+
+  async function handleSubmit() {
+    setOpen(false);
+    if (markStatus == "Delivered") {
+      await markAsDelivered(token, { id: data.id });
+    }
+    if (markStatus == "Processed") {
+      await markAsProcessed(token, { id: data.id });
+    }
+    alert(`Successfully Marked as ${markStatus}`);
+    window.location.reload();
   }
-  const submitOrder = () => {
-    console.log("submitOrder");
-  };
-  console.log(data);
+
   return (
-    <Card className="kt-order-card">
-      <Card.Header>
-        <i className="flaticon2-contract"></i>
-        <p className="order-name">Order </p>
-        <p className="order-number"> {data._id}</p>
-        <p className="order-date">2020/01/28</p>
-        <p className="order-customer">Customer: </p>
-        <p className="order-customername">Li Wei (China)</p>
-        {/* <img src="/media/flags/034-china.svg" alt="Mandarin" /> */}
-        {/* <i className="flaticon-email"></i> */}
-        {type === "undelivered" && (
-          <Chip
-            icon={<DoneIcon />}
-            label="Mark as Processed"
-            clickable
-            className={classes.chip}
-            color="primary"
-            onClick={handleDelete}
-            variant="outlined"
-          />
-        )}
-        {type === "inprocessing" && (
-          <Chip
-            icon={<DoneIcon />}
-            label="Mark as Delivered"
-            clickable
-            className={classes.chip}
-            color="primary"
-            onClick={handleDelete}
-            variant="outlined"
-          />
-        )}
-      </Card.Header>
-      <Card.Body className="order-products">
-        <div className="order-products__supplier">
+    <>
+      <Card className="kt-order-card">
+        <Card.Header>
+          <i className="flaticon2-contract"></i>
+          <p className="order-name">Order </p>
+          <p className="order-number"> {data.id}</p>
+          <p className="order-date">2020/01/28</p>
+          <p className="order-customer">Customer: </p>
+          <p className="order-customername">
+            {data.client.first_name} ({data.client.email})
+          </p>
+          {/* <img src="/media/flags/034-china.svg" alt="Mandarin" /> */}
+          {/* <i className="flaticon-email"></i> */}
           {type === "undelivered" && (
-            <Chip label="UnDelivered" className={classes.chip} />
+            <Chip
+              icon={<DoneIcon />}
+              label="Mark as Processed"
+              clickable
+              className={classes.chip}
+              color="primary"
+              onClick={() => {
+                setOpen(true);
+                setMarkStatus("Processed");
+              }}
+              variant="outlined"
+            />
           )}
           {type === "inprocessing" && (
             <Chip
-              label="In Processing"
+              icon={<DoneIcon />}
+              label="Mark as Delivered"
+              clickable
               className={classes.chip}
               color="primary"
+              onClick={() => {
+                setOpen(true);
+                setMarkStatus("Delivered");
+              }}
+              variant="outlined"
             />
           )}
-          {type === "delivered" && (
-            <Chip
-              label="Delivered"
-              className={classes.chip}
-              color="secondary"
-            />
-          )}
-          {type === "cancelled" && (
-            <Chip label="Cancelled" className={classes.chip} />
-          )}
+        </Card.Header>
+        <Card.Body className="order-products">
+          <div className="order-products__supplier">
+            {type === "undelivered" && (
+              <Chip label="UnDelivered" className={classes.chip} />
+            )}
+            {type === "inprocessing" && (
+              <Chip
+                label="In Processing"
+                className={classes.chip}
+                color="primary"
+              />
+            )}
+            {type === "delivered" && (
+              <Chip
+                label="Delivered"
+                className={classes.chip}
+                color="secondary"
+              />
+            )}
+            {type === "cancelled" && (
+              <Chip label="Cancelled" className={classes.chip} />
+            )}
 
-          {type === "undelivered" && (
-            <div className="d-flex btn-group-order">
-              <PayPalButton amount={0.99} />
-              <button
-                type="button"
-                className="btn btn-info btn-wide"
-                onClick={submitOrder}
-              >
-                Order Product
-              </button>
-            </div>
-          )}
-          {/* {type === "inprocessing" && (
-            <button type="button" className="btn btn-primary btn-wide">
-              Get Tracking Code
-            </button>
-          )} */}
-          {/* {type === "delivered" && (
-            <Chip
-              label="Delivered"
-              className={classes.chip}
-              color="secondary"
-            />
-          )}
-          {type === "cancelled" && (
-            <Chip label="Cancelled" className={classes.chip} />
-          )} */}
-        </div>
-        <Card>
-          <Card.Body>
-            <div className="row">
-              <div className="col-md-4">
-                <img
-                  alt=""
-                  className="order-product__img"
-                  src="https://ae01.alicdn.com/kf/H170b706c280948f18fad2a4a8dd6cfc3P/2019-Winter-Shoes-Men-Warm-Boots-Men-Fur-High-Quality-Split-Leather-Wterproof-Ankle-Snow-Boots.jpg"
-                />
-                <div className="order-product_details">
-                  <p className="order-product__name">T-Rex Skeleton Necklace</p>
-                  <p>145974-antique-silver</p>
+            {type === "undelivered" && (
+              <div className="d-flex btn-group-order">
+                {data.type === "self" ? (
+                  <PayPalButton amount={data.price} />
+                ) : (
+                  <button
+                    type="button"
+                    className="btn btn-info btn-wide"
+                    onClick={() => {
+                      window.open(
+                        `https://www.aliexpress.com/item/${data.product_id}`
+                      );
+                    }}
+                  >
+                    Order on Aliexpress
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
+          <Card>
+            <Card.Body>
+              <div className="row">
+                <div className="col-md-2">
+                  <img
+                    alt=""
+                    className="order-product__img"
+                    src={data.variant.image}
+                  />
+                  <div className="order-product_details ">
+                    <p className="order-product__name">{data.variant.title}</p>
+                  </div>
+                </div>
+                <div className="col-md-8 flexbox">
+                  <p>{data.sku}</p>
+                </div>
+                <div className="col-md-2 flexbox">
+                  <p>
+                    {data.quantity} * {data.price} USD
+                  </p>
                 </div>
               </div>
-              <div className="col-md-3">
-                <p>Antique Silver</p>
-              </div>
-              <div className="col-md-3">
-                <p>No Tracking Number</p>
-              </div>
-              <div className="col-md-2">
-                <p>1 * 26.99 USD</p>
-              </div>
-            </div>
-          </Card.Body>
-        </Card>
-        <Card>
-          <Card.Body>
-            <div className="row">
-              <div className="col-md-4">
-                <img
-                  alt=""
-                  className="order-product__img"
-                  src="https://ae01.alicdn.com/kf/H170b706c280948f18fad2a4a8dd6cfc3P/2019-Winter-Shoes-Men-Warm-Boots-Men-Fur-High-Quality-Split-Leather-Wterproof-Ankle-Snow-Boots.jpg"
-                />
-                <div className="order-product_details">
-                  <p className="order-product__name">T-Rex Skeleton Necklace</p>
-                  <p>145974-antique-silver</p>
+              <div className="shipping-container">
+                <h5>Shipping Address</h5>
+                <div className="shipping-details">
+                  <p>First Name:</p>
+                  <span>{data.shippingAddress.first_name}</span>
+                </div>
+                <div className="shipping-details">
+                  <p>Last Name:</p>
+                  <span>{data.shippingAddress.last_name}</span>
+                </div>
+                <div className="shipping-details">
+                  <p>Country:</p>
+                  <span>{data.shippingAddress.country}</span>
+                </div>
+                <div className="shipping-details">
+                  <p>Province:</p>
+                  <span>{data.shippingAddress.province}</span>
+                </div>
+                <div className="shipping-details">
+                  <p>City:</p>
+                  <span>{data.shippingAddress.city}</span>
+                </div>
+                <div className="shipping-details">
+                  <p>Address 1:</p>
+                  <span>{data.shippingAddress.address1}</span>
+                </div>
+                <div className="shipping-details">
+                  <p>Address 2:</p>
+                  <span>{data.shippingAddress.address2}</span>
+                </div>
+                <div className="shipping-details">
+                  <p>Zip Code:</p>
+                  <span>{data.shippingAddress.zip}</span>
                 </div>
               </div>
-              <div className="col-md-3">
-                <p>Antique Silver</p>
-              </div>
-              <div className="col-md-3">
-                <p>No Tracking Number</p>
-              </div>
-              <div className="col-md-2">
-                <p>1 * 26.99 USD</p>
-              </div>
-            </div>
-          </Card.Body>
-        </Card>
-      </Card.Body>
-    </Card>
+            </Card.Body>
+          </Card>
+        </Card.Body>
+      </Card>
+
+      <Dialog
+        open={open}
+        onClose={() => setOpen(false)}
+        aria-labelledby="draggable-dialog-title"
+      >
+        <DialogTitle id="draggable-dialog-title">
+          Mark As {markStatus}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Do you want to mark this order as {markStatus}?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleSubmit} color="primary">
+            Yes
+          </Button>
+          <Button onClick={() => setOpen(false)} color="primary">
+            No
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
   );
 };
 

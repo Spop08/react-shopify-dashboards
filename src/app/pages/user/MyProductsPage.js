@@ -14,7 +14,6 @@ const MyProductsPage = () => {
     };
     fetchProducts();
   }, [token]);
-  console.log(products);
   const componentProducts = products.map((item, index) => (
     <ExpansionPad data={item} key={index} />
   ));

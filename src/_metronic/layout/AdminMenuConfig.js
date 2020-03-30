@@ -24,14 +24,6 @@ export default {
   aside: {
     self: {},
     items: [
-      {
-        title: "Dashboard",
-        root: true,
-        icon: "flaticon2-architecture-and-city",
-        page: "admin/dashboard",
-        translate: "MENU.DASHBOARD",
-        bullet: "dot"
-      },
       { section: "Platform" },
       {
         title: "Product list",
@@ -47,64 +39,34 @@ export default {
         icon: "flaticon2-calendar-5",
         page: "admin/user-list"
       },
-      {
-        title: "Order issue list",
-        root: true,
-        bullet: "dot",
-        icon: "flaticon2-calendar-5",
-        page: "admin/my-products"
-      },
-      {
-        title: "Customer Service Info",
-        root: true,
-        bullet: "dot",
-        icon: "flaticon2-calendar-5",
-        page: "admin/my-products"
-      },
       { section: "Order" },
       {
-        title: "Order list",
+        title: "All Orders",
         root: true,
         bullet: "dot",
         icon: "flaticon2-search",
-        page: "admin/order-list"
+        page: "admin/all-orders"
       },
       {
-        title: "Pending orders",
+        title: "UnProcessed Orders",
         root: true,
         bullet: "dot",
         icon: "flaticon2-calendar-5",
-        page: "admin/pending-order"
-      },
-      { section: "Customer" },
-      {
-        title: "Orders by Customer",
-        root: true,
-        bullet: "dot",
-        icon: "flaticon2-search",
-        page: "admin/order-customer"
+        page: "admin/unprocessed-orders"
       },
       {
-        title: "Development customer list",
+        title: "Processed Orders",
         root: true,
         bullet: "dot",
         icon: "flaticon2-calendar-5",
-        page: "admin/import-list"
-      },
-      { section: "Purchase " },
-      {
-        title: "All purchased orders",
-        root: true,
-        bullet: "dot",
-        icon: "flaticon2-search",
-        page: "admin/search-products"
+        page: "admin/processed-orders"
       },
       {
-        title: "Unpurchased orders",
+        title: "Shipped Orders",
         root: true,
         bullet: "dot",
         icon: "flaticon2-calendar-5",
-        page: "admin/import-list"
+        page: "admin/shipped-orders"
       }
     ]
   }

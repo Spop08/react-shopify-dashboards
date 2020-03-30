@@ -64,7 +64,6 @@ const UserList = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       const response = await fetchAllUsers(token);
-      console.log(response);
       setUsers(response);
     };
     fetchUsers();

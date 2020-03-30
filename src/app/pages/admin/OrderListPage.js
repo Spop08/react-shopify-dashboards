@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import { useSelector } from "react-redux";
 
-import { fetchAllOrders } from "../../crud/order.crud";
+import { fetchAdminAllOrders } from "../../crud/order.crud";
 
 import OrderToolbarSelect from "../../components/ordertoolbar";
 
@@ -91,8 +91,7 @@ const OrderList = props => {
 
   useEffect(() => {
     const fetchOrders = async () => {
-      const response = await fetchAllOrders(token);
-      console.log(response);
+      const response = await fetchAdminAllOrders(token);
       setOrders(response);
     };
     fetchOrders();

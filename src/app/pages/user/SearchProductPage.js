@@ -26,7 +26,6 @@ class SearchProductPage extends Component {
     const { token } = this.props;
     const hot_products = await fetchHotProducts(token, 5);
     const sale_products = await fetchSaleProducts(token);
-    console.log(hot_products);
     this.setState({
       hot_products,
       sale_products,
@@ -66,7 +65,12 @@ class SearchProductPage extends Component {
   handleSubmit = async () => {
     const { aliURL, aliID } = this.state;
     const { token } = this.props;
-    const res = await addAliProductToStore(token, aliURL ? aliURL : aliID);
+    let id;
+    if (aliURL) {
+      const URI = aliURL.split("/")[4];
+      id = URI.split(".html?")[0];
+    } else id = aliID;
+    const res = await addAliProductToStore(token, id);
     if (res.status === "success") {
       alert("Aliexpress Product Imported Successfully!");
     } else alert("failed");

@@ -3,45 +3,41 @@ import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterIcon from "@material-ui/icons/FilterList";
-import { withStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
-const defaultToolbarSelectStyles = {
+const useStyles = makeStyles({
   iconButton: {
     marginRight: "24px",
     top: "50%",
     display: "inline-block",
-    position: "relative",
+    position: "relative"
   },
   deleteIcon: {
     color: "#000"
   }
-};
+});
 
-class SellerToolbarSelect extends React.Component {
-  handleClick = () => {
-    console.log("click! current selected rows", this.props.selectedRows);
+const SellerToolbarSelect = ({ selectedRows }) => {
+  const classes = useStyles();
+  const handleUpdate = () => {};
+  const handleDelete = () => {
+    console.log("Delete clicked", selectedRows);
   };
 
-  render() {
-    const { classes } = this.props;
+  return (
+    <div className={"custom-toolbar-select"}>
+      <Tooltip title={"Filter"}>
+        <IconButton className={classes.iconButton} onClick={handleUpdate}>
+          <FilterIcon className={classes.deleteIcon} />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title={"Delete"}>
+        <IconButton className={classes.iconButton} onClick={handleDelete}>
+          <DeleteIcon className={classes.deleteIcon} />
+        </IconButton>
+      </Tooltip>
+    </div>
+  );
+};
 
-    return (
-      <div className={"custom-toolbar-select"}>
-        <Tooltip title={"Filter"}>
-          <IconButton className={classes.iconButton} onClick={this.handleClick}>
-            <FilterIcon className={classes.deleteIcon} />
-          </IconButton>
-        </Tooltip>
-        <Tooltip title={"Delete"}>
-          <IconButton className={classes.iconButton} onClick={this.handleClick}>
-            <DeleteIcon className={classes.deleteIcon} />
-          </IconButton>
-        </Tooltip>
-      </div>
-    );
-  }
-}
-
-export default withStyles(defaultToolbarSelectStyles, {
-  name: "SellerToolbarSelect"
-})(SellerToolbarSelect);
+export default SellerToolbarSelect;

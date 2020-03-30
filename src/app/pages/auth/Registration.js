@@ -81,17 +81,14 @@ function Registration(props) {
             if (!values.acceptTerms) {
               errors.acceptTerms = "Accept Terms";
             }
-            console.log(errors);
             return errors;
           }}
           onSubmit={(values, { setStatus, setSubmitting }) => {
             enableLoading();
-            console.log("SUBMITTED");
 
             setTimeout(() => {
               register(values.username, values.email, values.password)
                 .then(({ data: { status } }) => {
-                  console.log(status);
                   props.history.push("/auth/login");
                 })
                 .catch(() => {

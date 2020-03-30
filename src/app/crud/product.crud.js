@@ -11,6 +11,8 @@ const ADD_TO_IMPORT = "api/product/import";
 const ADD_ALIPRODUCT_TO_IMPORT = "api/ali_product/info";
 const FETCH_ALL_PRODUCTS = "api/product/listAll";
 const ADD_PRODUCT_TO_ADMIN = "admin/api/product/add";
+const EDIT_IMPORTED_PRODUCT = "api/user/imported/edit";
+const REMOVE_ADMIN_PRODUCT = "admin/api/product/remove";
 
 export function fetchImportProducts(token) {
   return crudAPI(FETCH_IMPORT_PRODUCTS, "post", null, token).then(
@@ -75,4 +77,12 @@ export function addAliProductToStore(token, id) {
 
 export function addProductToAdmin(token, data) {
   return crudAPI(ADD_PRODUCT_TO_ADMIN, "post", data, token);
+}
+
+export function editImportedProduct(token, data) {
+  return crudAPI(EDIT_IMPORTED_PRODUCT, "post", data, token);
+}
+
+export function removeAdminProduct(token, data) {
+  return crudAPI(REMOVE_ADMIN_PRODUCT, "post", data, token);
 }

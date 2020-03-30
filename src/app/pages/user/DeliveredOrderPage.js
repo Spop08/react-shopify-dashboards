@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import OrderPad from "../../components/order.pad";
-import { fetchOrdersbyUser } from "../../crud/order.crud";
+import { fetchDeliveredOrders } from "../../crud/order.crud";
 import { useSelector } from "react-redux";
 
 const DeliveredOrderPage = () => {
@@ -8,19 +8,14 @@ const DeliveredOrderPage = () => {
   const [orders, loadOrders] = useState([]);
   useEffect(() => {
     const fetchOrders = async () => {
-      const orders = await fetchOrdersbyUser(token);
+      const orders = await fetchDeliveredOrders(token);
       loadOrders(orders);
     };
     fetchOrders();
   }, [token]);
-  console.log(orders);
-  const componentOrders = orders.map((item, index) => {
-    if (item.isShipped) {
-      console.log(item);
-      return <OrderPad type="delivered" data={item} key={index} />;
-    }
-    return null;
-  });
+  const componentOrders = orders.map((item, index) => (
+    <OrderPad type="delivered" data={item} key={index} />
+  ));
   return (
     <div className="order-container">
       <h3 className="page-title">Delivered Order</h3>

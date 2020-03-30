@@ -36,3 +36,9 @@
 .MuiDialog-paperWidthSm {
   min-width: 450px;
 }
+
+.kt-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

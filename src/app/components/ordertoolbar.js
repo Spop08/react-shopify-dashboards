@@ -2,7 +2,7 @@ import React from "react";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import DeleteIcon from "@material-ui/icons/Delete";
-import MarkIcon from '@material-ui/icons/AssignmentTurnedIn';
+import MarkIcon from "@material-ui/icons/AssignmentTurnedIn";
 import { withStyles } from "@material-ui/core/styles";
 
 const defaultToolbarSelectStyles = {
@@ -10,7 +10,7 @@ const defaultToolbarSelectStyles = {
     marginRight: "24px",
     top: "50%",
     display: "inline-block",
-    position: "relative",
+    position: "relative"
   },
   deleteIcon: {
     color: "#000"
@@ -18,9 +18,7 @@ const defaultToolbarSelectStyles = {
 };
 
 class OrderToolbarSelect extends React.Component {
-  handleClick = () => {
-    console.log("click! current selected rows", this.props.selectedRows);
-  };
+  handleClick = () => {};
 
   render() {
     const { classes } = this.props;

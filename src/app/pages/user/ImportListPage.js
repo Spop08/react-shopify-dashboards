@@ -18,6 +18,7 @@ const ImportListPage = () => {
   const componentProducts = products.map((item, index) => (
     <IProductPad data={item} index={index + 1} key={index} />
   ));
+  console.log(products);
   return (
     <div>
       <h3 className="page-title">Import List</h3>

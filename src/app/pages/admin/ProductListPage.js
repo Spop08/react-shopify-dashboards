@@ -2,19 +2,29 @@ import React, { useEffect, useState } from "react";
 import MUIDataTable from "mui-datatables";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import { fetchAllProducts, addProductToAdmin } from "../../crud/product.crud";
+import {
+  fetchAllProducts,
+  addProductToAdmin,
+  removeAdminProduct
+} from "../../crud/product.crud";
 import SellerToolbarSelect from "../../components/sellertoolbar";
 import Avatar from "@material-ui/core/Avatar";
 import Dialog from "@material-ui/core/Dialog";
 import { TextField, Grid } from "@material-ui/core";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
 import Button from "@material-ui/core/Button";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import ChipInput from "material-ui-chip-input";
 import Divider from "@material-ui/core/Divider";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import IconButton from "@material-ui/core/IconButton";
+import Tooltip from "@material-ui/core/Tooltip";
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
 
 import "./ProductListPage.scss";
 
@@ -62,8 +72,11 @@ const ProductsListPage = () => {
   const classes = useStyles();
   const token = useSelector(state => state.auth.authToken);
   const [open, setOpenDialog] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
+  const [originProducts, setOriginProducts] = useState([]);
   const [products, setProducts] = useState([]);
   const [activeStep, setActiveStep] = useState(0);
+  const [delIndex, setDelIndex] = useState();
   const steps = getSteps();
   const [state, setState] = useState(initialVariant);
   function handleAddChip(chip) {
@@ -71,7 +84,31 @@ const ProductsListPage = () => {
     types.push(chip);
     setState({ ...state, options: types });
   }
-  function handleDeleteChip() {}
+  function handleDeleteChip(chip, index) {
+    console.log(index);
+    const types = [...state.options];
+    types.splice(index, 1);
+    setState({ ...state, options: types });
+    console.log("Delete button clicked");
+  }
+  function handleEdit() {
+    console.log("Edit button clicked");
+  }
+  function handleDelete(index) {
+    setDelIndex(index);
+    setOpenDelete(true);
+  }
+  async function handleDeleteSubmit() {
+    setOpenDelete(false);
+    const response = await removeAdminProduct(token, {
+      id: originProducts[delIndex]._id
+    });
+    if (response.data.status === "success") {
+      alert("Successfully Deleted...");
+      window.location.reload();
+    }
+  }
+
   const options = {
     filterType: "checkbox",
     customToolbarSelect: selectedRows => (
@@ -136,12 +173,35 @@ const ProductsListPage = () => {
         filter: true,
         sort: false
       }
+    },
+    {
+      name: "actions",
+      label: "Actions",
+      options: {
+        filter: false,
+        sort: false,
+        customBodyRender: (value, tableMeta, updateValue) => {
+          return (
+            <div>
+              {/* <Tooltip title={"Edit"}>
+                <IconButton onClick={() => handleEdit(tableMeta.rowIndex)}>
+                  <EditIcon />
+                </IconButton>
+              </Tooltip> */}
+              <Tooltip title={"Delete"}>
+                <IconButton onClick={() => handleDelete(tableMeta.rowIndex)}>
+                  <DeleteIcon />
+                </IconButton>
+              </Tooltip>
+            </div>
+          );
+        }
+      }
     }
   ];
   useEffect(() => {
     const fetchUsers = async () => {
       const products = await fetchAllProducts(token);
-      console.log(products);
       var _products = [];
       products.map(item => {
         return _products.push({
@@ -155,6 +215,7 @@ const ProductsListPage = () => {
         });
       });
       setProducts(_products);
+      setOriginProducts(products);
     };
     fetchUsers();
   }, [token]);
@@ -246,7 +307,6 @@ const ProductsListPage = () => {
   function handleBack() {
     setActiveStep(prevActiveStep => prevActiveStep - 1);
   }
-  console.log("I am state", state);
   return (
     <div className="kt_admin_products">
       <button
@@ -265,6 +325,27 @@ const ProductsListPage = () => {
         columns={columns}
         options={options}
       />
+      <Dialog
+        open={openDelete}
+        onClose={() => setOpenDelete(false)}
+        aria-labelledby="draggable-dialog-title"
+      >
+        <DialogTitle id="draggable-dialog-title">Remove Product</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Do you want to remove this product?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleDeleteSubmit} color="primary">
+            Yes
+          </Button>
+          <Button onClick={() => setOpenDelete(false)} color="primary">
+            No
+          </Button>
+        </DialogActions>
+      </Dialog>
+
       <Dialog
         open={open}
         aria-labelledby="draggable-dialog-title"

@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { EditorState, ContentState, convertFromHTML } from "draft-js";
+import {
+  EditorState,
+  ContentState,
+  convertFromHTML,
+  convertToRaw
+} from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import Button from "@material-ui/core/Button";
@@ -39,6 +44,10 @@ const IProductPad = ({ data, index }) => {
     addToStore(token, data.id);
     setState({ ...state, import_open: false });
     toast.success("Product is adding to Store...", 3000);
+  };
+  const handleSaveChanges = () => {
+    const rawContentState = convertToRaw(editorState.getCurrentContent());
+    console.log("CLICKED", rawContentState);
   };
   toast.configure({
     draggable: false,
@@ -127,7 +136,7 @@ const IProductPad = ({ data, index }) => {
                   alt="name"
                 />
               </div>
-              <div className="col-md-9 kt-product-tab">
+              <div className="col-md-9 kt-product-tab kt-center">
                 <h5>Original title:</h5>
                 <p>{data.title}</p>
                 <h5>Title:</h5>
@@ -138,8 +147,6 @@ const IProductPad = ({ data, index }) => {
                   value={title}
                   onChange={event => setTitle(event.target.value)}
                 />
-                <h5>Collections:</h5>
-                <input className="form-control" type="text" placeholder="" />
               </div>
             </div>
           </div>
@@ -155,6 +162,14 @@ const IProductPad = ({ data, index }) => {
                 setState({ ...state, editorState })
               }
             />
+            {/* <div
+              style={{ float: "right", marginTop: "20px" }}
+              onClick={handleSaveChanges}
+            >
+              <Button color="secondary" variant="outlined">
+                Save Changes
+              </Button>
+            </div> */}
           </div>
           <div
             className={"tab-pane " + (activeTab === "tab3" ? "active" : "")}

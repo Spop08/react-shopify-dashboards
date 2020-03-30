@@ -10,7 +10,6 @@ const ImagesTab = ({ images }) => {
       </div>
     </div>
   ));
-  console.log(images);
   return <div className="row images-tab">{componentsImage}</div>;
 };
 

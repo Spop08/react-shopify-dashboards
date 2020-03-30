@@ -56,11 +56,11 @@ export default {
       },
       { section: "Orders" },
       {
-        title: "UnDelivered Order",
+        title: "UnProcessed Order",
         root: true,
         bullet: "dot",
         icon: "flaticon2-calendar-5",
-        page: "app/undelivered-order"
+        page: "app/unprocessed-order"
       },
       {
         title: "InProcessing Order",
@@ -76,13 +76,13 @@ export default {
         icon: "flaticon2-calendar-5",
         page: "app/delivered-order"
       },
-      {
-        title: "Cancelled Order",
-        root: true,
-        bullet: "dot",
-        icon: "flaticon2-calendar-5",
-        page: "app/cancelled-order"
-      },
+      // {
+      //   title: "Cancelled Order",
+      //   root: true,
+      //   bullet: "dot",
+      //   icon: "flaticon2-calendar-5",
+      //   page: "app/cancelled-order"
+      // },
       { section: "Settings" },
       {
         title: "Account Settings",

@@ -8,9 +8,8 @@ import ShopifyAuthCallBack from "../../auth/ShopifyAuthCallBack";
 import ImportListPage from "./ImportListPage";
 import MyProductsPage from "./MyProductsPage";
 import InProcessingOrderPage from "./InProcessingOrderPage";
-import UnDeliveredOrderPage from "./UnDeliveredOrderPage";
+import UnProcessedOrderPage from "./UnProcessedOrderPage";
 import DeliveredOrderPage from "./DeliveredOrderPage";
-import CancelledOrderPage from "./CancelledOrderPage";
 import CategoryPage from "./CategoryPage";
 import ProductDetailsPage from "./ProductDetailsPage";
 import AccountSettingsPage from "./AccountSettingsPage";
@@ -49,9 +48,8 @@ const MainHomePage = () => {
           path="/app/inprocessing-order"
           component={InProcessingOrderPage}
         />
-        <Route path="/app/undelivered-order" component={UnDeliveredOrderPage} />
+        <Route path="/app/unprocessed-order" component={UnProcessedOrderPage} />
         <Route path="/app/delivered-order" component={DeliveredOrderPage} />
-        <Route path="/app/cancelled-order" component={CancelledOrderPage} />
         <Route path="/app/category/:type" component={CategoryPage} />
         <Route path="/app/details/:id" component={ProductDetailsPage} />
         <Route path="/shopify/callback" component={ShopifyAuthCallBack} />

@@ -52,7 +52,6 @@ const UserList = () => {
       <SellerToolbarSelect selectedRows={selectedRows} />
     ),
     renderExpandableRow: (rowData, rowMeta) => {
-      console.log(users[[rowData[0] - 1]].orders);
       return (
         <>
           {users[[rowData[0] - 1]].orders.map((order, i) => (
@@ -89,7 +88,6 @@ const UserList = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       const response = await fetchOrdersbyUsers(token);
-      console.log(response);
       setUsers(response);
     };
     fetchUsers();

@@ -83,10 +83,8 @@ function Login(props) {
                     const data = res.data;
                     disableLoading();
                     if (data.status !== "no user") {
-                      console.log("LOGIN SUCCESS", res.data);
                       props.login(data.token);
                     } else {
-                      console.log("LOGIN FAILED1", res.data);
                       setSubmitting(false);
                       setStatus(
                         intl.formatMessage({
@@ -96,7 +94,6 @@ function Login(props) {
                     }
                   })
                   .catch(err => {
-                    console.log("LOGIN FAILED2", err);
                     disableLoading();
                     setSubmitting(false);
                     setStatus(
