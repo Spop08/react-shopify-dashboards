@@ -50,11 +50,12 @@ const CustomColumnTable = ({ data }) => {
     }
   ]);
   const [variants, setVariants] = useState([]);
-  const fields = [];
+  const [fields, setFields] = useState([]);
   useEffect(() => {
     var _variants = [];
     var cnt = 2;
     const ar_col = [...columns];
+    const _fields = [];
     data.options.forEach(item => {
       const field = item.split(" ")[0];
       const column = {
@@ -63,7 +64,7 @@ const CustomColumnTable = ({ data }) => {
         style: { whiteSpace: "nowrap" }
       };
       ar_col.splice(cnt, 0, column);
-      fields.push(field);
+      _fields.push(field);
       cnt++;
     });
     setColumns(ar_col);
@@ -80,17 +81,19 @@ const CustomColumnTable = ({ data }) => {
           item.inventoryQuantity === undefined ? 0 : item.inventoryQuantity
       };
       item.options.forEach((option, ind) => {
-        const _option = fields[ind];
+        const _option = _fields[ind];
         variant[_option] = option;
       });
       _variants.push(variant);
     });
     setVariants(_variants);
+    setFields(_fields);
   }, [data.variants, data.id]);
 
   const handleSubmit = async () => {
     var newData = data;
-    console.log(variants);
+    console.log("VARIANTS ", variants);
+    console.log("FIELDS ", fields);
     data.variants.forEach((item, index) => {
       // newData.variants[index] = item;
       newData.variants[index].imageSrc = variants[index].imageSrc;
@@ -102,6 +105,7 @@ const CustomColumnTable = ({ data }) => {
         newData.variants[index]["options"][ind] = variants[index][field];
       });
     });
+    console.log("NEWDATA ", newData);
     const response = await editImportedProduct(token, newData);
     if (response.data.status === "success") alert("Save Changed...");
   };
