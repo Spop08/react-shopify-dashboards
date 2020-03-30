@@ -18,7 +18,7 @@ const PayPalButton = ({ amount }) => {
     // => sometimes it may take about 0.5 second for everything to get set, or for the button to appear
   };
 
-  let env = "sandbox"; // you can set here to 'production' for production
+  let env = "production"; // you can set here to 'production' for production
   let currency = "USD"; // or you can set this value from your props or state
 
   const client = {
