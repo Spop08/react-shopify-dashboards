@@ -61,16 +61,7 @@ const ProcessedOrdersPage = props => {
         sort: true
       }
     },
-    {
-      name: "type",
-      label: "Self Product",
-      options: {
-        filter: true,
-        sort: true,
-        customBodyRender: (value, tableMeta, updateValue) =>
-          value === "self" ? "Yes" : "No"
-      }
-    },
+
     {
       name: "client.email",
       label: "Seller Email",
@@ -80,7 +71,7 @@ const ProcessedOrdersPage = props => {
       }
     },
     {
-      name: "storeName",
+      name: "client.storeName",
       label: "Seller Shop",
       options: {
         filter: true,
@@ -105,7 +96,7 @@ const ProcessedOrdersPage = props => {
     },
     {
       name: "actions",
-      label: "Actions",
+      label: "Shipping",
       options: {
         filter: false,
         sort: false,
@@ -166,20 +157,12 @@ const ProcessedOrdersPage = props => {
         <DialogContent>
           <div className="shipping-container">
             <div className="row">
-              <p className="col-md-4">First Name:</p>
-              <span classes="col-md-8">{shipping.first_name}</span>
-            </div>
-            <div className="row">
-              <p className="col-md-4">Last Name:</p>
-              <span classes="col-md-8">{shipping.last_name}</span>
-            </div>
-            <div className="row">
               <p className="col-md-4">Country:</p>
-              <span classes="col-md-8">{shipping.country}</span>
+              <span classes="col-md-8">{shipping.country_code}</span>
             </div>
             <div className="row">
-              <p className="col-md-4">Province:</p>
-              <span classes="col-md-8">{shipping.province}</span>
+              <p className="col-md-4">State:</p>
+              <span classes="col-md-8">{shipping.state}</span>
             </div>
             <div className="row">
               <p className="col-md-4">City:</p>
@@ -187,15 +170,15 @@ const ProcessedOrdersPage = props => {
             </div>
             <div className="row">
               <p className="col-md-4">Address 1:</p>
-              <span classes="col-md-8">{shipping.address1}</span>
+              <span classes="col-md-8">{shipping.line1}</span>
             </div>
             <div className="row">
               <p className="col-md-4">Address 2:</p>
-              <span classes="col-md-8">{shipping.address2}</span>
+              <span classes="col-md-8">{shipping.line2}</span>
             </div>
             <div className="row">
-              <p className="col-md-4">Zip Code:</p>
-              <span classes="col-md-8">{shipping.zip}</span>
+              <p className="col-md-4">Postal Code:</p>
+              <span classes="col-md-8">{shipping.postal_code}</span>
             </div>
           </div>
         </DialogContent>

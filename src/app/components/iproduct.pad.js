@@ -3,7 +3,7 @@ import {
   EditorState,
   ContentState,
   convertFromHTML,
-  convertToRaw
+  convertToRaw,
 } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
@@ -29,13 +29,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const IProductPad = ({ data, index }) => {
   const blocksFromHTML = convertFromHTML(data.descriptionHtml);
   const contentState = ContentState.createFromBlockArray(blocksFromHTML);
-  const token = useSelector(state => state.auth.authToken);
+  const token = useSelector((state) => state.auth.authToken);
 
   const [state, setState] = useState({
     activeTab: "tab1",
     editorState: EditorState.createWithContent(contentState),
     import_open: false,
-    delete_open: false
+    delete_open: false,
   });
   const [title, setTitle] = useState(data.title);
   const { activeTab, editorState, import_open, delete_open } = state;
@@ -51,7 +51,7 @@ const IProductPad = ({ data, index }) => {
   };
   toast.configure({
     draggable: false,
-    position: toast.POSITION.TOP_RIGHT
+    position: toast.POSITION.TOP_RIGHT,
   });
   return (
     <div className="kt-portlet">
@@ -134,6 +134,7 @@ const IProductPad = ({ data, index }) => {
                   }
                   className="tab-product-image"
                   alt="name"
+                  style={{ width: "100%" }}
                 />
               </div>
               <div className="col-md-9 kt-product-tab kt-center">
@@ -145,7 +146,7 @@ const IProductPad = ({ data, index }) => {
                   type="text"
                   placeholder=""
                   value={title}
-                  onChange={event => setTitle(event.target.value)}
+                  onChange={(event) => setTitle(event.target.value)}
                 />
               </div>
             </div>
@@ -158,7 +159,7 @@ const IProductPad = ({ data, index }) => {
               editorState={editorState}
               wrapperClassName="demo-wrapper"
               editorClassName="demo-editor"
-              onEditorStateChange={editorState =>
+              onEditorStateChange={(editorState) =>
                 setState({ ...state, editorState })
               }
             />
@@ -243,6 +244,6 @@ const IProductPad = ({ data, index }) => {
 };
 IProductPad.propTypes = {
   data: PropTypes.object,
-  index: PropTypes.number
+  index: PropTypes.number,
 };
 export default IProductPad;

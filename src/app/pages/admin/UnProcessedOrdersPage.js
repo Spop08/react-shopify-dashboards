@@ -4,15 +4,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import { useSelector } from "react-redux";
 
-import {
-  fetchUnProcessedOrders,
-  fetchAdminUnProcessedOrders
-} from "../../crud/order.crud";
+import { fetchAdminUnProcessedOrders } from "../../crud/order.crud";
 
 import OrderToolbarSelect from "../../components/ordertoolbar";
-import IconButton from "@material-ui/core/IconButton";
-import Tooltip from "@material-ui/core/Tooltip";
-import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -64,16 +58,7 @@ const UnProcessedOrdersPage = props => {
         sort: true
       }
     },
-    {
-      name: "type",
-      label: "Self Product",
-      options: {
-        filter: true,
-        sort: true,
-        customBodyRender: (value, tableMeta, updateValue) =>
-          value === "self" ? "Yes" : "No"
-      }
-    },
+
     {
       name: "client.email",
       label: "Seller Email",
@@ -83,7 +68,7 @@ const UnProcessedOrdersPage = props => {
       }
     },
     {
-      name: "storeName",
+      name: "client.storeName",
       label: "Seller Shop",
       options: {
         filter: true,
@@ -104,23 +89,6 @@ const UnProcessedOrdersPage = props => {
       options: {
         filter: true,
         sort: true
-      }
-    },
-    {
-      name: "actions",
-      label: "Actions",
-      options: {
-        filter: false,
-        sort: false,
-        customBodyRender: (value, tableMeta, updateValue) => {
-          return (
-            <Tooltip title={"Shipping Detail"}>
-              <IconButton onClick={() => handleOpenDialog(tableMeta.rowIndex)}>
-                <LocalShippingIcon />
-              </IconButton>
-            </Tooltip>
-          );
-        }
       }
     }
   ];
@@ -169,20 +137,12 @@ const UnProcessedOrdersPage = props => {
         <DialogContent>
           <div className="shipping-container">
             <div className="row">
-              <p className="col-md-4">First Name:</p>
-              <span classes="col-md-8">{shipping.first_name}</span>
-            </div>
-            <div className="row">
-              <p className="col-md-4">Last Name:</p>
-              <span classes="col-md-8">{shipping.last_name}</span>
-            </div>
-            <div className="row">
               <p className="col-md-4">Country:</p>
-              <span classes="col-md-8">{shipping.country}</span>
+              <span classes="col-md-8">{shipping.country_code}</span>
             </div>
             <div className="row">
-              <p className="col-md-4">Province:</p>
-              <span classes="col-md-8">{shipping.province}</span>
+              <p className="col-md-4">State:</p>
+              <span classes="col-md-8">{shipping.state}</span>
             </div>
             <div className="row">
               <p className="col-md-4">City:</p>
@@ -190,15 +150,15 @@ const UnProcessedOrdersPage = props => {
             </div>
             <div className="row">
               <p className="col-md-4">Address 1:</p>
-              <span classes="col-md-8">{shipping.address1}</span>
+              <span classes="col-md-8">{shipping.line1}</span>
             </div>
             <div className="row">
               <p className="col-md-4">Address 2:</p>
-              <span classes="col-md-8">{shipping.address2}</span>
+              <span classes="col-md-8">{shipping.line2}</span>
             </div>
             <div className="row">
-              <p className="col-md-4">Zip Code:</p>
-              <span classes="col-md-8">{shipping.zip}</span>
+              <p className="col-md-4">Postal Code:</p>
+              <span classes="col-md-8">{shipping.postal_code}</span>
             </div>
           </div>
         </DialogContent>

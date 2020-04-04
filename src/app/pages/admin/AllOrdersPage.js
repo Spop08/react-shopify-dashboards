@@ -77,16 +77,7 @@ const AllOrdersPage = props => {
         sort: true
       }
     },
-    {
-      name: "type",
-      label: "Self Product",
-      options: {
-        filter: true,
-        sort: true,
-        customBodyRender: (value, tableMeta, updateValue) =>
-          value === "self" ? "Yes" : "No"
-      }
-    },
+
     {
       name: "client.email",
       label: "Seller Email",
@@ -96,7 +87,7 @@ const AllOrdersPage = props => {
       }
     },
     {
-      name: "storeName",
+      name: "client.storeName",
       label: "Seller Shop",
       options: {
         filter: true,
@@ -131,7 +122,7 @@ const AllOrdersPage = props => {
     },
     {
       name: "actions",
-      label: "Actions",
+      label: "Shipping",
       options: {
         filter: false,
         sort: false,

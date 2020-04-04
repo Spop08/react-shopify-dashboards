@@ -12,39 +12,49 @@ import Button from "@material-ui/core/Button";
 import "./order.pad.scss";
 import PayPalButton from "./paypal.btn";
 import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import { markAsProcessed, markAsDelivered } from "../crud/order.crud";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     justifyContent: "center",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
   chip: {
-    marginLeft: "auto"
-  }
+    marginLeft: "auto",
+  },
 }));
 
-const OrderPad = props => {
+const OrderPad = (props) => {
   const classes = useStyles();
   const { type, data } = props;
-  const token = useSelector(state => state.auth.authToken);
+  const token = useSelector((state) => state.auth.authToken);
   const [open, setOpen] = useState(false);
   const [markStatus, setMarkStatus] = useState(null);
 
+  const onSuccess = (payment) => {
+    console.log("Payment", payment);
+    if (payment.paid) {
+      // const {recipient_name, line1, line2, city, state, postal_code, country_code} = payment.address;
+      markAsProcessed(token, { id: data.id, address: payment.address });
+      alert("Succesfully Purchased");
+      window.location.reload();
+    }
+  };
+
   async function handleSubmit() {
     setOpen(false);
-    if (markStatus == "Delivered") {
+    if (markStatus === "Delivered") {
       await markAsDelivered(token, { id: data.id });
     }
-    if (markStatus == "Processed") {
+    if (markStatus === "Processed") {
       await markAsProcessed(token, { id: data.id });
     }
     alert(`Successfully Marked as ${markStatus}`);
     window.location.reload();
   }
-
+  console.log("Data", data);
   return (
     <>
       <Card className="kt-order-card">
@@ -52,27 +62,14 @@ const OrderPad = props => {
           <i className="flaticon2-contract"></i>
           <p className="order-name">Order </p>
           <p className="order-number"> {data.id}</p>
-          <p className="order-date">2020/01/28</p>
-          <p className="order-customer">Customer: </p>
-          <p className="order-customername">
-            {data.client.first_name} ({data.client.email})
-          </p>
+          {/* <p className="order-date">2020/01/28</p> */}
+          {/* <p className="order-customer">Customer: </p> */}
+          {/* <p className="order-customername"> */}
+          {/* {data.client.first_name} ({data.client.email}) */}
+          {/* </p> */}
           {/* <img src="/media/flags/034-china.svg" alt="Mandarin" /> */}
           {/* <i className="flaticon-email"></i> */}
-          {type === "undelivered" && (
-            <Chip
-              icon={<DoneIcon />}
-              label="Mark as Processed"
-              clickable
-              className={classes.chip}
-              color="primary"
-              onClick={() => {
-                setOpen(true);
-                setMarkStatus("Processed");
-              }}
-              variant="outlined"
-            />
-          )}
+
           {type === "inprocessing" && (
             <Chip
               icon={<DoneIcon />}
@@ -113,21 +110,10 @@ const OrderPad = props => {
 
             {type === "undelivered" && (
               <div className="d-flex btn-group-order">
-                {data.type === "self" ? (
-                  <PayPalButton amount={data.price} />
-                ) : (
-                  <button
-                    type="button"
-                    className="btn btn-info btn-wide"
-                    onClick={() => {
-                      window.open(
-                        `https://www.aliexpress.com/item/${data.product_id}`
-                      );
-                    }}
-                  >
-                    Order on Aliexpress
-                  </button>
-                )}
+                <PayPalButton
+                  amount={data.price * data.quantity}
+                  onSuccess={onSuccess}
+                />
               </div>
             )}
           </div>
@@ -153,41 +139,35 @@ const OrderPad = props => {
                   </p>
                 </div>
               </div>
-              <div className="shipping-container">
-                <h5>Shipping Address</h5>
-                <div className="shipping-details">
-                  <p>First Name:</p>
-                  <span>{data.shippingAddress.first_name}</span>
+              {type !== "undelivered" && (
+                <div className="shipping-container">
+                  <h5>Shipping Address</h5>
+                  <div className="shipping-details">
+                    <p>Country:</p>
+                    <span>{data.shippingAddress.country_code}</span>
+                  </div>
+                  <div className="shipping-details">
+                    <p>State:</p>
+                    <span>{data.shippingAddress.state}</span>
+                  </div>
+                  <div className="shipping-details">
+                    <p>City:</p>
+                    <span>{data.shippingAddress.city}</span>
+                  </div>
+                  <div className="shipping-details">
+                    <p>Address 1:</p>
+                    <span>{data.shippingAddress.line1}</span>
+                  </div>
+                  <div className="shipping-details">
+                    <p>Address 2:</p>
+                    <span>{data.shippingAddress.line2}</span>
+                  </div>
+                  <div className="shipping-details">
+                    <p>Postal Code:</p>
+                    <span>{data.shippingAddress.postal_code}</span>
+                  </div>
                 </div>
-                <div className="shipping-details">
-                  <p>Last Name:</p>
-                  <span>{data.shippingAddress.last_name}</span>
-                </div>
-                <div className="shipping-details">
-                  <p>Country:</p>
-                  <span>{data.shippingAddress.country}</span>
-                </div>
-                <div className="shipping-details">
-                  <p>Province:</p>
-                  <span>{data.shippingAddress.province}</span>
-                </div>
-                <div className="shipping-details">
-                  <p>City:</p>
-                  <span>{data.shippingAddress.city}</span>
-                </div>
-                <div className="shipping-details">
-                  <p>Address 1:</p>
-                  <span>{data.shippingAddress.address1}</span>
-                </div>
-                <div className="shipping-details">
-                  <p>Address 2:</p>
-                  <span>{data.shippingAddress.address2}</span>
-                </div>
-                <div className="shipping-details">
-                  <p>Zip Code:</p>
-                  <span>{data.shippingAddress.zip}</span>
-                </div>
-              </div>
+              )}
             </Card.Body>
           </Card>
         </Card.Body>

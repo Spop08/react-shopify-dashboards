@@ -40,13 +40,13 @@ export default {
         page: "admin/user-list"
       },
       { section: "Order" },
-      {
-        title: "All Orders",
-        root: true,
-        bullet: "dot",
-        icon: "flaticon2-search",
-        page: "admin/all-orders"
-      },
+      // {
+      //   title: "All Orders",
+      //   root: true,
+      //   bullet: "dot",
+      //   icon: "flaticon2-search",
+      //   page: "admin/all-orders"
+      // },
       {
         title: "UnProcessed Orders",
         root: true,

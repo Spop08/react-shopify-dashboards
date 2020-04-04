@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import {
   fetchAllProducts,
   addProductToAdmin,
-  removeAdminProduct
+  removeAdminProduct,
 } from "../../crud/product.crud";
 import SellerToolbarSelect from "../../components/sellertoolbar";
 import Avatar from "@material-ui/core/Avatar";
@@ -25,26 +25,27 @@ import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
-
+import CloudinaryPad from "../../components/cloudinary.pad";
+import { openUploadWidget } from "../../crud/CloudinaryService";
 import "./ProductListPage.scss";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   large: {
     width: theme.spacing(9),
-    height: theme.spacing(9)
+    height: theme.spacing(9),
   },
   backButton: {
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   instructions: {
     marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1)
+    marginBottom: theme.spacing(1),
   },
   divider: {
     margin: "10px",
     width: "100%",
-    flexShrink: "initial"
-  }
+    flexShrink: "initial",
+  },
 }));
 
 function getSteps() {
@@ -53,24 +54,15 @@ function getSteps() {
 const initialVariant = {
   title: "",
   descriptionHtml: "",
-  images: [
-    {
-      src:
-        "https://ae01.alicdn.com/kf/H2f7bb42f4a80404c8b16ab9da4790fd4Z/2020-Men-Tee-Shirt-V-neck-Long-Sleeve-Tee-Tops-Stylish-Slim-Buttons-T-shirt-Autumn.jpg"
-    },
-    {
-      src:
-        "https://ae01.alicdn.com/kf/Hdeed4e7e3a7d4aae83a4df471f6d22d6F/2020-Men-Tee-Shirt-V-neck-Long-Sleeve-Tee-Tops-Stylish-Slim-Buttons-T-shirt-Autumn.jpg"
-    }
-  ],
+  images: [],
   category: "",
   options: ["Color", "Size"],
   onSale: false,
-  variants: []
+  variants: [],
 };
 const ProductsListPage = () => {
   const classes = useStyles();
-  const token = useSelector(state => state.auth.authToken);
+  const token = useSelector((state) => state.auth.authToken);
   const [open, setOpenDialog] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
   const [originProducts, setOriginProducts] = useState([]);
@@ -101,7 +93,7 @@ const ProductsListPage = () => {
   async function handleDeleteSubmit() {
     setOpenDelete(false);
     const response = await removeAdminProduct(token, {
-      id: originProducts[delIndex]._id
+      id: originProducts[delIndex]._id,
     });
     if (response.data.status === "success") {
       alert("Successfully Deleted...");
@@ -111,9 +103,9 @@ const ProductsListPage = () => {
 
   const options = {
     filterType: "checkbox",
-    customToolbarSelect: selectedRows => (
+    customToolbarSelect: (selectedRows) => (
       <SellerToolbarSelect selectedRows={selectedRows} />
-    )
+    ),
   };
   const columns = [
     {
@@ -121,8 +113,8 @@ const ProductsListPage = () => {
       label: "No",
       options: {
         filter: true,
-        sort: true
-      }
+        sort: true,
+      },
     },
     {
       name: "image",
@@ -139,44 +131,44 @@ const ProductsListPage = () => {
               className={classes.large}
             />
           );
-        }
-      }
+        },
+      },
     },
     {
       name: "title",
       label: "Title",
       options: {
         filter: true,
-        sort: true
-      }
+        sort: true,
+      },
     },
     {
       name: "price",
       label: "Price",
       options: {
         filter: true,
-        sort: true
-      }
+        sort: true,
+      },
     },
     {
       name: "category",
       label: "Category",
       options: {
         filter: true,
-        sort: true
-      }
+        sort: true,
+      },
     },
     {
       name: "description",
       label: "Description",
       options: {
         filter: true,
-        sort: false
-      }
+        sort: false,
+      },
     },
     {
       name: "actions",
-      label: "Actions",
+      label: "Shipping",
       options: {
         filter: false,
         sort: false,
@@ -195,15 +187,15 @@ const ProductsListPage = () => {
               </Tooltip>
             </div>
           );
-        }
-      }
-    }
+        },
+      },
+    },
   ];
   useEffect(() => {
     const fetchUsers = async () => {
       const products = await fetchAllProducts(token);
       var _products = [];
-      products.map(item => {
+      products.map((item) => {
         return _products.push({
           image: item.images[0]
             ? item.images[0].src
@@ -211,7 +203,7 @@ const ProductsListPage = () => {
           title: item.title,
           price: item.variants[0].price,
           category: item.category,
-          description: item.descriptionHtml
+          description: item.descriptionHtml,
         });
       });
       setProducts(_products);
@@ -220,18 +212,41 @@ const ProductsListPage = () => {
     fetchUsers();
   }, [token]);
 
-  const handleChange = name => event => {
+  const handleChange = (name) => (event) => {
     setState({ ...state, [name]: event.target.value });
   };
-  const changeVariant = (name, index) => event => {
+  const changeVariant = (name, index) => (event) => {
     var variants = [...state.variants];
     variants[index][name] = event.target.value;
     setState({ ...state, variants });
   };
-  const changeOption = (vindex, tindex) => event => {
+  const changeOption = (vindex, tindex) => (event) => {
     var variants = [...state.variants];
     variants[vindex]["options"][tindex] = event.target.value;
     setState({ ...state, variants });
+  };
+
+  const beginUpload = (index) => {
+    const uploadOptions = {
+      cloudName: "dzqbqfiug",
+      tags: ["image", "anImage"],
+      uploadPreset: "ml_default",
+    };
+    openUploadWidget(uploadOptions, (error, photos) => {
+      if (!error) {
+        console.log(photos);
+        if (photos.event === "success") {
+          console.log("URL:!!!!!!!", photos.info.url);
+          var variants = [...state.variants];
+          variants[index]["imageSrc"] = photos.info.url;
+          var images = [...state.images];
+          images[index] = { src: photos.info.url };
+          setState({ ...state, variants, images });
+        }
+      } else {
+        console.log(error);
+      }
+    });
   };
 
   const componentVariants = state.variants.map((item, vindex) => {
@@ -265,6 +280,21 @@ const ProductsListPage = () => {
             margin="normal"
           />
         </Grid>
+        <Grid container item xs={3}>
+          <TextField
+            label="Quantity"
+            onChange={changeVariant("inventoryQuantity", vindex)}
+            className={classes.textField}
+            margin="normal"
+            type="number"
+          />
+        </Grid>
+        <Grid container item xs={3}>
+          <CloudinaryPad
+            beginUpload={() => beginUpload(vindex)}
+            image={item.imageSrc}
+          />
+        </Grid>
         <Divider className={classes.divider} />
       </Grid>
     );
@@ -275,8 +305,8 @@ const ProductsListPage = () => {
       price: 0,
       salePrice: 0,
       options: [],
-      imageSrc:
-        "https://ae01.alicdn.com/kf/Ha82cab4f1aac4d66b8ecd61f12f5c3c47/2020-Men-Tee-Shirt-V-neck-Long-Sleeve-Tee-Tops-Stylish-Slim-Buttons-T-shirt-Autumn.jpg"
+      imageSrc: "",
+      inventoryQuantity: 0,
     };
     state.options.forEach((item, index) => {
       variant["options"][index] = "";
@@ -305,8 +335,9 @@ const ProductsListPage = () => {
   }
 
   function handleBack() {
-    setActiveStep(prevActiveStep => prevActiveStep - 1);
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
   }
+  console.log("I am STATE", state);
   return (
     <div className="kt_admin_products">
       <button
@@ -315,6 +346,7 @@ const ProductsListPage = () => {
         onClick={() => {
           setState(initialVariant);
           setOpenDialog(true);
+          setActiveStep(0);
         }}
       >
         Add Product
@@ -354,7 +386,7 @@ const ProductsListPage = () => {
       >
         <DialogContent>
           <Stepper activeStep={activeStep} alternativeLabel>
-            {steps.map(label => (
+            {steps.map((label) => (
               <Step key={label}>
                 <StepLabel>{label}</StepLabel>
               </Step>
@@ -391,7 +423,7 @@ const ProductsListPage = () => {
               <ChipInput
                 label="Variant Types"
                 value={state.options}
-                onAdd={chip => handleAddChip(chip)}
+                onAdd={(chip) => handleAddChip(chip)}
                 onDelete={(chip, index) => handleDeleteChip(chip, index)}
                 margin="normal"
               />

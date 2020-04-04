@@ -1,12 +1,7 @@
 import React from "react";
 import PaypalExpressBtn from "react-paypal-express-checkout";
 
-const PayPalButton = ({ amount }) => {
-  const onSuccess = payment => {
-    // Congratulation, it came here means everything's fine!
-    // You can bind the "payment" object's value to your state or props or whatever here, please see below for sample returned data
-  };
-
+const PayPalButton = ({ amount, onSuccess }) => {
   const onCancel = data => {
     // User pressed "cancel" or close Paypal's popup!
     // You can bind the "data" object's value to your state or props or whatever here, please see below for sample returned data
