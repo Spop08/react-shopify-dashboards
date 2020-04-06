@@ -9,17 +9,20 @@ import { Button } from "react-bootstrap";
 import ExpansionCategory from "../../components/expansion.category";
 import ExpansionPrice from "../../components/expansion.price";
 import "./CategoryPage.scss";
-import { fetchProductsByCategory } from "../../crud/product.crud";
+import {
+  fetchProductsByCategory,
+  fetchAllProducts,
+} from "../../crud/product.crud";
 import { useSelector } from "react-redux";
 
-const CategoryPage = props => {
+const CategoryPage = (props) => {
   const [openDialog, setOpenDialog] = useState(false);
-  const token = useSelector(state => state.auth.authToken);
+  const token = useSelector((state) => state.auth.authToken);
   const [products, loadProducts] = useState([]);
   useEffect(() => {
     const fetchProducts = async () => {
       const { type } = props.match.params;
-      const products = await fetchProductsByCategory(token, type);
+      const products = await fetchAllProducts(token);
       loadProducts(products);
     };
     fetchProducts();
