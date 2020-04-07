@@ -3,9 +3,11 @@ import OrderPad from "../../components/order.pad";
 import { fetchDeliveredOrders } from "../../crud/order.crud";
 import { useSelector } from "react-redux";
 
+//Delivered Order Page
 const DeliveredOrderPage = () => {
-  const token = useSelector(state => state.auth.authToken);
+  const token = useSelector((state) => state.auth.authToken);
   const [orders, loadOrders] = useState([]);
+  //Fetch Orders
   useEffect(() => {
     const fetchOrders = async () => {
       const orders = await fetchDeliveredOrders(token);

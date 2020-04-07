@@ -7,6 +7,7 @@ import { FormattedMessage, injectIntl } from "react-intl";
 import * as auth from "../../store/ducks/auth.duck";
 import { requestPassword } from "../../crud/auth.crud";
 
+//Forgot Password Page
 class ForgotPassword extends Component {
   state = { isRequested: false };
 
@@ -30,23 +31,24 @@ class ForgotPassword extends Component {
 
             <Formik
               initialValues={{ email: "" }}
-              validate={values => {
+              validate={(values) => {
                 const errors = {};
 
                 if (!values.email) {
                   errors.email = intl.formatMessage({
-                    id: "AUTH.VALIDATION.REQUIRED_FIELD"
+                    id: "AUTH.VALIDATION.REQUIRED_FIELD",
                   });
                 } else if (
                   !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
                 ) {
                   errors.email = intl.formatMessage({
-                    id: "AUTH.VALIDATION.INVALID_FIELD"
+                    id: "AUTH.VALIDATION.INVALID_FIELD",
                   });
                 }
 
                 return errors;
               }}
+              //call the backend API for requesting reset password
               onSubmit={(values, { setStatus, setSubmitting }) => {
                 requestPassword(values.email)
                   .then(() => {
@@ -71,7 +73,7 @@ class ForgotPassword extends Component {
                 handleChange,
                 handleBlur,
                 handleSubmit,
-                isSubmitting
+                isSubmitting,
               }) => (
                 <form onSubmit={handleSubmit} className="kt-form">
                   {status && (

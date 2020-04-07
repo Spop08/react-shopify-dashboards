@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { CloudinaryContext, Image } from "cloudinary-react";
 import Button from "@material-ui/core/Button";
 import "./cloudinary.pad.scss";
-
+//Cloudinary(Image Upload) Pad Component
 function App(props) {
   return (
     <CloudinaryContext cloudName="dzqbqfiug">

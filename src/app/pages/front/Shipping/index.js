@@ -5,6 +5,7 @@ import MainNav from "../MainNav";
 
 import "../styles.css";
 
+//Shipping Home Page
 class Shipping extends Component {
   render() {
     return (

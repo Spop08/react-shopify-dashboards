@@ -5,7 +5,6 @@ import Home from "./Home";
 import Pricing from "./Pricing";
 import Shipping from "./Shipping";
 import { Redirect, Route, Switch } from "react-router-dom";
-import Dashboard from "./Dashboard";
 import Footer from "./Footer";
 
 export default class LandingPage extends React.Component {
@@ -18,7 +17,6 @@ export default class LandingPage extends React.Component {
           <Route path="/main/pricing" component={Pricing} />
           <Route path="/main/shipping" component={Shipping} />
           <Route path="/main/features" component={Features} />
-          <Route path="/main/dashboard" component={Dashboard} />
           <Redirect from="/main" to="/main/home" />
         </Switch>
         <Footer />

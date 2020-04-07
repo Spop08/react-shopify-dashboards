@@ -5,62 +5,63 @@ import { useSelector } from "react-redux";
 import { fetchAllUsers } from "../../crud/user.crud";
 
 import SellerToolbarSelect from "../../components/sellertoolbar";
-
+//User List Page
 const UserList = () => {
+  //Define columns of table
   const columns = [
     {
       name: "no",
       label: "No",
       options: {
         filter: true,
-        sort: true
-      }
+        sort: true,
+      },
     },
     {
       name: "email",
       label: "Email",
       options: {
         filter: true,
-        sort: false
-      }
+        sort: false,
+      },
     },
     {
       name: "store",
       label: "Shop",
       options: {
         filter: true,
-        sort: false
-      }
+        sort: false,
+      },
     },
     {
       name: "products_cnt",
       label: "Total products",
       options: {
         filter: true,
-        sort: false
-      }
+        sort: false,
+      },
     },
     {
       name: "orders_cnt",
       label: "Total orders",
       options: {
         filter: true,
-        sort: false
-      }
-    }
+        sort: false,
+      },
+    },
   ];
 
   const options = {
     filterType: "checkbox",
-    customToolbarSelect: selectedRows => (
+    customToolbarSelect: (selectedRows) => (
       <SellerToolbarSelect selectedRows={selectedRows} />
-    )
+    ),
   };
 
-  const token = useSelector(state => state.auth.authToken);
+  const token = useSelector((state) => state.auth.authToken);
 
   const [users, setUsers] = useState([]);
-
+  //Fetch all user lists
   useEffect(() => {
     const fetchUsers = async () => {
       const response = await fetchAllUsers(token);

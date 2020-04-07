@@ -7,10 +7,11 @@ import "./SearchProductPage.scss";
 import {
   fetchHotProducts,
   fetchSaleProducts,
-  addAliProductToStore
+  addAliProductToStore,
 } from "../../crud/product.crud";
 import { connect } from "react-redux";
 
+//Search Product Page of Store Owner
 class SearchProductPage extends Component {
   state = {
     open: false,
@@ -20,8 +21,9 @@ class SearchProductPage extends Component {
     origin_hot_products: [],
     aliURL: "",
     aliID: "",
-    origin_sale_products: []
+    origin_sale_products: [],
   };
+  //Fetch Hot Products and Sale Products from backend
   async componentDidMount() {
     const { token } = this.props;
     const hot_products = await fetchHotProducts(token, 5);
@@ -30,38 +32,43 @@ class SearchProductPage extends Component {
       hot_products,
       sale_products,
       origin_hot_products: hot_products,
-      origin_sale_products: sale_products
+      origin_sale_products: sale_products,
     });
   }
+  //search function
   submitSearch = () => {
     const {
       origin_hot_products,
       origin_sale_products,
-      search_str
+      search_str,
     } = this.state;
     const hot_products = [];
     const sale_products = [];
     const low_search_str = search_str.toLowerCase();
 
-    origin_hot_products.forEach(product => {
+    origin_hot_products.forEach((product) => {
       const str = product.title.toLowerCase();
       if (str.includes(low_search_str)) hot_products.push(product);
     });
-    origin_sale_products.forEach(product => {
+    origin_sale_products.forEach((product) => {
       const str = product.title.toLowerCase();
       if (str.includes(low_search_str)) sale_products.push(product);
     });
     this.setState({ hot_products, sale_products });
   };
-  searchStringChange = event => {
+  //search string change function
+  searchStringChange = (event) => {
     this.setState({ search_str: event.target.value });
   };
+  //open the import dialog
   handleClickOpen = () => {
     this.setState({ open: true });
   };
+  //close the import dialog
   handleClose = () => {
     this.setState({ open: false });
   };
+  //import submit function for Ali Products
   handleSubmit = async () => {
     const { aliURL, aliID } = this.state;
     const { token } = this.props;
@@ -76,12 +83,15 @@ class SearchProductPage extends Component {
     } else alert("failed");
     this.setState({ open: false });
   };
-  changeAliID = event => {
+  //AliID change function
+  changeAliID = (event) => {
     this.setState({ aliID: event.target.value });
   };
-  changeAliURL = event => {
+  //AliURL change function
+  changeAliURL = (event) => {
     this.setState({ aliURL: event.target.value });
   };
+  //Categories components
   componentCategories = () => {
     return (
       <div className="d-flex ct-categories">

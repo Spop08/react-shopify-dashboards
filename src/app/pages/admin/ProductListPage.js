@@ -29,6 +29,7 @@ import CloudinaryPad from "../../components/cloudinary.pad";
 import { openUploadWidget } from "../../crud/CloudinaryService";
 import "./ProductListPage.scss";
 
+//Customize Material UI styles
 const useStyles = makeStyles((theme) => ({
   large: {
     width: theme.spacing(9),
@@ -47,10 +48,11 @@ const useStyles = makeStyles((theme) => ({
     flexShrink: "initial",
   },
 }));
-
+//Steps for creating products
 function getSteps() {
   return ["Product Information", "Variants Information"];
 }
+//Initial variant for new product
 const initialVariant = {
   title: "",
   descriptionHtml: "",
@@ -60,6 +62,7 @@ const initialVariant = {
   onSale: false,
   variants: [],
 };
+//Product List Page(Show the products and create new self products in this page)
 const ProductsListPage = () => {
   const classes = useStyles();
   const token = useSelector((state) => state.auth.authToken);
@@ -71,11 +74,13 @@ const ProductsListPage = () => {
   const [delIndex, setDelIndex] = useState();
   const steps = getSteps();
   const [state, setState] = useState(initialVariant);
+  //Add new variant function
   function handleAddChip(chip) {
     const types = [...state.options];
     types.push(chip);
     setState({ ...state, options: types });
   }
+  //Delete variant function
   function handleDeleteChip(chip, index) {
     console.log(index);
     const types = [...state.options];
@@ -83,13 +88,12 @@ const ProductsListPage = () => {
     setState({ ...state, options: types });
     console.log("Delete button clicked");
   }
-  function handleEdit() {
-    console.log("Edit button clicked");
-  }
+  //Delete function for product
   function handleDelete(index) {
     setDelIndex(index);
     setOpenDelete(true);
   }
+  //Delete company product
   async function handleDeleteSubmit() {
     setOpenDelete(false);
     const response = await removeAdminProduct(token, {
@@ -100,13 +104,14 @@ const ProductsListPage = () => {
       window.location.reload();
     }
   }
-
+  //Checkbox component
   const options = {
     filterType: "checkbox",
     customToolbarSelect: (selectedRows) => (
       <SellerToolbarSelect selectedRows={selectedRows} />
     ),
   };
+  //Columns of Table
   const columns = [
     {
       name: "no",
@@ -175,11 +180,6 @@ const ProductsListPage = () => {
         customBodyRender: (value, tableMeta, updateValue) => {
           return (
             <div>
-              {/* <Tooltip title={"Edit"}>
-                <IconButton onClick={() => handleEdit(tableMeta.rowIndex)}>
-                  <EditIcon />
-                </IconButton>
-              </Tooltip> */}
               <Tooltip title={"Delete"}>
                 <IconButton onClick={() => handleDelete(tableMeta.rowIndex)}>
                   <DeleteIcon />
@@ -191,6 +191,7 @@ const ProductsListPage = () => {
       },
     },
   ];
+  //fetch all product details
   useEffect(() => {
     const fetchUsers = async () => {
       const products = await fetchAllProducts(token);
@@ -215,17 +216,19 @@ const ProductsListPage = () => {
   const handleChange = (name) => (event) => {
     setState({ ...state, [name]: event.target.value });
   };
+  //Change variant function
   const changeVariant = (name, index) => (event) => {
     var variants = [...state.variants];
     variants[index][name] = event.target.value;
     setState({ ...state, variants });
   };
+  //Change option function
   const changeOption = (vindex, tindex) => (event) => {
     var variants = [...state.variants];
     variants[vindex]["options"][tindex] = event.target.value;
     setState({ ...state, variants });
   };
-
+  //Upload with Cloudinary
   const beginUpload = (index) => {
     const uploadOptions = {
       cloudName: "dzqbqfiug",
@@ -236,7 +239,6 @@ const ProductsListPage = () => {
       if (!error) {
         console.log(photos);
         if (photos.event === "success") {
-          console.log("URL:!!!!!!!", photos.info.url);
           var variants = [...state.variants];
           variants[index]["imageSrc"] = photos.info.url;
           var images = [...state.images];
@@ -299,7 +301,7 @@ const ProductsListPage = () => {
       </Grid>
     );
   });
-
+  //Add variant
   function addVariant(type = true) {
     var variant = {
       price: 0,
@@ -316,7 +318,7 @@ const ProductsListPage = () => {
     variants.push(variant);
     setState({ ...state, variants });
   }
-
+  //Set activeStep to next step
   async function handleNext() {
     if (activeStep === 0) {
       addVariant(false);
@@ -333,7 +335,7 @@ const ProductsListPage = () => {
       setOpenDialog(false);
     }
   }
-
+  //Set activeStep to prev state
   function handleBack() {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   }

@@ -6,7 +6,8 @@ import AdminHomePage from "../pages/admin/HomePage";
 import MainHomePage from "../pages/user/HomePage";
 import Layout from "../../_metronic/layout/Layout";
 
-const AppRoute = props => {
+//Routing for Admin and Store Owner Dashboard
+const AppRoute = (props) => {
   const [isAdmin, setAdminState] = useState(undefined);
   useEffect(() => {
     async function fetchInfo() {
@@ -28,9 +29,9 @@ const AppRoute = props => {
 };
 function mapStateToProps(state) {
   return {
-    token: state.auth.authToken
+    token: state.auth.authToken,
   };
 }
 export default connect(mapStateToProps, {
-  ...duck_user.actions
+  ...duck_user.actions,
 })(AppRoute);

@@ -7,19 +7,19 @@ import { Checkbox, FormControlLabel, TextField } from "@material-ui/core";
 import * as auth from "../../store/ducks/auth.duck";
 import { register } from "../../crud/auth.crud";
 import clsx from "clsx";
-
+//Registration Page
 function Registration(props) {
   const { intl } = props;
   const [loading, setLoading] = useState(false);
   const [loadingButtonStyle, setLoadingButtonStyle] = useState({
-    paddingRight: "2.5rem"
+    paddingRight: "2.5rem",
   });
-
+  //Enable Lazy Loading
   const enableLoading = () => {
     setLoading(true);
     setLoadingButtonStyle({ paddingRight: "3.5rem" });
   };
-
+  //Disable Lazy Loading
   const disableLoading = () => {
     setLoading(false);
     setLoadingButtonStyle({ paddingRight: "2.5rem" });
@@ -40,38 +40,38 @@ function Registration(props) {
             username: "",
             password: "",
             acceptTerms: true,
-            confirmPassword: ""
+            confirmPassword: "",
           }}
-          validate={values => {
+          validate={(values) => {
             const errors = {};
 
             if (!values.email) {
               errors.email = intl.formatMessage({
-                id: "AUTH.VALIDATION.REQUIRED_FIELD"
+                id: "AUTH.VALIDATION.REQUIRED_FIELD",
               });
             } else if (
               !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
             ) {
               errors.email = intl.formatMessage({
-                id: "AUTH.VALIDATION.INVALID_FIELD"
+                id: "AUTH.VALIDATION.INVALID_FIELD",
               });
             }
 
             if (!values.username) {
               errors.username = intl.formatMessage({
-                id: "AUTH.VALIDATION.REQUIRED_FIELD"
+                id: "AUTH.VALIDATION.REQUIRED_FIELD",
               });
             }
 
             if (!values.password) {
               errors.password = intl.formatMessage({
-                id: "AUTH.VALIDATION.REQUIRED_FIELD"
+                id: "AUTH.VALIDATION.REQUIRED_FIELD",
               });
             }
 
             if (!values.confirmPassword) {
               errors.confirmPassword = intl.formatMessage({
-                id: "AUTH.VALIDATION.REQUIRED_FIELD"
+                id: "AUTH.VALIDATION.REQUIRED_FIELD",
               });
             } else if (values.password !== values.confirmPassword) {
               errors.confirmPassword =
@@ -83,6 +83,7 @@ function Registration(props) {
             }
             return errors;
           }}
+          //Call backend API for submitting registration details
           onSubmit={(values, { setStatus, setSubmitting }) => {
             enableLoading();
 
@@ -96,7 +97,7 @@ function Registration(props) {
                   disableLoading();
                   setStatus(
                     intl.formatMessage({
-                      id: "AUTH.VALIDATION.INVALID_LOGIN"
+                      id: "AUTH.VALIDATION.INVALID_LOGIN",
                     })
                   );
                 });
@@ -111,7 +112,7 @@ function Registration(props) {
             handleChange,
             handleBlur,
             handleSubmit,
-            isSubmitting
+            isSubmitting,
           }) => (
             <form
               onSubmit={handleSubmit}
@@ -229,7 +230,7 @@ function Registration(props) {
                   disabled={isSubmitting || !values.acceptTerms}
                   className={`btn btn-primary btn-elevate kt-login__btn-primary ${clsx(
                     {
-                      "kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light": loading
+                      "kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light": loading,
                     }
                   )}`}
                   style={loadingButtonStyle}

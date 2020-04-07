@@ -3,6 +3,7 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import "./styles.css";
 
+//Global Footer Component
 class Footer extends Component {
   render() {
     return (

@@ -4,12 +4,13 @@ import { Modal } from "react-bootstrap";
 import "./dashboard.pad.scss";
 import { connect } from "react-redux";
 
-const DashboardPad = props => {
+//Dashboard Pad with Connecting Shopify Store
+const DashboardPad = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [stateConnect, setStateConnect] = useState(false);
   const [storeName, setStoreName] = useState("uds-dropshippingstore");
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     const store = event.target.value;
     store === "" ? setStateConnect(true) : setStateConnect(false);
     setStoreName(store);
@@ -173,7 +174,7 @@ function mapStateToProps(state) {
   return {
     email: state.user.info.email,
     store: state.user.info.store,
-    token: state.auth.authToken
+    token: state.auth.authToken,
   };
 }
 export default connect(mapStateToProps)(DashboardPad);

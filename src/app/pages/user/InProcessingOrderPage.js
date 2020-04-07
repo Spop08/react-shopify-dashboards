@@ -3,9 +3,11 @@ import OrderPad from "../../components/order.pad";
 import { fetchProcessedOrders } from "../../crud/order.crud";
 import { useSelector } from "react-redux";
 
+//InProcessingOrder Page
 const InProcessingOrderPage = () => {
-  const token = useSelector(state => state.auth.authToken);
+  const token = useSelector((state) => state.auth.authToken);
   const [orders, loadOrders] = useState([]);
+  //Fetch initial orders
   useEffect(() => {
     const fetchOrders = async () => {
       const orders = await fetchProcessedOrders(token);

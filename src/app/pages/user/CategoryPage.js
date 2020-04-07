@@ -15,10 +15,13 @@ import {
 } from "../../crud/product.crud";
 import { useSelector } from "react-redux";
 
+//Category Page
 const CategoryPage = (props) => {
   const [openDialog, setOpenDialog] = useState(false);
   const token = useSelector((state) => state.auth.authToken);
   const [products, loadProducts] = useState([]);
+
+  //Fetch Initial Products
   useEffect(() => {
     const fetchProducts = async () => {
       const { type } = props.match.params;

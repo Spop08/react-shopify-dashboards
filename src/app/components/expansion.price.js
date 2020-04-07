@@ -11,17 +11,18 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import "./expansion.price.scss";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   expansion: {
-    boxShadow: "none!important"
-  }
+    boxShadow: "none!important",
+  },
 }));
 
+//Price Expansion Pad in Category Page(Price Radio Boxes)
 export default function ExpansionPrice() {
   const [expanded, setExpanded] = React.useState(false);
   const [price, setPrice] = React.useState("");
   const classes = useStyles();
-  const handleChange = panel => (event, isExpanded) => {
+  const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
@@ -49,7 +50,7 @@ export default function ExpansionPrice() {
               name="gender1"
               //   className={classes.group}
               value={price}
-              onChange={event => setPrice(event.target.value)}
+              onChange={(event) => setPrice(event.target.value)}
             >
               <FormControlLabel
                 value="price1"

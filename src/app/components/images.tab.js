@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./images.tab.scss";
 
+// Images Tab in Variants Table
 const ImagesTab = ({ images }) => {
   const componentsImage = images.map((item, index) => (
     <div className="col-md-3" key={index}>
@@ -14,6 +15,6 @@ const ImagesTab = ({ images }) => {
 };
 
 ImagesTab.propTypes = {
-  images: PropTypes.array
+  images: PropTypes.array,
 };
 export default ImagesTab;

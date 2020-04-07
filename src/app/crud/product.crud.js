@@ -14,36 +14,37 @@ const ADD_PRODUCT_TO_ADMIN = "admin/api/product/add";
 const EDIT_IMPORTED_PRODUCT = "api/user/imported/edit";
 const REMOVE_ADMIN_PRODUCT = "admin/api/product/remove";
 
+//Fetch/Add To Store/Add to Import APIs
 export function fetchImportProducts(token) {
   return crudAPI(FETCH_IMPORT_PRODUCTS, "post", null, token).then(
-    res => res.data.data.products
+    (res) => res.data.data.products
   );
 }
 export function fetchStoreProducts(token) {
   return crudAPI(FETCH_STORE_PRODUCTS, "post", null, token).then(
-    res => res.data.data.products
+    (res) => res.data.data.products
   );
 }
 
 export function fetchHotProducts(token, count) {
   return crudAPI(FETCH_HOT_PRODUCTS, "post", { count }, token).then(
-    res => res.data.data.products
+    (res) => res.data.data.products
   );
 }
 
 export function fetchSaleProducts(token) {
   return crudAPI(FETCH_SALE_PRODUCTS, "post", null, token).then(
-    res => res.data.data.products
+    (res) => res.data.data.products
   );
 }
 
 export function addToImport(token, id) {
-  return crudAPI(ADD_TO_IMPORT, "post", { id }, token).then(res => res.data);
+  return crudAPI(ADD_TO_IMPORT, "post", { id }, token).then((res) => res.data);
 }
 
 export function fetchProductById(token, id) {
   return crudAPI(FETCH_PRODUCT_BY_ID, "post", { id }, token).then(
-    res => res.data.data
+    (res) => res.data.data
   );
 }
 
@@ -53,16 +54,16 @@ export function fetchProductsByCategory(token, type) {
     "post",
     { category: type },
     token
-  ).then(res => res.data.data.products);
+  ).then((res) => res.data.data.products);
 }
 
 export function addToStore(token, id) {
-  return crudAPI(ADD_TO_STORE, "post", { id }, token).then(res => res.data);
+  return crudAPI(ADD_TO_STORE, "post", { id }, token).then((res) => res.data);
 }
 
 export function fetchAllProducts(token) {
   return crudAPI(FETCH_ALL_PRODUCTS, "post", null, token).then(
-    res => res.data.data.products
+    (res) => res.data.data.products
   );
 }
 
@@ -72,7 +73,7 @@ export function addAliProductToStore(token, id) {
     "post",
     { product_id: id },
     token
-  ).then(res => res.data);
+  ).then((res) => res.data);
 }
 
 export function addProductToAdmin(token, data) {

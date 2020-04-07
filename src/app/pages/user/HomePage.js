@@ -18,11 +18,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { actions } from "../../store/ducks/user.duck";
 import {
   fetchImportProducts,
-  fetchStoreProducts
+  fetchStoreProducts,
 } from "../../crud/product.crud";
-
+//Routing for Store Owners
 const MainHomePage = () => {
-  const token = useSelector(state => state.auth.authToken);
+  const token = useSelector((state) => state.auth.authToken);
   const dispatch = useDispatch();
 
   useEffect(() => {

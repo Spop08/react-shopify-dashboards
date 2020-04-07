@@ -5,6 +5,8 @@ export const LOGIN_URL = "api/auth/login";
 export const REGISTER_URL = "api/auth/register";
 export const REQUEST_PASSWORD_URL = "api/auth/forgot-password";
 
+//Login/Register/ResetPassword APIs
+
 export function login(email, password) {
   return crudAPI("/auth/login", "post", { email, password });
   // return axios.post(LOGIN_URL, { email, password });

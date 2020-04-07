@@ -11,12 +11,13 @@ import { addToImport } from "../../crud/product.crud";
 import { toast } from "react-toastify";
 import "./ProductDetailsPage.scss";
 
-const ProductDetailsPage = props => {
+//Product Details Page
+const ProductDetailsPage = (props) => {
   const [selectedImg, setSelectedImg] = useState(0);
   const [data, setData] = useState(null);
-  const token = useSelector(state => state.auth.authToken);
+  const token = useSelector((state) => state.auth.authToken);
   const [openDialog, setOpenDialog] = useState(false);
-
+  //Fetch initial Product by ID
   useEffect(() => {
     const fetchProduct = async () => {
       const id = props.match.params.id;
@@ -25,13 +26,13 @@ const ProductDetailsPage = props => {
     };
     fetchProduct();
   }, [token, props.match.params.id]);
-
+  //Add to import List
   const handleSubmit = async () => {
     setOpenDialog(false);
     toast.success("Adding to the Import List");
     addToImport(token, data._id);
   };
-
+  //Details component with image and several prices
   const componentDetails = () => {
     const sale_price = data.variants[0].salePrice;
     const origin_price = data.variants[0].price;

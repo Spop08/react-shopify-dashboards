@@ -25,11 +25,7 @@ class Header extends React.Component {
   }
 
   render() {
-    const {
-      menuHeaderDisplay,
-      headerAttributes,
-      headerClasses
-    } = this.props;
+    const { menuHeaderDisplay, headerAttributes, headerClasses } = this.props;
     return (
       <div
         className={`kt-header kt-grid__item ${headerClasses}`}
@@ -51,10 +47,10 @@ class Header extends React.Component {
   }
 }
 
-const mapStateToProps = store => ({
+const mapStateToProps = (store) => ({
   headerClasses: builder.selectors.getClasses(store, {
     path: "header",
-    toString: true
+    toString: true,
   }),
   headerAttributes: builder.selectors.getAttributes(store, { path: "header" }),
   menuHeaderDisplay: objectPath.get(
@@ -62,7 +58,7 @@ const mapStateToProps = store => ({
     "header.menu.self.display"
   ),
   fluid:
-    objectPath.get(store.builder.layoutConfig, "header.self.width") === "fluid"
+    objectPath.get(store.builder.layoutConfig, "header.self.width") === "fluid",
 });
 
 export default connect(mapStateToProps)(Header);

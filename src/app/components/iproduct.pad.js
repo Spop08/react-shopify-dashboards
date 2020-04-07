@@ -26,6 +26,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
 
+//Import Product Pad in Import Products Page
 const IProductPad = ({ data, index }) => {
   const blocksFromHTML = convertFromHTML(data.descriptionHtml);
   const contentState = ContentState.createFromBlockArray(blocksFromHTML);
@@ -40,6 +41,7 @@ const IProductPad = ({ data, index }) => {
   const [title, setTitle] = useState(data.title);
   const { activeTab, editorState, import_open, delete_open } = state;
   const handleDelete = () => {};
+  //Add to Store Function
   const handleSubmit = () => {
     addToStore(token, data.id);
     setState({ ...state, import_open: false });
@@ -212,7 +214,6 @@ const IProductPad = ({ data, index }) => {
           </Button>
         </DialogActions>
       </Dialog>
-
       <Dialog
         open={import_open}
         TransitionComponent={Transition}

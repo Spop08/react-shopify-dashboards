@@ -1,4 +1,6 @@
 import React from "react";
+
+//Define SVG Icons
 export const arrow_right = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"

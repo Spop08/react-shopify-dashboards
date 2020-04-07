@@ -10,13 +10,13 @@ const defaultToolbarSelectStyles = {
     marginRight: "24px",
     top: "50%",
     display: "inline-block",
-    position: "relative"
+    position: "relative",
   },
   deleteIcon: {
-    color: "#000"
-  }
+    color: "#000",
+  },
 };
-
+//OrderToolBar Select in Admin Page with Icons
 class OrderToolbarSelect extends React.Component {
   handleClick = () => {};
 
@@ -41,5 +41,5 @@ class OrderToolbarSelect extends React.Component {
 }
 
 export default withStyles(defaultToolbarSelectStyles, {
-  name: "OrderToolbarSelect"
+  name: "OrderToolbarSelect",
 })(OrderToolbarSelect);

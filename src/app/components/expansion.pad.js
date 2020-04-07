@@ -9,13 +9,14 @@ import "./expansion.pad.scss";
 
 const useStyles = makeStyles({
   expansion: {
-    boxShadow: "none!important"
-  }
+    boxShadow: "none!important",
+  },
 });
+//Expansion Pad in Product Page
 export default function ExpansionPad({ data }) {
   const [expanded, setExpanded] = React.useState(false);
   const classes = useStyles();
-  const handleChange = panel => (event, isExpanded) => {
+  const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 

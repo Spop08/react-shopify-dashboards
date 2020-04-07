@@ -13,24 +13,24 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   large: {
     width: theme.spacing(9),
-    height: theme.spacing(9)
-  }
+    height: theme.spacing(9),
+  },
 }));
-
-const UnProcessedOrdersPage = props => {
+//UnProcessedOrder Page of store owners
+const UnProcessedOrdersPage = (props) => {
   const classes = useStyles();
-
+  //Define columns of table
   const columns = [
     {
       name: "id",
       label: "ID",
       options: {
         filter: false,
-        sort: true
-      }
+        sort: true,
+      },
     },
     {
       name: "variant.image",
@@ -47,16 +47,16 @@ const UnProcessedOrdersPage = props => {
               className={classes.large}
             />
           );
-        }
-      }
+        },
+      },
     },
     {
       name: "variant.title",
       label: "Product Name",
       options: {
         filter: true,
-        sort: true
-      }
+        sort: true,
+      },
     },
 
     {
@@ -64,45 +64,45 @@ const UnProcessedOrdersPage = props => {
       label: "Seller Email",
       options: {
         filter: true,
-        sort: true
-      }
+        sort: true,
+      },
     },
     {
       name: "client.storeName",
       label: "Seller Shop",
       options: {
         filter: true,
-        sort: true
-      }
+        sort: true,
+      },
     },
     {
       name: "price",
       label: "Price",
       options: {
         filter: true,
-        sort: true
-      }
+        sort: true,
+      },
     },
     {
       name: "quantity",
       label: "Quantity",
       options: {
         filter: true,
-        sort: true
-      }
-    }
+        sort: true,
+      },
+    },
   ];
 
   const options = {
     filterType: "checkbox",
-    customToolbarSelect: selectedRows => (
+    customToolbarSelect: (selectedRows) => (
       <OrderToolbarSelect selectedRows={selectedRows} />
-    )
+    ),
   };
 
   const [orders, setOrders] = useState([]);
-  const token = useSelector(state => state.auth.authToken);
-
+  const token = useSelector((state) => state.auth.authToken);
+  //fetch all unprocessed orders
   useEffect(() => {
     const fetchOrders = async () => {
       const response = await fetchAdminUnProcessedOrders(token);
@@ -112,12 +112,6 @@ const UnProcessedOrdersPage = props => {
   }, [token]);
   console.log(orders);
 
-  const handleOpenDialog = index => {
-    setOpen(true);
-    setShipping(orders[index].shippingAddress);
-  };
-  const [open, setOpen] = useState(false);
-  const [shipping, setShipping] = useState({});
   return (
     <>
       <MUIDataTable
@@ -126,48 +120,6 @@ const UnProcessedOrdersPage = props => {
         columns={columns}
         options={options}
       />
-      <Dialog
-        open={open}
-        keepMounted
-        onClose={() => setOpen(false)}
-        aria-labelledby="alert-dialog-slide-title"
-        aria-describedby="alert-dialog-slide-description"
-      >
-        <DialogTitle id="draggable-dialog-title">Shipping Details</DialogTitle>
-        <DialogContent>
-          <div className="shipping-container">
-            <div className="row">
-              <p className="col-md-4">Country:</p>
-              <span classes="col-md-8">{shipping.country_code}</span>
-            </div>
-            <div className="row">
-              <p className="col-md-4">State:</p>
-              <span classes="col-md-8">{shipping.state}</span>
-            </div>
-            <div className="row">
-              <p className="col-md-4">City:</p>
-              <span classes="col-md-8">{shipping.city}</span>
-            </div>
-            <div className="row">
-              <p className="col-md-4">Address 1:</p>
-              <span classes="col-md-8">{shipping.line1}</span>
-            </div>
-            <div className="row">
-              <p className="col-md-4">Address 2:</p>
-              <span classes="col-md-8">{shipping.line2}</span>
-            </div>
-            <div className="row">
-              <p className="col-md-4">Postal Code:</p>
-              <span classes="col-md-8">{shipping.postal_code}</span>
-            </div>
-          </div>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setOpen(false)} color="primary">
-            OK
-          </Button>
-        </DialogActions>
-      </Dialog>
     </>
   );
 };

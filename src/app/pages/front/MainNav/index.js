@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Navbar, Nav } from "react-bootstrap";
 
+//Nav for Home Pages
 class MainNav extends Component {
   render() {
     return (

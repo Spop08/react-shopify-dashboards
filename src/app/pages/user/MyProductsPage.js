@@ -3,10 +3,11 @@ import ExpansionPad from "../../components/expansion.pad";
 import { useSelector } from "react-redux";
 import { fetchStoreProducts } from "../../crud/product.crud";
 
+//My Products Page
 const MyProductsPage = () => {
-  const token = useSelector(state => state.auth.authToken);
+  const token = useSelector((state) => state.auth.authToken);
   const [products, loadProducts] = useState([]);
-
+  //Fetch my products page
   useEffect(() => {
     const fetchProducts = async () => {
       const products = await fetchStoreProducts(token);

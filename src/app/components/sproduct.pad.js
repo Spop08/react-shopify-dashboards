@@ -11,15 +11,16 @@ import { addToImport } from "../crud/product.crud";
 import { connect, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
+//Product Pad Component of Search Product Page
 const SProductPad = ({ data }) => {
   const [openDialog, setOpenDialog] = useState(false);
-  const token = useSelector(state => state.auth.authToken);
+  const token = useSelector((state) => state.auth.authToken);
 
   toast.configure({
     draggable: false,
-    position: toast.POSITION.TOP_RIGHT
+    position: toast.POSITION.TOP_RIGHT,
   });
-
+  //Add to Import List submit function
   const handleSubmit = async () => {
     setOpenDialog(false);
     toast.success("Adding to the Import List", { autoClose: 1500 });
@@ -46,7 +47,7 @@ const SProductPad = ({ data }) => {
                   ? `url(${data.images[0].src})`
                   : `url(
                       "https://us.123rf.com/450wm/pavelstasevich/pavelstasevich1902/pavelstasevich190200120/124934975-stock-vector-no-image-available-icon-vector-flat.jpg?ver=6"
-                    )`
+                    )`,
               }}
             >
               {sale_price && (

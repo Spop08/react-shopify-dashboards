@@ -6,6 +6,7 @@ import MainNav from "../MainNav";
 
 import "../styles.css";
 
+//Feature Home Page
 class Feature extends Component {
   render() {
     return (

@@ -1,5 +1,6 @@
 import axios from "axios";
 
+//Call Backend APIs
 export function crudAPI(url, method, data, token) {
   axios.defaults.baseURL = process.env.REACT_APP_BACKEND_ENDPOINT;
   if (token)
@@ -7,13 +8,13 @@ export function crudAPI(url, method, data, token) {
       url,
       headers: { "content-type": "application/json", secret_token: token },
       method,
-      data
+      data,
     });
   else
     return axios({
       url,
       headers: { "content-type": "application/json" },
       method,
-      data
+      data,
     });
 }

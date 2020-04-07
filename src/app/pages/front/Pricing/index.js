@@ -6,6 +6,7 @@ import MainNav from "../MainNav";
 
 import "../styles.css";
 
+//Pricing Home Page
 class Pricing extends Component {
   render() {
     return (

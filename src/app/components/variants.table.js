@@ -6,7 +6,9 @@ import { useSelector } from "react-redux";
 import { editImportedProduct } from "../crud/product.crud";
 import "./variants.table.scss";
 
-function priceFormatter(cell) {
+//Variants Table
+//Image Formatter for Bootstrap Table2
+function imageFormatter(cell) {
   return (
     <div className="d-flex">
       <img alt="" className="variants-img" src={cell} />
@@ -16,52 +18,53 @@ function priceFormatter(cell) {
 function disableEditFormatter(cell) {
   return false;
 }
-
+//Columns of Table
 const CustomColumnTable = ({ data }) => {
-  const token = useSelector(state => state.auth.authToken);
+  const token = useSelector((state) => state.auth.authToken);
   const [columns, setColumns] = useState([
     {
       dataField: "imageSrc",
       text: "Image",
-      formatter: priceFormatter,
+      formatter: imageFormatter,
       editable: disableEditFormatter,
-      style: { whiteSpace: "nowrap" }
+      style: { whiteSpace: "nowrap" },
     },
     {
       dataField: "sku",
       text: "SKU",
-      style: { whiteSpace: "nowrap" }
+      style: { whiteSpace: "nowrap" },
     },
     {
       dataField: "cost",
       text: "Cost",
       editable: disableEditFormatter,
-      style: { whiteSpace: "nowrap" }
+      style: { whiteSpace: "nowrap" },
     },
     {
       dataField: "price",
       text: "Price",
-      style: { whiteSpace: "nowrap" }
+      style: { whiteSpace: "nowrap" },
     },
     {
       dataField: "inventory",
       text: "Inventory",
-      style: { whiteSpace: "nowrap" }
-    }
+      style: { whiteSpace: "nowrap" },
+    },
   ]);
   const [variants, setVariants] = useState([]);
   const [fields, setFields] = useState([]);
+  //Configure table with inital variants
   useEffect(() => {
     var _variants = [];
     var cnt = 2;
     const ar_col = [...columns];
     const _fields = [];
-    data.options.forEach(item => {
+    data.options.forEach((item) => {
       const field = item.split(" ")[0];
       const column = {
         dataField: field,
         text: item,
-        style: { whiteSpace: "nowrap" }
+        style: { whiteSpace: "nowrap" },
       };
       ar_col.splice(cnt, 0, column);
       _fields.push(field);
@@ -78,7 +81,7 @@ const CustomColumnTable = ({ data }) => {
         cost: item.originalPrice ? item.originalPrice : item.price,
         price: item.price,
         inventory:
-          item.inventoryQuantity === undefined ? 0 : item.inventoryQuantity
+          item.inventoryQuantity === undefined ? 0 : item.inventoryQuantity,
       };
       item.options.forEach((option, ind) => {
         const _option = _fields[ind];
@@ -89,13 +92,12 @@ const CustomColumnTable = ({ data }) => {
     setVariants(_variants);
     setFields(_fields);
   }, [data.variants, data.id]);
-
+  //Submit function for editing variants
   const handleSubmit = async () => {
     var newData = data;
     console.log("VARIANTS ", variants);
     console.log("FIELDS ", fields);
     data.variants.forEach((item, index) => {
-      // newData.variants[index] = item;
       newData.variants[index].imageSrc = variants[index].imageSrc;
       newData.variants[index].inventoryQuantity = variants[index].inventory;
 
@@ -119,7 +121,7 @@ const CustomColumnTable = ({ data }) => {
         cellEdit={cellEditFactory({
           mode: "click",
           blurToSave: true,
-          afterSaveCell: (oldValue, newValue, row, column) => {}
+          afterSaveCell: (oldValue, newValue, row, column) => {},
         })}
       />
       <div style={{ float: "right" }} onClick={handleSubmit}>

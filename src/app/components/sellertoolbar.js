@@ -10,13 +10,13 @@ const useStyles = makeStyles({
     marginRight: "24px",
     top: "50%",
     display: "inline-block",
-    position: "relative"
+    position: "relative",
   },
   deleteIcon: {
-    color: "#000"
-  }
+    color: "#000",
+  },
 });
-
+//SellerToolBarSelect with Icons
 const SellerToolbarSelect = ({ selectedRows }) => {
   const classes = useStyles();
   const handleUpdate = () => {};

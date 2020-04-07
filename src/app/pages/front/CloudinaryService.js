@@ -1,5 +1,6 @@
 import { Cloudinary as CoreCloudinary, Util } from "cloudinary-core";
 
+//Cloudinary URL and OpenUploadWidget
 export const url = (publicId, options) => {
   const scOptions = Util.withSnakeCaseKeys(options);
   const cl = CoreCloudinary.new();

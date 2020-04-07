@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DashboardPad from "../../components/dashboard.pad";
-
+//Dashboard Page
 export default function Dashboard(props) {
   return (
     <>

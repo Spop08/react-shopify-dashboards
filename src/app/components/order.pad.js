@@ -12,7 +12,6 @@ import Button from "@material-ui/core/Button";
 import "./order.pad.scss";
 import PayPalButton from "./paypal.btn";
 import { useSelector } from "react-redux";
-// import { toast } from "react-toastify";
 import { markAsProcessed, markAsDelivered } from "../crud/order.crud";
 
 const useStyles = makeStyles((theme) => ({
@@ -25,24 +24,23 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "auto",
   },
 }));
-
+// Order Pad in all Orders Page
 const OrderPad = (props) => {
   const classes = useStyles();
   const { type, data } = props;
   const token = useSelector((state) => state.auth.authToken);
   const [open, setOpen] = useState(false);
   const [markStatus, setMarkStatus] = useState(null);
-
+  //When store owner purchase via Paypal, it will be marked as Processed via calling the backend API
   const onSuccess = (payment) => {
     console.log("Payment", payment);
     if (payment.paid) {
-      // const {recipient_name, line1, line2, city, state, postal_code, country_code} = payment.address;
       markAsProcessed(token, { id: data.id, address: payment.address });
       alert("Succesfully Purchased");
       window.location.reload();
     }
   };
-
+  //When store owner mark as 'Delivered', it will call the backend API and will be marked as 'Delivered'
   async function handleSubmit() {
     setOpen(false);
     if (markStatus === "Delivered") {

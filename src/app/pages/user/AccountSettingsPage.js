@@ -4,9 +4,10 @@ import { useSelector } from "react-redux";
 import { icon_settings, icon_profile, icon_changepassword } from "../../icons";
 import "./AccountSettingsPage.scss";
 
+//Store Owner Settings Page
 const AccountSettingsPage = () => {
   const [activeTab, setActiveTab] = useState("tab1");
-  const info = useSelector(state => state.user.info);
+  const info = useSelector((state) => state.user.info);
   const [email, setEmail] = useState("");
   useEffect(() => {
     setEmail(info.email);
@@ -21,7 +22,7 @@ const AccountSettingsPage = () => {
           <p
             className={clsx({
               "nav-link": true,
-              active: activeTab === "tab1"
+              active: activeTab === "tab1",
             })}
             onClick={() => setActiveTab("tab1")}
             data-toggle="tab"
@@ -35,7 +36,7 @@ const AccountSettingsPage = () => {
           <p
             className={clsx({
               "nav-link": true,
-              active: activeTab === "tab2"
+              active: activeTab === "tab2",
             })}
             onClick={() => setActiveTab("tab2")}
             data-toggle="tab"
@@ -49,7 +50,7 @@ const AccountSettingsPage = () => {
           <p
             className={clsx({
               "nav-link": true,
-              active: activeTab === "tab3"
+              active: activeTab === "tab3",
             })}
             onClick={() => setActiveTab("tab3")}
             data-toggle="tab"
@@ -62,13 +63,14 @@ const AccountSettingsPage = () => {
       </ul>
     </div>
   );
+  //Profile Tab
   const ComponentProfile = () => {
     return (
       <div className="tab-content">
         <div
           className={clsx({
             "tab-pane": true,
-            active: activeTab === "tab1"
+            active: activeTab === "tab1",
           })}
         >
           <div className="kt-form kt-form--label-right">
@@ -159,12 +161,13 @@ const AccountSettingsPage = () => {
       </div>
     );
   };
+  //Change Password Tab
   const ComponentChangePassword = () => (
     <div className="tab-content">
       <div
         className={clsx({
           "tab-pane": true,
-          active: activeTab === "tab2"
+          active: activeTab === "tab2",
         })}
       >
         <div className="kt-form kt-form--label-right">
@@ -224,7 +227,7 @@ const AccountSettingsPage = () => {
         <div
           className={clsx({
             "tab-pane": true,
-            active: activeTab === "tab3"
+            active: activeTab === "tab3",
           })}
         >
           <div className="kt-form kt-form--label-right">

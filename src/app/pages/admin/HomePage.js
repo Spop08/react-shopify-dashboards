@@ -10,11 +10,7 @@ import ProcessedOrdersPage from "./ProcessedOrdersPage";
 import UnProcessedOrdersPage from "./UnProcessedOrdersPage";
 import ShippedOrdersPage from "./ShippedOrdersPage";
 
-import OrderListPage from "./OrderListPage";
-import PendingOrderPage from "./PendingOrder";
-import OrderbyCustomerPage from "./OrderbyCustomer";
-import AdminDashBoard from "./DashboardPage";
-
+//Routing for Admin Page
 export default function AdminHomePage() {
   return (
     <Suspense fallback={<LayoutSplashScreen />}>

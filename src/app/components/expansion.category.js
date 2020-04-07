@@ -8,16 +8,16 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import "./expansion.category.scss";
 import { arrow_right } from "../icons";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   expansion: {
-    boxShadow: "none!important"
-  }
+    boxShadow: "none!important",
+  },
 }));
-
+// Expansion Pads for Category Page
 export default function ExpansionCategory() {
   const [expanded, setExpanded] = React.useState("panel2");
   const classes = useStyles();
-  const handleChange = panel => (event, isExpanded) => {
+  const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 

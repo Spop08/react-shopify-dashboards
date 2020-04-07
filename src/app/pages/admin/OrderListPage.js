@@ -8,24 +8,24 @@ import { fetchAdminAllOrders } from "../../crud/order.crud";
 
 import OrderToolbarSelect from "../../components/ordertoolbar";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   large: {
     width: theme.spacing(9),
-    height: theme.spacing(9)
-  }
+    height: theme.spacing(9),
+  },
 }));
-
-const OrderList = props => {
+//Order List Page for each store owners
+const OrderList = (props) => {
   const classes = useStyles();
-
+  //columns of table
   const columns = [
     {
       name: "no",
       label: "No",
       options: {
         filter: false,
-        sort: true
-      }
+        sort: true,
+      },
     },
     {
       name: "image",
@@ -42,53 +42,53 @@ const OrderList = props => {
               className={classes.large}
             />
           );
-        }
-      }
+        },
+      },
     },
     {
       name: "product_name",
       label: "Product Name",
       options: {
         filter: true,
-        sort: true
-      }
+        sort: true,
+      },
     },
     {
       name: "email",
       label: "Seller Email",
       options: {
         filter: true,
-        sort: true
-      }
+        sort: true,
+      },
     },
     {
       name: "store",
       label: "Seller Shop",
       options: {
         filter: true,
-        sort: true
-      }
+        sort: true,
+      },
     },
     {
       name: "isShipped",
       label: "Shipping",
       options: {
         filter: true,
-        sort: true
-      }
-    }
+        sort: true,
+      },
+    },
   ];
 
   const options = {
     filterType: "checkbox",
-    customToolbarSelect: selectedRows => (
+    customToolbarSelect: (selectedRows) => (
       <OrderToolbarSelect selectedRows={selectedRows} />
-    )
+    ),
   };
 
   const [orders, setOrders] = useState([]);
-  const token = useSelector(state => state.auth.authToken);
-
+  const token = useSelector((state) => state.auth.authToken);
+  //Fetch all orders from db
   useEffect(() => {
     const fetchOrders = async () => {
       const response = await fetchAdminAllOrders(token);

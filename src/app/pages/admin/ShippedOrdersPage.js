@@ -16,24 +16,24 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   large: {
     width: theme.spacing(9),
-    height: theme.spacing(9)
-  }
+    height: theme.spacing(9),
+  },
 }));
-
-const ShippedOrdersPage = props => {
+//Shipped Orders Page of store owners
+const ShippedOrdersPage = (props) => {
   const classes = useStyles();
-
+  //Define columns of table
   const columns = [
     {
       name: "id",
       label: "ID",
       options: {
         filter: false,
-        sort: true
-      }
+        sort: true,
+      },
     },
     {
       name: "variant.image",
@@ -50,16 +50,16 @@ const ShippedOrdersPage = props => {
               className={classes.large}
             />
           );
-        }
-      }
+        },
+      },
     },
     {
       name: "variant.title",
       label: "Product Name",
       options: {
         filter: true,
-        sort: true
-      }
+        sort: true,
+      },
     },
 
     {
@@ -67,32 +67,32 @@ const ShippedOrdersPage = props => {
       label: "Seller Email",
       options: {
         filter: true,
-        sort: true
-      }
+        sort: true,
+      },
     },
     {
       name: "client.storeName",
       label: "Seller Shop",
       options: {
         filter: true,
-        sort: true
-      }
+        sort: true,
+      },
     },
     {
       name: "price",
       label: "Price",
       options: {
         filter: true,
-        sort: true
-      }
+        sort: true,
+      },
     },
     {
       name: "quantity",
       label: "Quantity",
       options: {
         filter: true,
-        sort: true
-      }
+        sort: true,
+      },
     },
     {
       name: "actions",
@@ -108,21 +108,21 @@ const ShippedOrdersPage = props => {
               </IconButton>
             </Tooltip>
           );
-        }
-      }
-    }
+        },
+      },
+    },
   ];
 
   const options = {
     filterType: "checkbox",
-    customToolbarSelect: selectedRows => (
+    customToolbarSelect: (selectedRows) => (
       <OrderToolbarSelect selectedRows={selectedRows} />
-    )
+    ),
   };
 
   const [orders, setOrders] = useState([]);
-  const token = useSelector(state => state.auth.authToken);
-
+  const token = useSelector((state) => state.auth.authToken);
+  //Fetch admin orders
   useEffect(() => {
     const fetchOrders = async () => {
       const response = await fetchAdminShippedOrders(token);
@@ -131,8 +131,8 @@ const ShippedOrdersPage = props => {
     fetchOrders();
   }, [token]);
   console.log(orders);
-
-  const handleOpenDialog = index => {
+  //Open Shipping Address Dialog
+  const handleOpenDialog = (index) => {
     setOpen(true);
     setShipping(orders[index].shippingAddress);
   };

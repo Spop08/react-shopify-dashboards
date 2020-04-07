@@ -11,48 +11,49 @@ const FETCH_UNPROCESSED_ORDERS = "/api/order/listUnprocessed";
 const MARK_AS_PROCESSED = "api/order/markasprocessed";
 const MARK_AS_DELIVERED = "api/order/markasshipped";
 
+//Fetch/Update Orders
 export function fetchAdminAllOrders(token) {
   return crudAPI(FETCH_ADMIN_ALL_ORDERS, "post", null, token).then(
-    res => res.data.data.orders
+    (res) => res.data.data.orders
   );
 }
 export function fetchAdminShippedOrders(token) {
   return crudAPI(FETCH_ADMIN_SHIPPED_ORDERS, "post", null, token).then(
-    res => res.data.data.orders
+    (res) => res.data.data.orders
   );
 }
 export function fetchAdminProcessedOrders(token) {
   return crudAPI(FETCH_ADMIN_PROCESSED_ORDERS, "post", null, token).then(
-    res => res.data.data.orders
+    (res) => res.data.data.orders
   );
 }
 export function fetchAdminUnProcessedOrders(token) {
   return crudAPI(FETCH_ADMIN_UNPROCESSED_ORDERS, "post", null, token).then(
-    res => res.data.data.orders
+    (res) => res.data.data.orders
   );
 }
 
 export function fetchOrdersbyUsers(token) {
   return crudAPI(FETCH_ORDERS_BY_USERS, "post", null, token).then(
-    res => res.data.data.users
+    (res) => res.data.data.users
   );
 }
 
 export function fetchProcessedOrders(token) {
   return crudAPI(FETCH_PROCESSED_ORDERS, "post", null, token).then(
-    res => res.data.data.orders
+    (res) => res.data.data.orders
   );
 }
 
 export function fetchDeliveredOrders(token) {
   return crudAPI(FETCH_DELIVERED_ORDERS, "post", null, token).then(
-    res => res.data.data.orders
+    (res) => res.data.data.orders
   );
 }
 
 export function fetchUnProcessedOrders(token) {
   return crudAPI(FETCH_UNPROCESSED_ORDERS, "post", null, token).then(
-    res => res.data.data.orders
+    (res) => res.data.data.orders
   );
 }
 

@@ -6,6 +6,7 @@ import MainNav from "../MainNav";
 
 import "../styles.css";
 
+//Branding Home Page
 class Branding extends Component {
   render() {
     return (

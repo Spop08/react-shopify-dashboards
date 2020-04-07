@@ -8,6 +8,7 @@ import MainNav from "../MainNav";
 import "./styles.css";
 import "../styles.css";
 
+//Home Page
 class Home extends Component {
   render() {
     return (
@@ -103,7 +104,7 @@ class Home extends Component {
               style={{
                 justifyContent: "center",
                 display: "flex",
-                flexDirection: "column"
+                flexDirection: "column",
               }}
             >
               <h2 className="text-medium-h">Why choose Us?</h2>
@@ -146,7 +147,7 @@ class Home extends Component {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  paddingTop: "30px"
+                  paddingTop: "30px",
                 }}
               >
                 <Card.Img
@@ -175,7 +176,7 @@ class Home extends Component {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  paddingTop: "30px"
+                  paddingTop: "30px",
                 }}
               >
                 <Card.Img
@@ -203,7 +204,7 @@ class Home extends Component {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  paddingTop: "30px"
+                  paddingTop: "30px",
                 }}
               >
                 <Card.Img
@@ -232,7 +233,7 @@ class Home extends Component {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  paddingTop: "30px"
+                  paddingTop: "30px",
                 }}
               >
                 <Card.Img
