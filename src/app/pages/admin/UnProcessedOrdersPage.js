@@ -13,14 +13,14 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   large: {
     width: theme.spacing(9),
-    height: theme.spacing(9),
-  },
+    height: theme.spacing(9)
+  }
 }));
 //UnProcessedOrder Page of store owners
-const UnProcessedOrdersPage = (props) => {
+const UnProcessedOrdersPage = props => {
   const classes = useStyles();
   //Define columns of table
   const columns = [
@@ -29,8 +29,8 @@ const UnProcessedOrdersPage = (props) => {
       label: "ID",
       options: {
         filter: false,
-        sort: true,
-      },
+        sort: true
+      }
     },
     {
       name: "variant.image",
@@ -47,16 +47,16 @@ const UnProcessedOrdersPage = (props) => {
               className={classes.large}
             />
           );
-        },
-      },
+        }
+      }
     },
     {
       name: "variant.title",
       label: "Product Name",
       options: {
         filter: true,
-        sort: true,
-      },
+        sort: true
+      }
     },
 
     {
@@ -64,24 +64,24 @@ const UnProcessedOrdersPage = (props) => {
       label: "Seller Email",
       options: {
         filter: true,
-        sort: true,
-      },
+        sort: true
+      }
     },
     {
       name: "client.storeName",
       label: "Seller Shop",
       options: {
         filter: true,
-        sort: true,
-      },
+        sort: true
+      }
     },
     {
       name: "price",
       label: "Price",
       options: {
         filter: true,
-        sort: true,
-      },
+        sort: true
+      }
     },
     {
       name: "quantity",
@@ -89,19 +89,29 @@ const UnProcessedOrdersPage = (props) => {
       options: {
         filter: true,
         sort: true,
-      },
+        customBodyRender: value => (value === -1 ? "" : value)
+      }
     },
+    {
+      name: "quantity",
+      label: "Is Parent",
+      options: {
+        filter: true,
+        sort: true,
+        customBodyRender: value => (value === -1 ? "True" : "False")
+      }
+    }
   ];
 
   const options = {
     filterType: "checkbox",
-    customToolbarSelect: (selectedRows) => (
+    customToolbarSelect: selectedRows => (
       <OrderToolbarSelect selectedRows={selectedRows} />
-    ),
+    )
   };
 
   const [orders, setOrders] = useState([]);
-  const token = useSelector((state) => state.auth.authToken);
+  const token = useSelector(state => state.auth.authToken);
   //fetch all unprocessed orders
   useEffect(() => {
     const fetchOrders = async () => {
