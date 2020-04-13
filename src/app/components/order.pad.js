@@ -14,25 +14,25 @@ import PayPalButton from "./paypal.btn";
 import { useSelector } from "react-redux";
 import { markAsProcessed, markAsDelivered } from "../crud/order.crud";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
     justifyContent: "center",
-    flexWrap: "wrap",
+    flexWrap: "wrap"
   },
   chip: {
-    marginLeft: "auto",
-  },
+    marginLeft: "auto"
+  }
 }));
 // Order Pad in all Orders Page
-const OrderPad = (props) => {
+const OrderPad = props => {
   const classes = useStyles();
   const { type, data } = props;
-  const token = useSelector((state) => state.auth.authToken);
+  const token = useSelector(state => state.auth.authToken);
   const [open, setOpen] = useState(false);
   const [markStatus, setMarkStatus] = useState(null);
   //When store owner purchase via Paypal, it will be marked as Processed via calling the backend API
-  const onSuccess = (payment) => {
+  const onSuccess = payment => {
     console.log("Payment", payment);
     if (payment.paid) {
       markAsProcessed(token, { id: data.id, address: payment.address });
@@ -140,29 +140,31 @@ const OrderPad = (props) => {
               {type !== "undelivered" && (
                 <div className="shipping-container">
                   <h5>Shipping Address</h5>
-                  <div className="shipping-details">
-                    <p>Country:</p>
-                    <span>{data.shippingAddress.country_code}</span>
-                  </div>
-                  <div className="shipping-details">
-                    <p>State:</p>
-                    <span>{data.shippingAddress.state}</span>
-                  </div>
-                  <div className="shipping-details">
-                    <p>City:</p>
-                    <span>{data.shippingAddress.city}</span>
-                  </div>
-                  <div className="shipping-details">
-                    <p>Address 1:</p>
-                    <span>{data.shippingAddress.line1}</span>
-                  </div>
-                  <div className="shipping-details">
-                    <p>Address 2:</p>
-                    <span>{data.shippingAddress.line2}</span>
-                  </div>
-                  <div className="shipping-details">
-                    <p>Postal Code:</p>
-                    <span>{data.shippingAddress.postal_code}</span>
+                  <div className="row">
+                    <div className="shipping-details col-md-4">
+                      <p>Country:</p>
+                      <span>{data.shippingAddress.country}</span>
+                    </div>
+                    <div className="shipping-details col-md-4">
+                      <p>State:</p>
+                      <span>{data.shippingAddress.province}</span>
+                    </div>
+                    <div className="shipping-details col-md-4">
+                      <p>City:</p>
+                      <span>{data.shippingAddress.city}</span>
+                    </div>
+                    <div className="shipping-details col-md-4">
+                      <p>Address 1:</p>
+                      <span>{data.shippingAddress.address1}</span>
+                    </div>
+                    <div className="shipping-details col-md-4">
+                      <p>Address 2:</p>
+                      <span>{data.shippingAddress.address2}</span>
+                    </div>
+                    <div className="shipping-details col-md-4">
+                      <p>Postal Code:</p>
+                      <span>{data.shippingAddress.zip}</span>
+                    </div>
                   </div>
                 </div>
               )}

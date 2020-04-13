@@ -151,7 +151,7 @@ const OrderPad = props => {
                   <div className="row">
                     <div className="shipping-details col-md-4">
                       <p>Country:</p>
-                      <span>{order.shippingAddress.country_code}</span>
+                      <span>{order.shippingAddress.country}</span>
                     </div>
                     <div className="shipping-details col-md-4">
                       <p>State:</p>
