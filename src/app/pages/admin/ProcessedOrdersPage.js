@@ -16,14 +16,14 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   large: {
     width: theme.spacing(9),
-    height: theme.spacing(9),
-  },
+    height: theme.spacing(9)
+  }
 }));
 //Processed Order Page of all store owners
-const ProcessedOrdersPage = (props) => {
+const ProcessedOrdersPage = props => {
   const classes = useStyles();
   //columns of table
   const columns = [
@@ -32,8 +32,8 @@ const ProcessedOrdersPage = (props) => {
       label: "ID",
       options: {
         filter: false,
-        sort: true,
-      },
+        sort: true
+      }
     },
     {
       name: "variant.image",
@@ -50,16 +50,16 @@ const ProcessedOrdersPage = (props) => {
               className={classes.large}
             />
           );
-        },
-      },
+        }
+      }
     },
     {
       name: "variant.title",
       label: "Product Name",
       options: {
         filter: true,
-        sort: true,
-      },
+        sort: true
+      }
     },
 
     {
@@ -67,32 +67,32 @@ const ProcessedOrdersPage = (props) => {
       label: "Seller Email",
       options: {
         filter: true,
-        sort: true,
-      },
+        sort: true
+      }
     },
     {
       name: "client.storeName",
       label: "Seller Shop",
       options: {
         filter: true,
-        sort: true,
-      },
+        sort: true
+      }
     },
     {
       name: "price",
       label: "Price",
       options: {
         filter: true,
-        sort: true,
-      },
+        sort: true
+      }
     },
     {
       name: "quantity",
       label: "Quantity",
       options: {
         filter: true,
-        sort: true,
-      },
+        sort: true
+      }
     },
     {
       name: "actions",
@@ -108,20 +108,20 @@ const ProcessedOrdersPage = (props) => {
               </IconButton>
             </Tooltip>
           );
-        },
-      },
-    },
+        }
+      }
+    }
   ];
   //checkbox components
   const options = {
     filterType: "checkbox",
-    customToolbarSelect: (selectedRows) => (
+    customToolbarSelect: selectedRows => (
       <OrderToolbarSelect selectedRows={selectedRows} />
-    ),
+    )
   };
 
   const [orders, setOrders] = useState([]);
-  const token = useSelector((state) => state.auth.authToken);
+  const token = useSelector(state => state.auth.authToken);
   //fetch all processed orders of store owners
   useEffect(() => {
     const fetchOrders = async () => {
@@ -132,7 +132,7 @@ const ProcessedOrdersPage = (props) => {
   }, [token]);
   console.log(orders);
 
-  const handleOpenDialog = (index) => {
+  const handleOpenDialog = index => {
     setOpen(true);
     setShipping(orders[index].shippingAddress);
   };
@@ -159,11 +159,11 @@ const ProcessedOrdersPage = (props) => {
           <div className="shipping-container">
             <div className="row">
               <p className="col-md-4">Country:</p>
-              <span classes="col-md-8">{shipping.country_code}</span>
+              <span classes="col-md-8">{shipping.country}</span>
             </div>
             <div className="row">
               <p className="col-md-4">State:</p>
-              <span classes="col-md-8">{shipping.state}</span>
+              <span classes="col-md-8">{shipping.province}</span>
             </div>
             <div className="row">
               <p className="col-md-4">City:</p>
@@ -171,15 +171,15 @@ const ProcessedOrdersPage = (props) => {
             </div>
             <div className="row">
               <p className="col-md-4">Address 1:</p>
-              <span classes="col-md-8">{shipping.line1}</span>
+              <span classes="col-md-8">{shipping.address1}</span>
             </div>
             <div className="row">
               <p className="col-md-4">Address 2:</p>
-              <span classes="col-md-8">{shipping.line2}</span>
+              <span classes="col-md-8">{shipping.address2}</span>
             </div>
             <div className="row">
               <p className="col-md-4">Postal Code:</p>
-              <span classes="col-md-8">{shipping.postal_code}</span>
+              <span classes="col-md-8">{shipping.zip}</span>
             </div>
           </div>
         </DialogContent>
