@@ -65,6 +65,19 @@ class UserProfile extends React.Component {
                 </div>
               </div>
             </a>
+            <a className="kt-notification__item" href="/auth/go-homepage">
+              <div className="kt-notification__item-icon">
+                <i className="flaticon2-speaker kt-font-error" />
+              </div>
+              <div className="kt-notification__item-details">
+                <div className="kt-notification__item-title kt-font-bold">
+                  Go HomePage
+                </div>
+                {/* <div className="kt-notification__item-time">
+                  Products imported to your store
+                </div> */}
+              </div>
+            </a>
             <div className="kt-notification__custom">
               <Link
                 to="/auth/logout"

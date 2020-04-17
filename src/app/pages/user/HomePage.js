@@ -3,6 +3,7 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import Dashboard from "./DashboardPage";
 import { LayoutSplashScreen } from "../../../_metronic";
 import LogoutPage from "../auth/Logout";
+import GoHomePage from "../auth/GoHomePage";
 import SearchProductPage from "./SearchProductPage";
 import ShopifyAuthCallBack from "../../auth/ShopifyAuthCallBack";
 import ImportListPage from "./ImportListPage";
@@ -55,6 +56,7 @@ const MainHomePage = () => {
         <Route path="/shopify/callback" component={ShopifyAuthCallBack} />
         <Route path="/app/account-settings" component={AccountSettingsPage} />
         <Route path="/auth/logout" component={LogoutPage} />
+        <Route path="/auth/go-homepage" component={GoHomePage} />
         <Redirect to="/error/error-v1" />
       </Switch>
     </Suspense>

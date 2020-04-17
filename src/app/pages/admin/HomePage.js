@@ -3,7 +3,7 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import { LayoutSplashScreen } from "../../../_metronic";
 import LogoutPage from "../auth/Logout";
 
-import ProductListPage from "./ProductListPage";
+import ProductListPage from "./ProductListPage/ProductListPage";
 import UserListPage from "./UserListPage";
 import AllOrdersPage from "./AllOrdersPage";
 import ProcessedOrdersPage from "./ProcessedOrdersPage";
