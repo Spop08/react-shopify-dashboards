@@ -115,7 +115,8 @@ const ProductsListPage = () => {
       id = URI.split(".html?")[0];
     } else id = aliID;
     const res = await addAdminAliProduct(token, id);
-    if (res.status === "success") {
+    console.log("I am res", res);
+    if (res.data.status === "success") {
       alert("Aliexpress Product Imported Successfully!");
     } else alert("failed");
     window.location.reload();
@@ -211,14 +212,6 @@ const ProductsListPage = () => {
       options: {
         filter: true,
         sort: true,
-      },
-    },
-    {
-      name: "description",
-      label: "Description",
-      options: {
-        filter: true,
-        sort: false,
       },
     },
     {

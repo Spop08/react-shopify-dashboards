@@ -69,8 +69,8 @@ const IProductPad = ({ data, handleClose }) => {
     console.log(newData);
     const response = await editAdminProduct(token, newData);
     console.log(response);
-    // if (response.data.status === "success") alert("Save Changed...");
-    // window.location.reload();
+    if (response.data.status === "success") alert("Save Changed...");
+    window.location.reload();
   };
   toast.configure({
     draggable: false,
