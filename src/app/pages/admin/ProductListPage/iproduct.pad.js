@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { EditorState, ContentState, convertFromHTML } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
@@ -15,6 +15,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import { makeStyles } from "@material-ui/core/styles";
+import { fetchAllCategories } from "../../../crud/category.crud";
 
 const stateToHTML = require("draft-js-export-html").stateToHTML;
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -44,7 +45,14 @@ const IProductPad = ({ data, handleClose }) => {
   const { activeTab, editorState, import_open, delete_open } = state;
   const [variants, setVariants] = useState(null);
   const [fields, setFields] = useState(null);
-
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const categories = await fetchAllCategories(token);
+      setCategories(categories);
+    };
+    fetchCategories();
+  }, []);
   //Handle Variants Change
   const handleVariantsChange = (variants, fields) => {
     setVariants(variants);
@@ -156,10 +164,9 @@ const IProductPad = ({ data, handleClose }) => {
                     value={category}
                     onChange={(event) => setCategory(event.target.value)}
                   >
-                    <MenuItem value="Clothes">Clothes</MenuItem>
-                    <MenuItem value="Toy">Toy</MenuItem>
-                    <MenuItem value="Beauty & Health">Beauty & Health</MenuItem>
-                    <MenuItem value="Watches">Watches</MenuItem>
+                    {categories.map((value) => (
+                      <MenuItem value={value.title}>{value.title}</MenuItem>
+                    ))}
                   </Select>
                 </div>
                 {/* <h5>Category:</h5>

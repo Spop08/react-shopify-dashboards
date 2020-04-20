@@ -19,25 +19,32 @@ export default {
       //     }
       //   ]
       // },
-    ]
+    ],
   },
   aside: {
     self: {},
     items: [
       { section: "Platform" },
       {
+        title: "Category list",
+        root: true,
+        bullet: "dot",
+        icon: "flaticon2-search",
+        page: "admin/category-list",
+      },
+      {
         title: "Product list",
         root: true,
         bullet: "dot",
         icon: "flaticon2-search",
-        page: "admin/product-list"
+        page: "admin/product-list",
       },
       {
         title: "Seller list",
         root: true,
         bullet: "dot",
         icon: "flaticon2-calendar-5",
-        page: "admin/user-list"
+        page: "admin/user-list",
       },
       { section: "Order" },
       // {
@@ -52,22 +59,22 @@ export default {
         root: true,
         bullet: "dot",
         icon: "flaticon2-calendar-5",
-        page: "admin/unprocessed-orders"
+        page: "admin/unprocessed-orders",
       },
       {
         title: "Processed Orders",
         root: true,
         bullet: "dot",
         icon: "flaticon2-calendar-5",
-        page: "admin/processed-orders"
+        page: "admin/processed-orders",
       },
       {
         title: "Shipped Orders",
         root: true,
         bullet: "dot",
         icon: "flaticon2-calendar-5",
-        page: "admin/shipped-orders"
-      }
-    ]
-  }
+        page: "admin/shipped-orders",
+      },
+    ],
+  },
 };

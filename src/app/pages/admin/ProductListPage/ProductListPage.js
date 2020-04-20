@@ -34,6 +34,7 @@ import { openUploadWidget } from "../../../crud/CloudinaryService";
 import { Modal, InputGroup, FormControl } from "react-bootstrap";
 import "./ProductListPage.scss";
 import IProductPad from "./iproduct.pad";
+import { fetchAllCategories } from "../../../crud/category.crud";
 import { mock } from "./mock";
 
 //Customize Material UI styles
@@ -97,6 +98,7 @@ const ProductsListPage = () => {
   const [openAli, setOpenAli] = useState(false);
   const [aliID, setAliID] = useState(false);
   const [aliURL, setAliURL] = useState(false);
+  const [categories, setCategories] = useState([]);
   const handleCloseAli = () => {
     setOpenAli(false);
   };
@@ -242,6 +244,7 @@ const ProductsListPage = () => {
   //fetch all product details
   useEffect(() => {
     const fetchUsers = async () => {
+      const categories = await fetchAllCategories(token);
       const products = await fetchAllProducts(token);
       console.log("FIRST PRODUCTS", products);
       var _products = [];
@@ -256,6 +259,7 @@ const ProductsListPage = () => {
           description: item.descriptionHtml,
         });
       });
+      setCategories(categories);
       setProducts(_products);
       setOriginProducts(products);
     };
@@ -389,7 +393,7 @@ const ProductsListPage = () => {
   function handleBack() {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   }
-  console.log("I am STATE", state.category);
+  console.log("I am STATE", categories);
   return (
     <div className="kt_admin_products">
       <div className="kt-buttons-group">
@@ -501,10 +505,9 @@ const ProductsListPage = () => {
                   value={state.category}
                   onChange={handleChange("category")}
                 >
-                  <MenuItem value="Clothes">Clothes</MenuItem>
-                  <MenuItem value="Toy">Toy</MenuItem>
-                  <MenuItem value="Beauty & Health">Beauty & Health</MenuItem>
-                  <MenuItem value="Watches">Watches</MenuItem>
+                  {categories.map((value) => (
+                    <MenuItem value={value.title}>{value.title}</MenuItem>
+                  ))}
                 </Select>
               </div>
               {/* <TextField

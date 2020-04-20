@@ -9,6 +9,7 @@ import AllOrdersPage from "./AllOrdersPage";
 import ProcessedOrdersPage from "./ProcessedOrdersPage";
 import UnProcessedOrdersPage from "./UnProcessedOrdersPage";
 import ShippedOrdersPage from "./ShippedOrdersPage";
+import CategoryListPage from "./CategoryListPage";
 
 //Routing for Admin Page
 export default function AdminHomePage() {
@@ -20,6 +21,7 @@ export default function AdminHomePage() {
 
         <Route path="/admin/product-list" component={ProductListPage} />
         <Route path="/admin/user-list" component={UserListPage} />
+        <Route path="/admin/category-list" component={CategoryListPage} />
         <Route path="/admin/all-orders" component={AllOrdersPage} />
         <Route
           path="/admin/unprocessed-orders"
